@@ -1,0 +1,13 @@
+Fluke Brazil
+
+curl -s -X GET -u meteorsolutions:durc9yeej8ug2huc 'http://meteorsolutions.cloudant.com:5984/t_a8709a29-12ed-4dc2-bbc2-423a6994e313/_design/userkey_sharing_tree/_view/userkey_sharing_tree?limit=0'
+
+
+
+
+curl -v -X GET -u meteorsolutions:durc9yeej8ug2huc 'http://meteorsolutions.cloudant.com:5984/t_a8709a29-12ed-4dc2-bbc2-423a6994e313_userkey_sharing_tree/_design/direct_children/_view/direct_children?reduce=false&stale=ok'
+
+
+
+
+curl -v -X GET -u meteorsolutions:durc9yeej8ug2huc 'http://meteorsolutions.cloudant.com:5984/t_a8709a29-12ed-4dc2-bbc2-423a6994e313/_design/userkey_sharing_tree/_view/userkey_sharing_tree?reduce=false&stale=ok'

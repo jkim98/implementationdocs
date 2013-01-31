@@ -1,0 +1,106 @@
+
+Reel/AT&T Holiday Guide Campaign 11/9/2012
+	
+We're very excited to be working with you on this project! Please contact rachel@meteorsolutions.com with any questions.
+
+
+General Overview
+
+Meteor's core components are written in Javascript and designed to be called from Javascript. The main library is metsol.js which is served via Akamai CDN. 
+
+
+1. Meteor tracking Code.
+
+The code below is the Tag and Trace component which enables tracking of social sharing by generating an 11 digit unique ID for each user and appends this ID to the URL in the browser environment. 
+
+Please add the following code in the header section of the every page where Meteor social tracking is desired.
+
+<!-- Meteor Async code in header --> 
+<script> 
+(function(){
+       var load = function() {
+         var s, p, track;
+         s = document.createElement('script');
+         s.type = 'text/javascript';
+         s.async = true;
+         s.src = 'https://cdnt.meteorsolutions.com/ metsol.js';
+         p = document.getElementsByTagName('script')[0];
+         p.parentNode.insertBefore(s, p);
+         track = function() {
+           if (typeof meteor !== 'undefined') {
+             meteor.tracking.track('00d78e1f-01f0-45cd-9f9c-79e690335b05', {'url_storage_source': 'hash', 'query_string_tag_key': ['mtag', 'source', 'src']});
+           } else {
+             setTimeout(function() { track(); }, 200);
+           }
+         };
+         track();
+       }
+       if (window.attachEvent) {
+         window.attachEvent('onload', load);
+       } else {
+         window.addEventListener('load', load, false);
+       }
+     })();
+</script>
+            
+            
+That's it. This will deploy Meteor and enable tracking of your site and must execute first on a page in order to utilize the rest of Meteor technologies listed below with sole exception of Pixel Conversion call detailed below. 
+
+
+
+
+SHARE TOOL IMPLEMENTATION - Meteor Share Tool
+
+The following implementation is based on the comp located at http://www.reelapp.com/c09635#1  
+
+Please insert the following Share Tool initialization code in the header.
+
+<script src='http://static.meteorsolutions.com/metshare.js'></script>
+<script type='text/javascript'>
+meteor.sharing.superbar.init({'id': 'reel_holiday'});
+</script>
+ 
+
+Then please attach the meteor javascript method to the onclick events for Twitter and Facebook share as shown below. Please replace the title and message parameters with appropriate text.
+
+<a href="#" onclick="meteor.sharing.superbar.trigger('twitter', {'message': 'SET TWITTER SHARE MESSAGE'});">Share via Twitter</a>
+
+
+<a href="#" onclick="meteor.sharing.superbar.trigger('facebook', {'title': 'SET FACEBOOK SHARE TITLE', 'message': 'SET FACEBOOK SHARE MESSAGE'});">Share via Facebook</a>
+
+
+When a user clicks on Facebook or Twitter share, meteor.sharing.superbar.trigger method will present the user with respective sharing and automatically embed the unique Meteor ID in the shared URL for multi-generational share tracking.
+  
+  
+
+
+Conversion/End-Action Tracking
+
+We offer the ability to name tracking events so that they are easily distinguished, giving you a great deal of flexibility in how you measure your campaign or site's effectiveness.
+
+***In all cases - please rename the 'myconversion' to something that will allow us to track each conversions
+
+
+Option One -  Javascript  (The preferred method of tracking conversions) 
+
+This calls our track_conversion() method
+
+<input type="button" onClick="meteor.tracking.track_conversion('00d78e1f-01f0-45cd-9f9c-79e690335b05',{'name':'myconversion'});">
+_____
+
+
+HREF  Javascript Configuration
+(use for conversion that are links (<a href=...))
+
+<a href="http://example.com" onClick="meteor.tracking.track_conversion('00d78e1f-01f0-45cd-9f9c-79e690335b05',{'name':'myconversion'}, this);">
+***The "this" is needed to prevent the original link from firing, which can cause issues. If you are already blocking the original link, use the "non-this" format.
+
+
+Option Two -  Pixel
+
+For tracking on third-party sites, or places where incorporating Javascript is not possible, use the pixel conversion:
+
+<img src="http://cdnt.meteorsolutions.com/api/conversion_pixel?cookie_name=00d78e1f-01f0-45cd-9f9c-79e690335b05&name=myconversion" />
+
+
+

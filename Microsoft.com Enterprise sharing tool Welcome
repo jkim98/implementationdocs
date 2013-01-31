@@ -1,0 +1,23 @@
+
+
+<script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script>
+<script type="text/javascript">
+     meteor.sharing.configure('9081c086-c500-4e70-9391-dbe2dea191c0');
+</script>
+
+
+<a href="#" target="_blank" onclick="this.href=meteor.sharing.href('Twitter', {'url': 'SET URL HERE', 'title': 'SET SHARING TEXT'});">Share on Twitter</a>
+
+<a href="#" target="_blank" onclick="this.href=meteor.sharing.href('Facebook', {'url': 'SET URL HERE'});">Share on Facebook</a>
+
+<a href="#" target="_blank" onclick="this.href=meteor.sharing.href('LinkedIn', {'url': 'SET URL HERE', 'title': 'SET SHARING TEXT'});">Share on LinkedIn</a>
+
+<a href="#" target="_blank" onclick="this.href=meteor.sharing.href('Email', {'title': 'SET EMAIL SUBJECT', 'desc': 'SET EMAIL BODY'});">Share on Email</a>
+
+
+Meta Tags for Facebook
+
+<meta name="title" content="content" />
+<meta name="description" content="content" />
+<link rel="image_src" href="content" />
+

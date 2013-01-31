@@ -1,0 +1,96 @@
+This document contains 2 options for implementing Meteor on the Registration Confirmation page.
+
+
+First option is to use pixel conversion to track the registration confirmation page, Meteor tracking tags for tracking users on Social sites and attaching pixel conversions to each of the social sharing buttons (Facebook, Twitter, Linkedin).
+
+The second option is to call Meteor Javascript tracking code in the header, use Javascript conversion to track the registration confirmation page and use Meteor Share tool for social sharing buttons (which will automatically track social sharing).
+
+
+
+First option is listed below:
+
+
+1. 
+
+Please call the following pixel conversion on the registration confirmation page load.
+
+However, please note that the  conversion uses third party cookie and thus will NOT be able to track conversions for users on browsers with third party cookie turned off.
+
+<img src="http://cdnt.meteorsolutions.com/api/conversion_pixel?cookie_name=089243ac-8ab5-4062-9072-4a2fd21d0023&name=REG_2013" />
+
+
+2.
+
+Meteor tracking tag for WPC registration URL posted by users on Social Sites
+
+In order to track the shared URL posted by registered users on Social sites, please append the shared URL with querystring in this format: ?mtag=reg_2013_share
+
+So if the shared URL is http://www.digitalwpc.com/Pages/Home.aspx then the shared URL should be http://www.digitalwpc.com/Pages/Home.aspx?mtag=reg_2013_share
+
+If there are already other querystring values in the shared URL, please use &mtag=reg_2013_share 
+
+An example of this would be: http://www.digitalwpc.com/Pages/Home.aspx?src=somevalue&mtag=reg_2013_share
+
+
+3.
+Attaching pixel conversions to each of the social sharing buttons 
+
+On each of the 3 social sharing buttons, please call one of following pixel conversion with appropriate name for that social button:
+
+<img src="http://cdnt.meteorsolutions.com/api/conversion_pixel?cookie_name=089243ac-8ab5-4062-9072-4a2fd21d0023&name=twitter_register_share" />
+<img src="http://cdnt.meteorsolutions.com/api/conversion_pixel?cookie_name=089243ac-8ab5-4062-9072-4a2fd21d0023&name=facebook_register_share" />
+<img src="http://cdnt.meteorsolutions.com/api/conversion_pixel?cookie_name=089243ac-8ab5-4062-9072-4a2fd21d0023&name=linkedin_register_share" />
+
+
+
+
+
+Second option
+
+
+1.
+Please insert the following Meteor Tracker code in the header which is necessary for Javascript conversion tracking and to use Meteor Share tool. This code will append the URL with #fbid=11 digit alpha num ID and set cookies for tracking and retargeting.
+
+<!-- Meteor tracking code in header --> 
+<script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script>
+<script type="text/javascript">
+meteor.tracking.track('089243ac-8ab5-4062-9072-4a2fd21d0023', {'url_storage_source': 'hash', 'query_string_tag_key': ['mtag', 'CR_CC', 'cr_cc']});
+meteor.orion.init();
+</script>
+
+
+2.
+Javascript conversion to track the registration confirmation page
+
+The best method of implementing conversion tracking for users who have registered is to use the Javascript conversion. 
+Unlike pixel conversion which uses third party cookie, it uses first party cookie and thus will track users on browsers which turn-off third party cookies by default (IE10 and Safari)
+
+Please call the following Javascript conversion on the registration confirmation page. The example below is set to trigger the conversion on the page load. 
+Alternatively, if jQuery is being used, the conversion can be attached to $(document).ready function.
+
+<body onload="meteor.tracking.track_conversion('089243ac-8ab5-4062-9072-4a2fd21d0023',{'name':'REG_2013'});">
+
+
+
+3.
+Meteor Share tool for social sharing buttons
+
+Please insert the following sharetool code where the social sharing buttons are to be rendered. There are additional configurations which are possible to set share messages, icon size, orientation and other settings. 
+Those will be provided once the exact specifications 
+
+<script src='http://static.meteorsolutions.com/metshare.js'></script>
+<script type='text/javascript'>
+meteor.sharing.superbar.init({'id': 'register_share', 'title': 'SET SHARE TITLE HERE', 'message' : 'SET SHARE MESSAGE HERE', 'sites' : ['twitter', 'facebook', 'linkedin']});
+</script>
+
+
+
+      meteor.sharing.superbar.init({'id': '1', 'parentID': 'RioSEOShare', 'orientation' : 'vertical', 'sites' : ['twitter', 'email', 'facebook', 'linkedin']});
+</script>
+ 
+If present on the page, share tool will automatically use the value of HTML <title> tag to set the title of Facebook sharing and email subject and meta name="description" content will be used for Twitter, Facebook and Linkedin shared messages and the email body text. 
+
+Optionally, title and/or message can be explicitly set which will override the value of HTML <title> and meta name="description" with parameters of 'title' and/or 'message' to meteor.sharing.superbar.init call in the section above. 
+
+
+Please see "SuperbarDocumentation11_16_12Release" for further details and configuration options.

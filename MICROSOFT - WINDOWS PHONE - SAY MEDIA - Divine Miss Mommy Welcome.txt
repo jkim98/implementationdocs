@@ -1,0 +1,110 @@
+﻿Divine Miss Mommy  http://divinemissmommy.com/
+
+
+We're very excited to be working with you on this project!  
+
+
+The setup process is very straightforward. Listed below, you'll find 4 easy steps to get started.
+
+
+1. Tracking Code.
+This code should be in each of the 3 blog posts about Windows Phone. Ideally this should be in the header of the page.
+
+
+
+
+<script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script>
+<script type="text/javascript" src=http://cdnt.meteorsolutions.com/api/multi_track?application_id=5a368a14-1a37-48b8-adb3-d7040199caad&url_storage_source=hash&query_string_tag_key=mtag&query_string_tag_key=source&query_string_tag_key=src&query_string_tag_key=linkID">
+</script>
+
+
+
+
+That's it. This will deploy Meteor and enable tracking of your site.
+2. Customizable Sharing Tracking
+You can add the Meteor Sharing tracking by simply placing the following code on your site where you currently have sharing enabled.
+
+
+For Divine Miss Mommy, the following code needs to each of the 3 Divine Miss Mommy Blog Posts about Windows Phone.
+
+
+Meta tags
+        
+The following three meta headers are needed to ensure proper operation  for Facebook (FB) sharing by explicitly setting the description and image on FB share link button.
+
+
+In addition, in order to properly test for FB shared link, the linked URL must be reachable by FB through internet (not hidden behind a private network) as FB verifies that the link is reachable before accepting it.
+
+
+<meta name="title" content="content" />
+<meta name="description" content="content" />
+<link rel="image_src" href="content" />
+
+
+
+
+These should be populated with:
+
+
+Title: set content to the <title> of the Blog article
+Description: This is a longer description.
+Image_src: This should be set to the desired image to be on the shared link: 100x100 max size recommended.
+
+
+
+
+Sharing configuration
+
+
+The following code is needed to load and setup Meteor’s Javascript library and needs to be run before the following code need to track the sharing buttons.
+
+
+<script type="text/javascript" src="http://static.meteorsolutions.com/ metsol.js">
+</script>
+
+
+<script type="text/javascript">
+meteor.sharing.configure('5a368a14-1a37-48b8-adb3-d7040199caad');
+</script>
+
+
+
+
+
+
+The following code needs to added to existing sharing buttons on each of the 3 Divine Miss Mommy Blog Posts about Windows Phone. Please modify the parameters appropriately.
+
+
+*** Please DO NOT modify the floating vertical sharing buttons on the leftmost edge of the screen which has ‘Contact’ as the top most button and ‘RSS’ as the bottom most button as they all share the Divine Miss Mommy home page and NOT individual Blog Post.  The following code changes should ONLY be done to the sharing buttons associated with each Blog Post. ***
+ 
+
+
+Del.icio.us
+
+
+<a href="#" target="_blank" onclick="this.href=meteor.sharing.href('Del.icio.us', {'url': 'SET URL HERE', 'title': 'SET SHARING TEXT'});">Share on Del.icio.us</a>
+
+
+Digg
+
+
+<a href="#" target="_blank" onclick="this.href=meteor.sharing.href('Digg', {'url': 'SET URL HERE', 'title': 'SET SHARING TEXT'});">Share on Digg</a>
+
+
+
+
+Facebook
+
+
+<a href="#" target="_blank" onclick="this.href=meteor.sharing.href('Facebook', {'url': 'SET URL HERE'});">Share on Facebook</a>
+
+
+
+
+Stumbleupon - Please add to all 3 Stumbledupon sharing buttons around each blog post 
+1. at top right of blog article 
+2. at bottom right of blog article
+3. at bottom of blog article after Kirtsy share button
+
+
+<a href="#" target="_blank" onclick="this.href=meteor.sharing.href('Stumbleupon', {'url': 'SET URL HERE', 'title': 'SET SHARING TEXT'});">Share on Stumbleupon</a>

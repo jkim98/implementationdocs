@@ -1,0 +1,160 @@
+﻿We're very excited to be working with you on this project!  
+
+
+The setup process is very straightforward. Listed below, you'll find 4 easy steps to get started.
+
+
+1. Tracking Code.
+
+
+Install our tracking code on any of your HTML page(s) (registration page, registration confirmation page, core page with daily offers) where you would like to track traffic. Installation is simply placing the following javascript call in your page. We recommend placing it as early as possible in the <HEAD></HEAD> section though this is not required.
+
+
+Note: the querystring configuration should only be used where there are conflicts with "deep linking" or Adobe Flash.
+
+
+Querystring configuration (for Flash-based site)
+<script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script>
+<script type="text/javascript">
+meteor.tracking.track('6da8b296-5293-483a-87fc-294bda8ba797', {'query_string_tag_key' : ['mytag','src']});
+</script>
+
+
+Please Note: The tag "src" is assumed, based on prior configuration.  This needs to be verified against the Omniture configuration
+
+
+Hashtag configuration (for HTML down-rev version)
+<script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script>
+<script type="text/javascript">
+meteor.tracking.track('6da8b296-5293-483a-87fc-294bda8ba797', {'url_storage_source': 'hash','query_string_tag_key' : ['mytag','src']});
+</script>
+
+
+Please Note: The tag "src" is assumed, based on prior configuration.  This needs to be verified against the Omniture configuration
+
+
+Note: for secure, change above to use:
+<script type="text/javascript" src="https://cdnt.meteorsolutions.com/metsol.js"></script>
+
+
+That's it. This will deploy Meteor and enable tracking of your site.
+
+
+We're happy to offer an API document should you desire more information on all the customizable features of Meteor's Tracker, common solutions for your own deployments, and more information on the additional tools available.
+
+
+2. Conversion Tracking
+
+
+Tracking conversions is very easy with Meteor Solutions. We offer the ability to name tracking events so that they are easily distinguished, giving you a great deal of flexibility in how you measure your campaign or site's effectiveness. 
+
+
+1) Javascript
+
+
+The preferred method of tracking conversions is to call our track_conversion() method, e.g.:
+
+
+<input type="button" onClick="meteor.tracking.track_conversion('6da8b296-5293-483a-87fc-294bda8ba797',{'name':'myconversion2'});">
+
+
+If the conversion that you are tracking is a link (<a href=...), use the following format:
+
+
+<a href="http://example.com" onClick="meteor.tracking.track_conversion('6da8b296-5293-483a-87fc-294bda8ba797',{'name':'myconversion2'}, this);">
+
+
+The "this" is needed to prevent the original link from firing, which can cause issues.  If you are already blocking the original link, use the "non-this" format.
+
+
+2) Pixel
+
+
+For tracking on third-party sites, or places where incorporating Javascript is not possible, use the pixel conversion:
+
+
+<img src="http://cdnt.meteorsolutions.com/api/conversion_pixel?cookie_name=6da8b296-5293-483a-87fc-294bda8ba797&name=myconversion" />
+
+
+
+
+With properly deployed conversion tracking, you'll not only see how your site is contributing towards your end goals, but you'll also be able to monitor each step of your process and identify areas where you can increase your conversion ratio.  We are always happy to discuss naming and deployment strategies so that you get the most out of your deployment.
+
+
+3. Customizable Sharing Toolbar
+
+
+Want to give your users an easy way to spread your content? Meteor offers its Customizable Sharing Toolbar. Focused on simplicity to make sharing as easy as possible for your user, our Sharing Toolbar by default includes all the sharing information you need to seamlessly track the sharing activity of your users including the tracking id and prepared media tagging.
+You can add the Sharing Toolbar by simply placing the following code on your site where you would like the Toolbar to display:
+
+
+Sharing tool configuration
+<script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script>
+<script type="text/javascript">
+       meteor.sharing.tool('6da8b296-5293-483a-87fc-294bda8ba797',{'sites':'email,facebook,twitter,live'});
+</script>
+
+
+"href" configuration
+<script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script>
+<script type="text/javascript">
+       meteor.sharing.configure('6da8b296-5293-483a-87fc-294bda8ba797');
+</script>
+
+
+then:
+
+
+<a href="#" target="_blank" onclick="this.href=meteor.sharing.href('Twitter');">Share on Twitter</a>
+
+
+<a href="#" target="_blank" onclick="this.href=meteor.sharing.href('Facebook');">Share on Facebook</a>
+
+
+If for some reason you choose not to use our Sharing Toolbar, Meteor can enable your links to fully leverage its advanced tracking and reporting capabilities with a few simple Javascript calls.
+Instructions for this and many more features are available through our Sharing Tool API document. This document will guide you through customizable features of the Sharing Toolbar, common solutions for your own deployments, and even using other 3rd party sharing tools in conjunction with Meteor's tracker. 
+You can visit our demo page to see some common deployment recipes in action which you can use right away in your own site at:
+http://stage.meteorsolutions.com/sharing.html
+4. Media Tagging
+
+
+By seeding your campaigns with known values, we are able to give you an even more accurate picture of how your campaign is going. All we need in order to provide media tags for your display, search, seeding (blogs/forums), social network (Facebook, Twitter, etc.) and content site (partner/sister sites) efforts is a list of the different sources you'd like to have tagged. Following, we'll send you a list of click-through URLs with media tags which you can seed at those various sites.
+
+
+A media tag is simply a value added to the URL for your site running Meteor's tracker.  For example, if you are trying to drive traffic from your Twitter to your main page, you may want to seed a destination with a link such as:
+http://www.mysite.com/index.html?mtag=twitter
+
+
+
+Using media tags in combination opens up a world of tracking and identification. Simply add additional values to gain more insight into how your external advertising efforts are performing such as (in this particular case, paid and magazine placements):
+http://www.mysite.com/index.html?mtag=paid&mtag=magazine1
+
+
+5. Flash
+The primary things to use in this flash implementation are sharing and conversions:
+
+
+Sharing
+Assuming that the meteor.sharing.configure() call has been made as in section 3), then getting the URL to send the user to is as simple as:
+
+
+var facebookURL:String = ExternalInterface.call("meteor.sharing.href('Facebook');").toString();
+
+
+However, since there is an existing sharing tool in place that is using the Facebook dialog methods, use the following to get the fbid:
+
+
+var fbid:String = ExternalInterface.call("meteor.tracking.get_id();").toString();
+
+
+Once you have the fbid, you can combine it with the existing URL:
+
+
+http://meteorsolutions.com/ would become http://meteorsolutions.com/?fbid=<insert fbid here>
+
+
+Conversions
+Conversions can be handled as above:
+
+
+ExternalInterface.call("meteor.tracking.track_conversion('6da8b296-5293-483a-87fc-294bda8ba797',{'name':'myconversion2'});");

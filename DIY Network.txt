@@ -1,0 +1,15 @@
+﻿On init, use externalInterface if possible
+
+
+On fail, use meteor.as on following code:
+
+
+
+
+cshrock@diy
+
+
+Shortner API calls
+
+
+IP of client pc where does it go into the track query

@@ -1,0 +1,26 @@
+
+
+Please remove the following code. It is not needed.
+
+	<script type="text/javascript">	     meteor.sharing.tool('edced537-ff9a-4fc6-b05c-ee5e1387108a');	</script>
+
+
+To add LinkedIn sharing button.
+
+Currently, the eSupport site has already integrated Meteor sharing of Facebook and Twitter. The existing code on the eSupport pages looks like this:
+
+<a href="#" title="Share this content at Twitter" onclick="window.open(meteor.sharing.href('twitter')); rpt('twitter'); return false;"><img border="0" class="vAlignMid" src="images/buttons/btn_share_Tweet.gif"  alt="Share this content at Twitter"/></a>    
+
+In order to use LinkedIN, the above code format can be used by changing the 'twitter' sharing method in the onclick event to LinkedIN like this:
+
+<a href="#" title="Share this content at LinkedIn" onclick="window.open(meteor.sharing.href('LinkedIn')); rpt('linkedin'); return false;"><img border="0" class="vAlignMid" src="images/buttons/btn_share_linkedin.gif"  alt="Share this content at LinkedIn"/></a> 
+
+In addition, the following things will need to be changed:
+1) src= should reflect the location and name of the actual LinkedIN icon
+2) if needed, AT&T existing function rpt may need to modified to accept LinkedIn.
+
+
+
+The current email sharing does NOT use Meteor sharing. In order to integrate Meteor tracking via email, please do the following:
+
+1) When embedding the article URL link on the email which points back to the article, please include the part of URL which contains 'fbid=11 alphanumberic ID'. The other option is for the email application to embed the entire URL as it's shown in the URL bar which already contains 'fbid=11 alphanumberic ID'.

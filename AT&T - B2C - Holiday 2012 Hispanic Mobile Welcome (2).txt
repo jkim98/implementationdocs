@@ -1,0 +1,135 @@
+
+
+1. Tracking Code
+
+This code should go on every page in the site where you want to track sharing. Please insert this code in the header section as early as possible since all other Meteor method calls requires Tracking code in order to function correctly.
+
+(function(){
+       var load = function() {
+         var s, p, track;
+         s = document.createElement('script');
+         s.type = 'text/javascript';
+         s.async = true;
+         s.src = 'http://static.meteorsolutions.com/metsol.js';
+         p = document.getElementsByTagName('script')[0];
+         p.parentNode.insertBefore(s, p);
+         track = function() {
+           if (typeof meteor !== 'undefined') {
+             meteor.tracking.track('138ecbfa-a7ba-4103-87bf-26ac4d610f31', {'url_storage_source': 'hash', 'query_string_tag_key': ['mtag', 'source', 'src' ]});
+	     meteor.orion.init();
+           } else {
+             setTimeout(function() { track(); }, 200);
+           }
+         };
+         track();
+       }
+       if (window.attachEvent) {
+         window.attachEvent('onload', load);
+       } else {
+         window.addEventListener('load', load, false);
+       }
+     })();
+
+
+Please note that the Tracking code will alter the URL by appending #fbid=11 alphanumeric character which is uniquely generated per user. 
+
+
+2. Conversion Tracking
+
+Tracking conversions are very easy with Meteor Solutions. We offer the ability to name tracking events so that they are easily distinguished, giving you a great deal of flexibility in how you measure your campaign or site's effectiveness. 
+
+
+1) Javascript
+The preferred method of tracking conversions is to call our track_conversion() method, e.g.:
+
+
+<input type="button" onClick="meteor.tracking.track_conversion('138ecbfa-a7ba-4103-87bf-26ac4d610f31',{'name':'myconversion'});">
+
+e.g.: change 'myconversion' to 'vote'
+
+
+If the conversion that you are tracking is a link (<a href=...), use the following format:
+
+
+<a href="http://example.com" onClick="meteor.tracking.track_conversion('138ecbfa-a7ba-4103-87bf-26ac4d610f31',{'name':'myconversion'}, this);">
+
+
+The "this" is needed to prevent the original link from firing, which can cause issues.  If you are already blocking the original link, use the "non-this" format.
+
+
+2) Pixel
+For tracking on third-party sites, or places where incorporating Javascript is problematic, use the pixel conversion:
+
+
+<img src="http://cdnt.meteorsolutions.com/api/conversion_pixel?cookie_name=138ecbfa-a7ba-4103-87bf-26ac4d610f31&name=myconversion" />
+
+
+
+3. Twitter, Facebook, Linkedin and Email
+
+Please create a new share_tab div for vertical sharebar on the right side without custom icons as Meteor Sharebar will render it's own set of icons for Twitter, Facebook, Linkedin and Email. 
+
+The following configuration will detect for mobile version of sharebar and renders sharebar into a div id = 'share_tab'.  Please insert this code towards the end of <body> tag, right before </body> tag.
+
+Additional sharing as well as configurations are possible. Please contact us if you would like to make configuration changes.
+
+
+<script src="http://static.meteorsolutions.com/metshare.js"></script>
+<script>
+					
+    if (meteor.detect_browser().device === "mobile") {
+        meteor.sharing.superbar.init({'id': '2', 'device': 'mobile', 'size' : 'mobile-med', 'sites' : ['twitter', 'facebook', 'linkedin',  'email'] });
+    } else {
+        meteor.sharing.superbar.init({'id': '1',  'parentID': 'share_tab', 'size' : 'med', 'orientation' : 'vertical', 'sites' : ['twitter', 'facebook', 'linkedin',  'email'] });
+    }
+</script>
+        
+      
+4. Activating FaceBook like with count, Pinterest and Google Plus
+
+The following code is set up for a FB Like, Pinterest and Google Plus with common options enabled. 
+
+Documentation is also available at: https://app.meteorsolutions.com/sites/965/like_help/
+
+Please insert this code towards the end of <body> tag, right before </body> tag.
+
+
+<script type="text/javascript" src="http://cdnt.meteorsolutions.com/metlike.js"></script>
+    
+<script type="text/javascript">
+     
+var config = {'fblike':
+                {'enabled': 'true','send': 'false'},
+              'google':
+                {'enabled': 'true'},
+	      'pinterest': 
+		{
+                 'enabled': 'true',
+                   'pin1': {
+                       'media': '<<replace with first fully qualified URL of image to share on pinterest>>'
+                   },
+                   'pin2': {
+                        'media': '<<replace with second fully qualified URL of image to share on pinterest>>'
+                   }
+             	}
+	      };
+meteor.metlike.init(config);
+</script>
+
+
+Then where you want the FaceBook like with count to appear, insert the following code.
+<div class="meteor:fblike"></div>
+
+Then where you want the Google Plus to appear, insert the following code.
+<div class="meteor:google"></div>
+
+Then where you want Pinterest Pinit button to appear, insert the following code.
+<div class="meteor:pinterest" id=”pin1”></div>  or <div class="meteor:pinterest" id=”pin2”></div>
+
+
+If you have additional images for Pinterest that you wish to pin, add additional 'pin3', 'pin4', and on into the config variable then call them using the same div class with id='pin3', id='pin4' and so on.
+
+
+
+
+

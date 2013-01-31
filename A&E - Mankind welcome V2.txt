@@ -1,0 +1,178 @@
+	
+We're very excited to be working with you on this project! This guide contains sample code and how to implement it for different web environments such as Wordpress and mobile sites. 
+
+
+General Overview
+
+Meteor's core components are written in Javascript and designed to be called from Javascript. The main library is metsol.js which is served via Akamai CDN. 
+
+The code below is the Tag and Trace component which enables tracking of users by generating an 11 digit unique ID for each user and appends this ID to the URL in the browser environment. 
+
+For A&E, the code below should be placed in all web sites where tracking is desired. Please insert this code in the header section if possible. We can also provide an Async wrapper if desired.
+
+
+<script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script> 
+<script type="text/javascript">
+meteor.tracking.track('3f2412a8-f11b-4f28-a77b-606a382a1a1b', {'url_storage_source': 'hash', 'query_string_tag_key': ['mtag', 'cid', 'source', 'src']});
+meteor.orion.init();
+</script>
+
+That's it. This will deploy Meteor and enable tracking of your site and is required on the pages in order to use rest of Meteor technologies listed below with sole exception of Pixel Conversion call detailed below. 
+
+**We're happy to offer an API document should you desire more information on all the customizable features of Meteor's Tracker, common solutions for your own deployments, and more information on the additional tools available.
+
+
+Meta Headers 
+
+Each page should contain three meta headers to ensure proper operation with external sites like Facebook and LinkedIN:
+
+<meta name="title" content="content" />
+<meta name="description" content="content" />
+<link rel="image_src" href="content" />
+
+
+These should be populated with:
+
+
+Title: set content to the <title> of the page. In Facebook, this will be the Title.
+Description: This is a longer description which will be used by Facebook
+Image_src: This should be set to fully qualified URL of picture to be shared in Facebook
+
+
+Facebook requires that the picture’s width AND height must be at least 50 pixels, and cannot exceed 130x110 pixels. The ratio of both height divided by width and width divided by height (w/h, h/w) cannot exceed 3.0.
+
+
+
+
+SHARE TOOL IMPLEMENTATION - Meteor Share Tool
+
+Meteor share tool offers a mobile optimized version in addition to a regular version optimized for a larger screen.  
+
+Configuration of the share tool is possible via Meteor's dashboard at: https://app.meteorsolutions.com/sites/968/sharing_setup/ in addition to over-riding them via run time configurations (please contact us for documentation).
+
+Sharing tool: 
+
+<script src="http://static.meteorsolutions.com/metshare.js"></script>
+<script>
+    if (meteor.detect_browser().device === "mobile") {
+        meteor.sharing.superbar.init({'id': '1', 'device': 'mobile'});
+    } else {
+        meteor.sharing.superbar.init({'id': '1'});
+    }
+</script>
+        
+
+
+Conversion/End-Action Tracking
+
+We offer the ability to name tracking events so that they are easily distinguished, giving you a great deal of flexibility in how you measure your campaign or site's effectiveness.
+
+***In all cases - please rename the “myconversion” to something that will allow us to track each action individually as needed
+
+
+Option One -  Javascript  (The preferred method of tracking conversions) 
+
+This calls our track_conversion() method
+
+<input type="button" onClick="meteor.tracking.track_conversion('3f2412a8-f11b-4f28-a77b-606a382a1a1b',{'name':'myconversion'});">
+_____
+
+HREF – Javascript Configuration
+(use for conversion that are links (<a href=...))
+
+
+
+<a href="http://example.com" onClick="meteor.tracking.track_conversion('3f2412a8-f11b-4f28-a77b-606a382a1a1b',{'name':'myconversion'}, this);">
+***The "this" is needed to prevent the original link from firing, which can cause issues. If you are already blocking the original link, use the "non-this" format.
+
+
+Option Two -  Pixel
+
+For tracking on third-party sites, or places where incorporating Javascript is not possible, use the pixel conversion:
+
+<img src="http://cdnt.meteorsolutions.com/api/conversion_pixel?cookie_name=3f2412a8-f11b-4f28-a77b-606a382a1a1b&name=myconversion" />
+
+
+
+
+
+Implementing Meteor on a per blog article basis in Word Press
+
+Ideally, Meteor's Tag and Trace Javascript should be deployed onto a Word Press template for the blog articles where needed. However, if that approach is not possible, Meteor in past has successfully used a Word Press plugin “Specific CSS/JS for Posts and Pages” to deploy Meteor on a per blog article basis.
+
+
+
+In Word Press Admin interface, naviage to Plugins | Installed Plugins  and look for a plugin called “Specific CSS/JS for Posts and Pages”. Version 1.0 is currently the latest.
+
+If this plugin is active and working, you will see right underneath the plugin name: Deactivate | Edit. Nothing more is needed and please skip to Step 2.
+
+Otherwise, if you see underneath the plugin name: Activate | Edit | Delete then please click on Activate. Now skip to Step 2
+
+If you can not find a plugin called  “Specific CSS/JS for Posts and Pages” then naviage to Plugins | Installed Plugins. Keep the search plugin setting to ‘term’ and paste Specific CSS/JS for Posts and Pages  into the plugin search field and click ‘Search Plugins’ button next to it.
+
+Specific CSS/JS for Posts and Pages should be at the top of the search results. Find it and click ‘Install Now’
+
+2. Implementing Meteor’s Tag and Trace Code.
+
+This code should be in each of the 3 blog posts about Windows Phone.
+
+If the blog post already exists, navigate to Posts ? All Posts then click Edit, NOT Quick Edit. Otherwise create a new blog post.
+
+Once in Edit mode, scroll all the way to the bottom. You should see a section named “Specific CSS or Javascript” (please note that it’s possible for it to be somewhere else than the bottom as it is movable).
+
+Please copy and paste the following code into the text box right below: “Write here custom CSS or Javascript for this entry, it will be added within tags <header> “
+
+
+<script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script><script type="text/javascript" src=http://cdnt.meteorsolutions.com/api/multi_track?application_id=3f2412a8-f11b-4f28-a77b-606a382a1a1b&url_storage_source=hash&query_string_tag_key=mtag&query_string_tag_key=source&query_string_tag_key=src&query_string_tag_key=cid"></script>
+
+<script type="text/javascript" src="http://static.meteorsolutions.com/metshare.js"></script>
+<script type="text/javascript">
+       
+var drawShare = function (element, config) {
+   if (meteor && !meteor.missing(meteor.tracking.settings.cookie_name)) {
+       var bar_id = meteor.random_id(4);
+       config.node = document.createElement('div');
+       config.node.id = bar_id;
+       config.node.className = "meteor_share_" + config.id;
+       config.node.style.position = 'relative';
+       element.appendChild(config.node);
+       meteor.sharing.superbar.configure(
+           config, bar_id, function (json) {
+               meteor.sharing.superbar.reinit(json);
+           });
+
+           //following is placeholder
+  
+
+   } else {
+       // Recurse until track() has been called
+       setTimeout(function() { drawShare(element, config); }, 500);
+   }
+};
+
+jQuery(document).ready(function() {
+   drawShare(document.getElementById("meteorshare"), {"id": "4"});
+});
+
+</script>
+
+<meta name="title" content="" />
+<meta name="description" content="" />
+<link rel="image_src" href="" />
+
+
+The above three meta headers are needed to ensure proper operation for Facebook (FB) sharing by explicitly setting the description and image on FB share link button. Please change them appropriately for your site, ESPECIALLY the href = “http://about.jpg” to point to the proper location for an image to share in FaceBook.
+
+In addition, in order to properly test for FB shared link, the linked URL must be reachable by FB through internet (not hidden behind a private network) as FB verifies that the link is reachable before accepting it.
+
+
+
+3. Activating Meteor Share Buttons on the Word Press Blog
+
+
+You can add the Meteor Sharing Buttons by simply placing the following HTML in your blog post where you want to place the buttons. Please remember to switch your editor from Visual to HTML before entering the following code.
+
+<div id="meteorshare"></div>
+
+
+Typically this is placed either on the top of the blog post and/or the bottom.

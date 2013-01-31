@@ -1,0 +1,23 @@
+            
+
+1. Tracking Code.
+
+The following code is required for Meteor to track social sharing and to integrate with Insight Express. Please insert this code in the header section of the Tumblr page HTML.
+
+<script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script>
+<script src="http://cdnt.meteorsolutions.com/api/multi_track?application_id=593b3423-2592-4e1e-b9fd-f64af4782cef&url_storage_source=hash&query_string_tag_key=mtag&query_string_tag_key=src&query_string_tag_key=source">
+meteor.orion.init();
+</script>
+
+
+2. Conversion Pixel.
+
+<img src="http://cdnt.meteorsolutions.com/api/conversion_pixel?cookie_name=593b3423-2592-4e1e-b9fd-f64af4782cef&name=myconversion" />
+
+
+3. Insight Express Integration.
+
+The following Meteor pixel call should be fired by Insight Express during the survey to integrate Meteor Social data with Insight Express.
+
+
+<img src="http://cdnt.meteorsolutions.com/api/conversion_pixel?cookie_name=593b3423-2592-4e1e-b9fd-f64af4782cef&name=ie_[%getcolumn("id")%]"/>

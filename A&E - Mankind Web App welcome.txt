@@ -1,0 +1,112 @@
+     
+	
+We're very excited to be working with you on this project! This guide contains instructions for implementing the Web App. 
+
+
+General Overview
+
+Meteor's core components are written in Javascript and designed to be called from Javascript. The main library is metsol.js which is served via Akamai CDN. 
+
+The code below is the Tag and Trace component which enables tracking of users by generating an 11 digit unique ID for each user and appends this ID to the URL in the browser environment. 
+
+Most likely, this tracker code will be implemented by A&E at the page level and Bad Assembley will not need to implement it. However, Share tools and Javascript conversion call will not function unless the code below is already running on the page level.
+
+<script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script> 
+<script type="text/javascript">
+meteor.tracking.track('3f2412a8-f11b-4f28-a77b-606a382a1a1b', {'url_storage_source': 'hash', 'query_string_tag_key': ['mtag', 'cid', 'source', 'src', 'cat']});
+meteor.orion.init();
+</script>
+
+
+
+META HEADERS
+
+Again, meta headers should be in the header of the page and most likely will be implemented by A&E at the page level and Bad Assembley will not need to implement it. However, Facebook sharing will use this 
+
+Each page should contain three meta headers to ensure proper operation in Facebook sharing:
+
+<meta name="title" content="SET FB SHARE TITLE" />
+<meta name="description" content="SET FB SHARE DESC" />
+<link rel="image_src" href="URL OF FB SHARE THUMBNAIL" />
+
+
+These should be populated with:
+
+Title: set content to the <title> of the page. In Facebook, this will be the Title.
+Description: This is a longer description which will be used by Facebook
+Image_src: This should be set to fully qualified URL of thumbnail picture to be shared in Facebook
+
+
+TWITTER, FACEBOOK AND EMAIL SHARE TOOL IMPLEMENTATION
+
+Please insert the following init code on page after the Tag and Trace code above under General Overview. Be sure to replace the properties of 'title', 'desc' and 'url' with appropriate values.
+
+
+<script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script>
+<script type="text/javascript">
+meteor.sharing.configure('3f2412a8-f11b-4f28-a77b-606a382a1a1b', {'id': '1', 'title': 'REPLACE WITH SHARING TITLE', 'desc': 'REPLACE WITH EMAIL BODY TEXT' , 'url' : 'REPLACE WITH FULLY QUALIFIED URL OF LINK TO SHARE'});
+</script>
+
+then call meteor.sharing.href methods with following configurations in examples below:
+
+<a href="#" target="_blank" onclick="this.href=meteor.sharing.href('Twitter', {'id':'1'});">Share on Twitter</a>
+
+<a href="#" target="_blank" onclick="this.href=meteor.sharing.href('Facebook', {'id':'1'});">Share on Facebook</a>
+
+<a href="#" target="_blank" onclick="this.href=meteor.sharing.href('Email', {'id':'1'});">Share on Email</a>
+
+
+
+
+Google+ IMPLEMENTATION
+
+Google+ implementation code is different due to the Google+ share API requirements.
+
+Please insert the following init code on page after the Tag and Trace code above under General Overview
+
+<script type="text/javascript" src="http://cdnt.meteorsolutions.com/metlike.js"></script>
+<script type="text/javascript"> meteor.metlike.init({}, 'REPLACE WITH FULLY QUALIFIED URL OF LINK TO SHARE'); </script>
+        
+
+Place the following tag wherever you want each Google+ button to show. 
+
+<div class="meteor:google"></div>
+
+
+       
+
+
+Conversion/End-Action Tracking
+
+We offer the ability to name tracking events so that they are easily distinguished, giving you a great deal of flexibility in how you measure your campaign or site's effectiveness.
+
+A&E has asked that the content categories be tracked as conversion once a user has decided to share that content. On conference call on 10/4, we understand that each content has a unique name which should be used to populate the 'name' property. 
+
+In addition, please attach a conversion to the 'Top 25' button on the bottom of the page. Please name it 'top25_button'
+
+***In all cases - please rename the “myconversion” to appropriate conversion name.
+
+
+Option One -  Javascript  (The preferred method of tracking conversions) 
+
+This calls our track_conversion() method
+
+<input type="button" onClick="meteor.tracking.track_conversion('3f2412a8-f11b-4f28-a77b-606a382a1a1b',{'name':'myconversion'});">
+_____
+
+HREF – Javascript Configuration
+(use for conversion that are links (<a href=...))
+
+
+<a href="http://example.com" onClick="meteor.tracking.track_conversion('3f2412a8-f11b-4f28-a77b-606a382a1a1b',{'name':'myconversion'}, this);">
+***The "this" is needed to prevent the original link from firing, which can cause issues. If you are already blocking the original link, use the "non-this" format.
+
+
+Option Two -  Pixel
+
+For tracking on third-party sites, or places where incorporating Javascript is not possible, use the pixel conversion:
+
+<img src="http://cdnt.meteorsolutions.com/api/conversion_pixel?cookie_name=3f2412a8-f11b-4f28-a77b-606a382a1a1b&name=myconversion" />
+
+
+

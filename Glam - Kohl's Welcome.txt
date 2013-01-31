@@ -1,0 +1,34 @@
+﻿Asynch Tracker call with Multitrack.
+
+
+
+
+(function(){
+        var load = function() {
+          var s, p, track;
+          s = document.createElement('script');
+          s.type = 'text/javascript';
+          s.async = true;
+          s.src = 'http://static.meteorsolutions.com/metsol.js';
+          p = document.getElementsByTagName('script')[0];
+          p.parentNode.insertBefore(s, p);
+          track = function() {
+            if (typeof meteor !== 'undefined') {
+              // if you're doing regular tracking, call meteor.tracking.track() here
+              var m = document.createElement('script');
+              m.src = 'http://cdnt.meteorsolutions.com/api/multi_track?application_id=f2094755-c10c-4613-a954-953b8239ffd4&url_storage_source=hash';
+              p.parentNode.insertBefore(m, p);
+
+
+            } else {
+              setTimeout(function() { track(); }, 500);
+            }
+          };
+          track();
+        }
+        if (window.attachEvent) {
+          window.attachEvent('onload', load);
+        } else {
+          window.addEventListener('load', load, false);
+        }
+      })();

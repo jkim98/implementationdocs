@@ -1,0 +1,65 @@
+﻿Food52 http://food52.com/
+
+
+We're very excited to be working with you on this project!  
+
+
+The setup process is very straightforward. Listed below, you'll find 4 easy steps to get started.
+
+
+1. Tracking Code.
+This code should be in each of the 3 blog posts about Windows Phone. Ideally this should be in the header of the page.
+
+
+
+
+<script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script>
+<script type="text/javascript" src=http://cdnt.meteorsolutions.com/api/multi_track?application_id=5a368a14-1a37-48b8-adb3-d7040199caad&url_storage_source=hash&query_string_tag_key=mtag&query_string_tag_key=source&query_string_tag_key=src&query_string_tag_key=linkID">
+</script>
+
+
+
+
+
+
+That's it. This will deploy Meteor and enable tracking of your site.
+2. Customizable Sharing Tracking
+You can add the Meteor Sharing tracking by simply placing the following code on your site where you currently have sharing enabled.
+
+
+For Food52, the following code needs to each of the 3 Food52 Blog Posts about Windows Phone. Only the email sharing will be tracked.
+
+
+
+
+Sharing configuration
+
+
+The following code is needed to load and setup Meteor’s Javascript library and needs to be run before the following code need to track the sharing button.
+
+
+<script type="text/javascript" src="http://static.meteorsolutions.com/ metsol.js">
+</script>
+
+
+<script type="text/javascript">
+meteor.sharing.configure('5a368a14-1a37-48b8-adb3-d7040199caad');
+</script>
+
+
+
+
+
+
+
+
+The following code needs to added to existing sharing button on each of the 3 Food52 Blog Posts about Windows Phone.
+ 
+
+
+
+
+Email
+
+
+<a href="#" target="_blank" onclick="this.href=meteor.sharing.href('Email', {'id': 1', title': 'SET EMAIL SUBJECT 1', 'desc': 'SET EMAIL BODY 1'});">Share on Email</a>

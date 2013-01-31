@@ -1,0 +1,63 @@
+Microsoft.com Enterprise Conversion and Sharing Tool 
+
+Please contact jkim@meteorsolutions.com with any questions.
+
+
+Conversion Tracking
+
+Tracking conversions are very easy with Meteor Solutions. We offer the ability to name tracking events so that they are easily distinguished, giving you a great deal of flexibility in how you measure your campaign or site's effectiveness. 
+
+
+1) Javascript
+
+Javascript conversions require that Meteor tracking is already present in the page (this is called on Chrome). Please use Pixel conversion if Meteor tracking call is NOT present on the page.
+
+<input type="button" onClick="meteor.tracking.track_conversion('9081c086-c500-4e70-9391-dbe2dea191c0',{'name':'myconversion'});">
+
+e.g.: change 'myconversion' to 'Register' or tag value already defined for RIO. 
+
+
+If the conversion that you are tracking is a link (<a href=...), use the following format:
+
+
+<a href="http://example.com" onClick="meteor.tracking.track_conversion('9081c086-c500-4e70-9391-dbe2dea191c0',{'name':'myconversion'}, this);">
+
+
+The "this" is needed to prevent the original link from firing, which can cause issues.  If you are already blocking the original link, use the "non-this" format.
+
+
+2) Pixel
+
+For tracking where Meteor tracking is NOT on the same page, or places where incorporating Javascript is problematic, use the pixel conversion:
+
+
+<img src="http://cdnt.meteorsolutions.com/api/conversion_pixel?cookie_name=9081c086-c500-4e70-9391-dbe2dea191c0&name=myconversion" />
+
+
+
+
+
+Sharing Tool
+
+Please call the following share tool configuration. Please replace the 'SET...' with proper values.
+
+<script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script>
+<script type="text/javascript">
+     meteor.sharing.configure('9081c086-c500-4e70-9391-dbe2dea191c0',{'url': 'SET URL TO SHARE', 'title': 'SET SHARING TEXT', 'desc': 'SET EMAIL BODY' });
+</script>
+
+
+Please place the following where the share icons are to be rendered. Note that these icons (*.png) are the ones already present in Enterprise site. For an example, please see www.microsoft.com/enterprise/get-connected/default.aspx 
+
+
+
+<a href="#" target="_blank" onclick="this.href=meteor.sharing.href('Facebook');"><img src="/global/enterprise/publishingimages/ShareButtons/facebook.png"></a>
+
+<a style="width:80px;" href="#" onclick="this.href=meteor.sharing.href('Twitter');" target="_blank"><img src="/global/enterprise/publishingimages/ShareButtons/twitter.png"></a>
+
+<a style="width:80px;" href="#" target="_blank" onclick="this.href=meteor.sharing.href('LinkedIn');"><img src="/global/enterprise/publishingimages/ShareButtons/linkedin.png"></a>
+
+<a href="#" onclick="this.href=meteor.sharing.href('Email');" onMouseOver="window.status=\'Send your friends e-mail about this page\'; return true" TITLE="Send your friends e-mail about this page" 
+rel="nofollow" style="margin-top:3px; margin-left:-1px;"><img src="/global/enterprise/publishingimages/ShareButtons/email.png"></a>
+
+

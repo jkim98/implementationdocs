@@ -1,0 +1,52 @@
+
+
+
+namespace SilverlightApplication2
+{
+    public partial class MainPage : UserControl
+    {
+        public MainPage()
+        {
+            InitializeComponent();
+            InjectMeteor("089243ac-8ab5-4062-9072-4a2fd21d0023");
+        }
+        public void InjectMeteor(string appid) {
+            System.Windows.Browser.HtmlPage.Window.Eval("var inject_meteor = function () { \n" +
+                "var body, metsol, cb, checker;\n" +
+                "body = document.getElementsByTagName('body')[0];\n" +
+                "metsol = document.createElement('script');\n" +
+                "metsol.src = 'http://static.meteorsolutions.com/metsol.js';\n" +
+                "body.appendChild(metsol);\n" +
+                "cb = function() {\n" +
+                " meteor.sharing.configure("+appid+");\n" +
+                " };\n" +
+                "checker = function() {\n" +
+                "    if (typeof meteor !== 'undefined') {\n" +
+                "        meteor.register_callback(cb);\n" +
+                "        var trackScript = document.createElement('script');\n" +
+                "        trackScript.src = 'http://cdnt.meteorsolutions.com/api/multi_track?application_id="+appid+"&url_storage_source=hash&url_storage_source=hash&query_string_tag_key=mtag&query_string_tag_key=CR_CC&query_string_tag_key=cr_cc';\n" +
+                "        body.appendChild(trackScript);\n" +
+                "    } else {\n" +
+                "        setTimeout(function() { checker(); }, 500);\n" +
+                "    }\n" +
+                "};\n" +
+                "checker();\n" +
+        "}; inject_meteor();");
+        }
+ 
+        private void FacebookShare(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Browser.HtmlPage.Window.Eval("var link = meteor.sharing.href('facebook'); window.location.href = link;");
+        }
+        private void TwitterShare(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Browser.HtmlPage.Window.Eval("var link = meteor.sharing.href('twitter'); window.location.href = link;");
+        }
+        private void LinkedinShare(object sender, RoutedEventArgs e)
+        {
+            System.Windows.Browser.HtmlPage.Window.Eval("var link = meteor.sharing.href('linkedin'); window.location.href = link;");
+        }
+ 
+    }
+}
+ 

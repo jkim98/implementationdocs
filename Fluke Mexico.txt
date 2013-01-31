@@ -1,0 +1,13 @@
+Fluke Mexico
+
+curl -s -X GET -u meteorsolutions:durc9yeej8ug2huc 'http://meteorsolutions.cloudant.com:5984/t_b8de4a2d-dc35-4ee3-ae13-744c657eecd9/_design/userkey_sharing_tree/_view/userkey_sharing_tree?limit=0'
+
+
+
+
+curl -v -X GET -u meteorsolutions:durc9yeej8ug2huc 'http://meteorsolutions.cloudant.com:5984/t_b8de4a2d-dc35-4ee3-ae13-744c657eecd9_userkey_sharing_tree/_design/direct_children/_view/direct_children?reduce=false&stale=ok'
+
+
+
+
+curl -v -X GET -u meteorsolutions:durc9yeej8ug2huc 'http://meteorsolutions.cloudant.com:5984/t_b8de4a2d-dc35-4ee3-ae13-744c657eecd9/_design/userkey_sharing_tree/_view/userkey_sharing_tree?reduce=false&stale=ok'

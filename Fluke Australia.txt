@@ -1,0 +1,15 @@
+Fluke Australia
+
+curl -s -X GET -u meteorsolutions:durc9yeej8ug2huc 'http://meteorsolutions.cloudant.com:5984/t_549db851-96ad-41a6-b0b7-345261c18d7c/_design/userkey_sharing_tree/_view/userkey_sharing_tree?limit=0'
+
+
+
+
+curl -v -X GET -u meteorsolutions:durc9yeej8ug2huc 'http://meteorsolutions.cloudant.com:5984/t_549db851-96ad-41a6-b0b7-345261c18d7c_userkey_sharing_tree/_design/direct_children/_view/direct_children?reduce=false&stale=ok'
+
+
+
+
+curl -v -X GET -u meteorsolutions:durc9yeej8ug2huc 'http://meteorsolutions.cloudant.com:5984/t_549db851-96ad-41a6-b0b7-345261c18d7c/_design/userkey_sharing_tree/_view/userkey_sharing_tree?reduce=false&stale=ok'
+
+testAU2@fluke.com

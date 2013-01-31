@@ -1,0 +1,4 @@
+﻿Due to the limitations of the supported zip file format, the following file(s) had to be renamed.
+
+Original File Name  ->  New File Name
+AT&T – B2B - SAMSUNG FOCUS 2 SWEEPSTAKES Welcome.txt -> File1.txt

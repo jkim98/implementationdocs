@@ -1,0 +1,35 @@
+﻿Microsoft Generation App Video Sharing Integration with Meteor Conversion Guide
+
+
+5 Videos on http://www.generationapp.com/W8appsin30.aspx
+
+Please add the the following code to fire as the first Javascript method to the onClick= event for Facebook, Twitter, Google+ and Email share button on http://www.generationapp.com/W8appsin30.aspx. Please use specific code named for share method ('name' : 'Vidsharew8apps-facebook')
+
+meteor.tracking.track_conversion('09109331-6ae8-4e07-a770-d7b2a2ea21d0',{'name':'Vidsharew8apps-facebook'});
+meteor.tracking.track_conversion('09109331-6ae8-4e07-a770-d7b2a2ea21d0',{'name':'Vidsharew8apps-twitter'});
+meteor.tracking.track_conversion('09109331-6ae8-4e07-a770-d7b2a2ea21d0',{'name':'Vidsharew8apps-googlePlus'});
+meteor.tracking.track_conversion('09109331-6ae8-4e07-a770-d7b2a2ea21d0',{'name':'Vidsharew8apps-email'}, this);
+
+The "this" may be needed on email share button to prevent the original link from firing, which can cause issues.  If you are already blocking the original link, remove "this".
+
+Here's an example of where to insert the facebook specific share code based on the current actual code on http://www.generationapp.com/W8appsin30.aspx
+
+<button onclick="meteor.tracking.track_conversion('09109331-6ae8-4e07-a770-d7b2a2ea21d0',{'name':'Vidsharew8apps-facebook'});yt.tracking.shareVideo(&quot;FACEBOOK&quot;, &quot;WqplLC7HQQg&quot;,&quot;en_US&quot;, &quot;sharepanel&quot;);yt.window.popup(&quot;http:\/\/www.facebook.com\/sharer.php?u=http%3A%2F%2Fwww.youtube.com%2Fwatch%3Fv%3DWqplLC7HQQg%26feature%3Dshare\u0026t=Millions+of+People+Await+Windows+8+apps&quot;, {'height': 440,'width': 620,'scrollbars': true});return false;" data-service-name="FACEBOOK" title="Share to Facebook" class="yt-uix-tooltip share-service-button">
+      <img src="//s.ytimg.com/yt/img/pixel-vfl3z5WfW.gif" alt="Facebook" class="share-service-icon share-service-icon-facebook">
+      <span>Facebook</span>
+    </button>
+
+
+
+4 Videos on http://www.generationapp.com/WPappsin30.aspx
+
+Please add the the following code to fire as the first Javascript method to the onClick= event for Facebook, Twitter, Google+ and Email share button on http://www.generationapp.com/W8appsin30.aspx. Please use specific code named for share method ('name' : 'Vidsharew8rtm-facebook')
+
+meteor.tracking.track_conversion('09109331-6ae8-4e07-a770-d7b2a2ea21d0',{'name':'Vidsharew8rtm-facebook'});
+meteor.tracking.track_conversion('09109331-6ae8-4e07-a770-d7b2a2ea21d0',{'name':'Vidsharew8rtm-twitter'});
+meteor.tracking.track_conversion('09109331-6ae8-4e07-a770-d7b2a2ea21d0',{'name':'Vidsharew8rtm-googlePlus'});
+meteor.tracking.track_conversion('09109331-6ae8-4e07-a770-d7b2a2ea21d0',{'name':'Vidsharew8rtm-email'}, this);
+
+The "this" may be needed on email share button to prevent the original link from firing, which can cause issues.  If you are already blocking the original link, remove "this".
+
+Please see example from above as a guide.

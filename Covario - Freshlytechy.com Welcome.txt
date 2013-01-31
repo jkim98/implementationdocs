@@ -1,0 +1,82 @@
+
+Covario - Freshlytechy.com Campaign 12/13/2012
+	
+We're very excited to be working with you on this project! Please contact ajones@rioseo.com with any questions.
+
+     
+
+General Overview
+
+RioSEO Social's core components are written in Javascript and designed to be called from Javascript. The main library is metsol.js which is served via Akamai CDN. 
+
+
+1. RioSEO Social tracking Code.
+
+The code below is the Tag and Trace component which enables tracking of social sharing by generating an 11 digit unique ID for each user and appends this ID to the URL in the browser environment. 
+
+Please add the following code in the header section of the every page where RioSEO Social tracking is desired.
+
+<!-- RioSEO Social tracking code in header --> 
+<script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script>
+<script type="text/javascript">
+meteor.tracking.track('4f793137-0b2e-41f7-bd3d-8cb5a1c3c837', {'url_storage_source': 'hash', 'query_string_tag_key': ['mtag', 'source', 'src']});
+meteor.orion.init();
+</script>
+            
+            
+That's it. This will deploy RioSEO Social and enable tracking of your site and must execute first on a page in order to utilize the rest of RioSEO Social technologies listed below with sole exception of Pixel Conversion call detailed below. 
+
+
+2. SHARE TOOL IMPLEMENTATION - RioSEO Social Share Tool
+
+Please create a div id=’RioSEOShare’ where the RioSEO Social Share Tool is to be positioned and displayed on the web page.
+
+Then insert the following code after the RioSEO Social Tracking Code in section 1 above. 
+
+<script src="http://static.meteorsolutions.com/metshare.js"></script>
+<script>
+      meteor.sharing.superbar.init({'id': '1', 'parentID': 'RioSEOShare', 'orientation' : 'vertical', 'sites' : ['twitter', 'email', 'facebook', 'linkedin']});
+</script>
+ 
+If present on the page, RioSEO Social share tool will automatically use the value of HTML <title> tag to set the title of Facebook sharing and email subject and meta name="description" content will be used for Twitter, Facebook and Linkedin shared messages and the email body text. 
+
+Optionally, title and/or message can be explicitly set which will override the value of HTML <title> and meta name="description" by adding parameters of 'title' and/or 'message' to meteor.sharing.superbar.init call in the section above. 
+
+
+Please see "SuperbarDocumentation11_16_12Release" for further details and configuration options.
+ 
+   
+  
+  
+
+
+3. Conversion/End-Action Tracking
+
+We offer the ability to name tracking events so that they are easily distinguished, giving you a great deal of flexibility in how you measure your campaign or site's effectiveness.
+
+***In all cases - please rename the 'myconversion' to something that will allow us to track each conversions
+
+
+Option One -  Javascript  (The preferred method of tracking conversions) 
+
+This calls our track_conversion() method
+
+<input type="button" onClick="meteor.tracking.track_conversion('4f793137-0b2e-41f7-bd3d-8cb5a1c3c837',{'name':'myconversion'});">
+_____
+
+
+HREF  Javascript Configuration
+(use for conversion that are links (<a href=...))
+
+<a href="http://example.com" onClick="meteor.tracking.track_conversion('4f793137-0b2e-41f7-bd3d-8cb5a1c3c837',{'name':'myconversion'}, this);">
+***The "this" is needed to prevent the original link from firing, which can cause issues. If you are already blocking the original link, use the "non-this" format.
+
+
+Option Two -  Pixel
+
+For tracking on third-party sites, or places where incorporating Javascript is not possible, use the pixel conversion:
+
+<img src="http://cdnt.meteorsolutions.com/api/conversion_pixel?cookie_name=4f793137-0b2e-41f7-bd3d-8cb5a1c3c837&name=myconversion" />
+
+
+

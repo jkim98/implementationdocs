@@ -1,0 +1,207 @@
+
+b
+ATT - B2C - Holiday 2012 Hispanic Campaign 10/22/2012
+	
+We're very excited to be working with you on this project! Please contact rachel@meteorsolutions.com with any questions.
+
+
+General Overview
+
+Meteor's core components are written in Javascript and designed to be called from Javascript. The main library is metsol.js which is served via Akamai CDN. 
+
+
+1. Async tracking Code.
+
+The code below is the Tag and Trace component which enables tracking of social sharing by generating an 11 digit unique ID for each user and appends this ID to the URL in the browser environment. 
+
+Please add the following code in the header section of the every page where Meteor social tracking is desired.
+
+<!-- Meteor Async code in header --> 
+<script type="text/javascript"> 
+(function(){
+       var load = function() {
+         var s, p, track;
+         s = document.createElement('script');
+         s.type = 'text/javascript';
+         s.async = true;
+         s.src = 'http://static.meteorsolutions.com/metsol.js';
+         p = document.getElementsByTagName('script')[0];
+         p.parentNode.insertBefore(s, p);
+         track = function() {
+           if (typeof meteor !== 'undefined') {
+             meteor.tracking.track('bb5cafed-bcff-40f8-bd11-be7516f7bff4', {'url_storage_source': 'hash', 'query_string_tag_key': ['mtag', 'source', 'src']});
+	     meteor.orion.init();
+           } else {
+             setTimeout(function() { track(); }, 200);
+           }
+         };
+         track();
+       }
+       if (window.attachEvent) {
+         window.attachEvent('onload', load);
+       } else {
+         window.addEventListener('load', load, false);
+       }
+     })();
+</script>
+
+
+That's it. This will deploy Meteor and enable tracking of your site and must first execute on a page in order to utilize the rest of Meteor technologies listed below with sole exception of Pixel Conversion call detailed below. 
+
+
+
+
+SHARE TOOL IMPLEMENTATION - Meteor Share Tool
+
+Based on the comp provided to Meteor (WishADay_Landing_1009_meteor.png), there are 3 separate categories of social sharing present with each category of share tool requiring different configuration. 
+
+Category 1 Share tool - Designed to share Wish a Day page. Located at top right side with Twitter, FB, Linkedin, email and Pinterest sharing. Please note that the Pinterest sharing configuration and implementation is different than all the other sharing.
+
+Category 1 Twitter, FB, Linkedin and email sharing code: 
+
+<script src="http://static.meteorsolutions.com/metshare.js"></script>
+<script>
+var sharepage_url; 
+sharepage_url = window.location.href + "&mtag=Cat1_sharepage";
+meteor.sharing.superbar.init({'id': 'sharepage_tool','size' : 'med', 'orientation' : 'vertical', 'sites' : ['twitter', 'facebook', 'linkedin', 'email'], 'url': sharepage_url });
+</script>
+
+The code above will render medium size (24 x 24 pixel buttons) share bar, orient it vertically, use 'twitter', 'facebook', 'linkedin', 'email' sharing, set the shared URL to current page and append the category tag for analytics. 
+   
+If present on the page, Meteor share tool will automatically use the value of HTML <title> tag to set the title of Facebook sharing and email subject and meta name="description" content will be used for Twitter, Facebook and Linkedin shared messages and the email body text. 
+
+Optionally, title and/or message can be explicitly set which will override the value of HTML <title> and meta name="description" by adding parameters of 'title' and/or 'message' to meteor.sharing.superbar.init call in the section above. Here's an example of how:
+
+meteor.sharing.superbar.init({ 'title': 'SET SHARE TITLE', 'message': 'SET SHARE MESSAGE', 'id': 'sharepage_tool','size' : 'med', 'orientation' : 'vertical', 'sites' : ['twitter', 'facebook', 'linkedin', 'email'], 'url': sharepage_url });
+
+
+Category 1 Pinterest sharing code:
+
+Please add the following Pinterest initialization code in the <body> of the page before where Pinterest sharing it to happen.
+
+<script type="text/javascript" src="http://cdnt.meteorsolutions.com/metlike.js"></script>
+<script type="text/javascript"> 
+      
+meteor.sharing.liketool.init({'pinterest': {
+                   'enabled': 'true',
+                   'page_pin1': {
+                       'media': 'full URL of the picture to be shared, starting with 'http://'
+                   }
+                 }
+               });
+  
+</script>
+
+
+Place the following tags where the Pinterest sharing button is to be displayed. 
+
+<div class="meteor:pinterest" id="page_pin1"></div>
+
+Please note that the actual images to be shared via Pinterest must be accessible from the internet. This means that if the testing is done behind a firewall, Pinterest site needs be able to access the images to be shared. Otherwise Pinterest pin function will not work as Pinterest can not can't access the image. 
+
+Multiple Pinterest buttons with multiple images are supported. Please see full documentation at: https://app.meteorsolutions.com/sites/983/like_help/
+
+
+
+Category 2 Share Tool - Designed to share each person's greatest wish this season. Located at middle left side with FB, Twitter, Linkedin and email sharing. 
+
+The following code is configured with assumption that Meteor will NOT be responsible for determining a user each day with most votes. 
+
+<script src="http://static.meteorsolutions.com/metshare.js"></script>
+<script>
+var wish_url; 
+wishvote_url = window.location.href + "&mtag=Cat2_wishvote";
+meteor.sharing.superbar.init({'id': 'wishvote_tool','size' : 'small', 'orientation' : 'horizontal', 'sites' : ['facebook', 'twitter', 'linkedin', 'email'], 'url': wishvote_url });
+</script>
+
+The code above will render small size (16 X 16 pixel buttons) share bar, orient it horizontally, use 'facebook', 'twitter', 'linkedin', 'email' sharing, set the shared URL to current page and append the category tag for analytics. 
+   
+If present on the page, Meteor share tool will automatically use the value of HTML <title> tag to set the title of Facebook sharing and email subject and meta name="description" content will be used for Twitter, Facebook and Linkedin shared messages and the email body text. 
+
+Optionally, title and/or message can be explicitly set which will override the value of HTML <title> and meta name="description" by adding parameters of 'title' and/or 'message' to meteor.sharing.superbar.init call in the section above. Here's an example of how:
+
+meteor.sharing.superbar.init({ 'title': 'SET SHARE TITLE', 'message': 'SET SHARE MESSAGE','id': 'wishvote_tool','size' : 'small', 'orientation' : 'horizontal', 'sites' : ['facebook', 'twitter', 'linkedin', 'email'], 'url': wishvote_url });
+
+
+
+Category 3 Share Tool - Designed to share Video of the day. Located at bottom left side with Twitter, FB, Linkedin, email and Pinterest sharing. Please note that the Pinterest sharing configuration and implementation is different than all the other sharing.
+
+Category 3 Twitter, FB, Linkedin and email sharing code: 
+
+<script src="http://static.meteorsolutions.com/metshare.js"></script>
+<script>
+var todayvideo_url; 
+todayvideo_url = window.location.href + "&mtag=Cat3_todayvideo";
+meteor.sharing.superbar.init({'id': 'todayvideo_tool','size' : 'small', 'orientation' : 'horizontal', 'sites' : ['facebook', 'twitter', 'linkedin', 'email'], 'url': todayvideo_url });
+</script>
+
+The code above will render small size (16 X 16 pixel buttons) share bar, orient it horizontally, use 'facebook', 'twitter', 'linkedin', 'email' sharing, set the shared URL to current page and append the category tag for analytics. 
+   
+If present on the page, Meteor share tool will automatically use the value of HTML <title> tag to set the title of Facebook sharing and email subject and meta name="description" content will be used for Twitter, Facebook and Linkedin shared messages and the email body text. 
+
+Optionally, title and/or message can be explicitly set which will override the value of HTML <title> and meta name="description" by adding parameters of 'title' and/or 'message' to meteor.sharing.superbar.init call in the section above. Here's an example of how:
+
+meteor.sharing.superbar.init({ 'title': 'SET SHARE TITLE', 'message': 'SET SHARE MESSAGE','id': 'wishvote_tool','size' : 'small', 'orientation' : 'horizontal', 'sites' : ['facebook', 'twitter', 'linkedin', 'email'], 'url': wishvote_url });
+
+
+Category 3 Pinterest sharing code:
+
+Please add the following Pinterest initialization code in the <body> of the page before where Pinterest sharing it to happen.
+
+<script type="text/javascript" src="http://cdnt.meteorsolutions.com/metlike.js"></script>
+<script type="text/javascript"> 
+      
+meteor.sharing.liketool.init({'pinterest': {
+                   'enabled': 'true',
+                   'video_pin1': {
+                       'media': 'full URL of the video to be shared, starting with 'http://'
+                   }
+                 }
+               });
+  
+</script>
+
+
+Place the following tags where the Pinterest sharing button is to be displayed. 
+
+<div class="meteor:pinterest" id="video_pin1"></div>
+
+Please note that the actual media to be shared via Pinterest must be accessible from the internet. This means that if the testing is done behind a firewall, Pinterest site needs be able to access the media to be shared. Otherwise Pinterest pin function will not work as Pinterest can not can't access the media. 
+
+Multiple Pinterest buttons with multiple medias are supported. Please see full documentation at: https://app.meteorsolutions.com/sites/983/like_help/
+
+
+
+
+Conversion/End-Action Tracking
+
+We offer the ability to name tracking events so that they are easily distinguished, giving you a great deal of flexibility in how you measure your campaign or site's effectiveness.
+
+***In all cases - please rename the “myconversion” to something that will allow us to track each action individually as needed
+
+
+Option One -  Javascript  (The preferred method of tracking conversions) 
+
+This calls our track_conversion() method
+
+<input type="button" onClick="meteor.tracking.track_conversion('bb5cafed-bcff-40f8-bd11-be7516f7bff4',{'name':'myconversion'});">
+_____
+
+HREF – Javascript Configuration
+(use for conversion that are links (<a href=...))
+
+
+
+<a href="http://example.com" onClick="meteor.tracking.track_conversion('bb5cafed-bcff-40f8-bd11-be7516f7bff4',{'name':'myconversion'}, this);">
+***The "this" is needed to prevent the original link from firing, which can cause issues. If you are already blocking the original link, use the "non-this" format.
+
+
+Option Two -  Pixel
+
+For tracking on third-party sites, or places where incorporating Javascript is not possible, use the pixel conversion:
+
+<img src="http://cdnt.meteorsolutions.com/api/conversion_pixel?cookie_name=bb5cafed-bcff-40f8-bd11-be7516f7bff4&name=myconversion" />
+
+
+
+

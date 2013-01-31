@@ -1,0 +1,91 @@
+Microsoft - TechED Relaunch 2013 Campaign 1/28/2013
+	
+We're very excited to be working with you on this project! Please contact anna@rioseo.com with any questions.
+            
+General Overview
+
+Please note that there are 3 Campaign IDs for use within TechED website as well as in US Tech's registration pages.
+
+The Meteor code and configurations should be similiar regardless of which section the code resides but the Campaign ID will be different to reflect the type of the pages mainly in order to differentiate between North American (NA) and European (EU) visitors and registrations.
+
+Listed below are the 3 Campaign Names with associated Campaign IDs. 
+
+Campaign Names with Meteor Dashboard (Campaign ID):
+# Microsoft - TechED Main 2013  eab6c086-f2dc-48c8-b5bb-fd808db9c82e
+# Microsoft - TechED NA 2013  7a3b7d94-989d-4f69-bb93-2f2ad68c89e3
+# Microsoft - TechED EU 2013  de3f8220-d39e-4003-a110-2fdfe713ea21
+
+Please use the TechED Main 2013 Campaign ID for the initial home page as well as any pages which are NOT specifically targeted for NA or EU users. 
+
+All the code listed on this document is using the TechED Main 2013 Campaign ID of eab6c086-f2dc-48c8-b5bb-fd808db9c82e  Please replace this with TechED NA 2013 Campaign ID for North American targeted pages and TechED EU 2013 Campaign ID for European targeted pages 
+
+In addition, the home page will need to pass through any querystring parameters from the referrer and dynamically append these values to the URL on the home page linking to both NA and EU specific content. This is to assue that campaign attribution parameters are passed on to those sites which have different Campaign IDs. 
+
+ 
+1. Meteor tracking Code.
+
+The code below is the Tag and Trace component which enables tracking of social sharing by generating an 11 digit unique ID for each user and appends this ID to the URL in the browser environment. 
+Ideally, this code should be placed at the header section of the every page where Meteor social tracking is desired.
+
+<!-- Meteor tracking and configuration code in header --> 
+<script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script>
+<script type="text/javascript" src="http://static.meteorsolutions.com/metshare.js"></script>
+<script type="text/javascript">
+meteor.tracking.track('eab6c086-f2dc-48c8-b5bb-fd808db9c82e', {'url_storage_source': 'hash', 'cookie_domain': '.msteched.com' 'query_string_tag_key': ['mtag', 'source', 'src', 'cr_cc', 'CR_CC']});
+meteor.orion.init();
+</script>      
+                   
+That's it. This will deploy Meteor and enable tracking of your site and must execute first on a page in order to utilize the rest of Meteor technologies listed below with sole exception of Pixel Conversion call detailed below. 
+   
+
+
+2. Share Tool Implementation
+
+Please name a DIV tag where you would like the Share Tool to be rendered in the page:  <div id='SET DIV ID'> 
+
+Then insert the following code into the body section of the HTML and replace 'SET DIV ID' with the actual DIV id. 
+
+<script>
+        meteor.sharing.superbar.init({'id': '1', 'parentID' : 'SET DIV ID', 'sites' : ['twitter', 'email', 'facebook', 'linkedin']});
+</script>
+ 
+ 
+If present on the page, Meteor share tool will automatically use the value of HTML <title> tag to set the title of Facebook sharing and email subject and meta name="description" content will be used for Twitter, Facebook and Linkedin shared messages and the email body text. 
+
+Optionally, title and/or message can be explicitly set which will override the value of HTML <title> and meta name="description" by adding parameters of 'title' and/or 'message' to meteor.sharing.superbar.init call in the section above. 
+
+Please see "Superbar Documentation 11_16_12 Release" for further details and configuration options.
+ 
+
+
+
+3. Conversion/End-Action Tracking
+
+We offer the ability to name tracking events so that they are easily distinguished, giving you a great deal of flexibility in how you measure your campaign or site's effectiveness.
+
+***In all cases - please rename 'myconversion' to a conversion name appropriate for a specific end action i.e. 'whitepaper1_download', 'register_page1', 'watch_welcomeVideo'
+
+
+Option One -  Javascript  (The preferred method of tracking conversions) 
+
+This calls our track_conversion() method
+
+<input type="button" onClick="meteor.tracking.track_conversion('eab6c086-f2dc-48c8-b5bb-fd808db9c82e',{'name':'myconversion'});">
+_____
+
+
+HREF  Javascript Configuration
+(use for conversion that are links (<a href=...))
+
+<a href="http://example.com" onclick="meteor.tracking.track_conversion('eab6c086-f2dc-48c8-b5bb-fd808db9c82e',{'name':'myconversion'}, this);">
+***The "this" is needed to prevent the original link from firing, which can cause issues. If you are already blocking the original link, use the "non-this" format.
+
+
+Option Two -  Pixel
+
+For tracking on third-party sites, or places where incorporating Javascript is not possible, use the pixel conversion:
+
+<img src="http://cdnt.meteorsolutions.com/api/conversion_pixel?cookie_name=eab6c086-f2dc-48c8-b5bb-fd808db9c82e&name=myconversion" />
+
+
+

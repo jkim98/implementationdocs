@@ -1,0 +1,79 @@
+	
+We're very excited to be working with you on this project!
+
+
+This guide contains sample code and how to implement it for mobile apps.  
+
+
+General Overview
+
+Meteor's core components are written in Javascript and designed to be called from Javascript. The main library is metsol.js which is served via Akamai CDN. 
+
+The code below is the Tag and Trace component which enables tracking of users by generating an 11 digit unique ID for each user (named Fbid by Meteor) and appends this ID to the URL in the browser environment. 
+
+iOS and Android apps will need to call out to a Javascript enabled browser to execute the Javascript and capture the unique ID. 
+
+
+<script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script> 
+<script type="text/javascript">
+        meteor.tracking.track('3f2412a8-f11b-4f28-a77b-606a382a1a1b', {'url_storage_source': 'hash', 'query_string_tag_key': ['mtag', 'cid', 'source', 'src']
+});
+</script>
+
+**We're happy to offer an API document should you desire more information on all the customizable features of Meteor's Tracker, common solutions for your own deployments, and more information on the additional tools available.
+
+
+SHARE TOOL INTEGRATION
+
+Following items are needed in order to integrate Meteor's tracking during sharing:
+
+If the sharing icons on the mobile apps are rendered within an in-app browser, the following Javascript code would be used. Anchor tags would be attached to the actual share Icons as depicted in the comps.
+
+
+"href" configuration
+<script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script>
+<script type="text/javascript">
+     meteor.sharing.configure('3f2412a8-f11b-4f28-a77b-606a382a1a1b', {'id': '1', 'url': 'SET SHARING URL 1'});
+</script>
+
+then:
+
+<a href="#" target="_blank" onclick="this.href=meteor.sharing.href('Twitter', {'url': 'SET URL HERE', 'title': 'SET SHARING TEXT'});">Share on Twitter</a>
+
+<a href="#" target="_blank" onclick="this.href=meteor.sharing.href('Facebook', {'url': 'SET URL HERE'});">Share on Facebook</a>
+
+<a href="#" target="_blank" onclick="this.href=meteor.sharing.href('Email', {'id': '1', 'title': 'SET EMAIL SUBJECT 1', 'desc': 'SET EMAIL BODY 1'});">Share on Email</a>
+
+
+However, if the share functionality on the mobile apps are written using Objective C or Java, then 11 digit Fbid appeneded to the URL needs to be included in the shared URL. Alternatively, the shared URL can be appended with '&src=twittershare' , '&src=facebookshare' based on the sharing method to indicate the type of sharing. Meteor will then record the src data and accurately attribute sharing for each type of social sharing. 
+
+
+Conversion/End-Action Tracking
+
+We offer the ability to name tracking events so that they are easily distinguished, giving you a great deal of flexibility in how you measure your campaign or site's effectiveness.
+
+Option One -  Javascript  (The preferred method of tracking conversions) 
+
+This calls our track_conversion() method
+
+<input type="button" onClick="meteor.tracking.track_conversion('3f2412a8-f11b-4f28-a77b-606a382a1a1b',{'name':'myconversion'});">
+_____
+
+HREF – Javascript Configuration
+(use for conversion that are links (<a href=...))
+
+SAMPLE CODE (DO NOT USE THIS)
+
+<a href="http://example.com" onClick="meteor.tracking.track_conversion('3f2412a8-f11b-4f28-a77b-606a382a1a1b',{'name':'myconversion'}, this);">
+***The "this" is needed to prevent the original link from firing, which can cause issues. If you are already blocking the original link, use the "non-this" format.
+
+
+Option Two -  Pixel
+
+For tracking on third-party sites, or places where incorporating Javascript is not possible, use the pixel conversion:
+SAMPLE CODE (DO NOT USE THIS)
+<img src="http://cdnt.meteorsolutions.com/api/conversion_pixel?cookie_name=3f2412a8-f11b-4f28-a77b-606a382a1a1b&name=myconversion" />
+***In all cases - please rename the “myconversion” to something that will allow us to track each action individually as needed
+
+
+

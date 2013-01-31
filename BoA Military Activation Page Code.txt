@@ -1,0 +1,89 @@
+﻿Please reach out to Rachel@meteorsolutions with any questions/concerns and to confirm execution/release for testing and reporting purposes. 
+
+
+Based on our discussion in the technical call on 8/21/12, we will be using the same Meteor Trace and Tag code that is currently running on the Bank of America Corporate Responsibility site.  The only difference is the var meteorCode is unique for the Portraits of Support site.
+
+______________________________________________________________________________________________________________________________________________________
+______________________________________________________________________________________________________________________________________________________
+
+
+INSTALL THE BELOW TRACKING CODE ON ALL HTML PAGES within the flow (registration page, registration confirmation page, core page with daily offers). This will enable us to report on social traffic. 
+CODE IS BELOW: (this code mirrors what is already on the BoA Site for Meteor on the Corporate REsponsibility pages) 
+
+<!-- Meteor Tagging -->
+<script type="text/javascript" src="https://cdnt.meteorsolutions.com/metsol.js"></script>
+
+<script type="text/javascript">
+
+	var meteorCode = '595dd3d1-9ce8-4e58-8033-e7473bdf7ea0';
+
+	function meteor_TagPage() { 
+	
+		if( typeof (meteor.tracking.track) == 'function' && typeof (meteor.sharing.configure) == 'function') {
+			
+			meteor.tracking.track(
+					meteorCode, 
+					{
+						'url_storage_source' : 'hash',
+						'hash_separator' : '/',
+						'hash_end' : '/',
+						'query_string_tag_key' : ['mtag', 'source', 'src', 'cm_mmc']
+					});
+					
+				meteor.sharing.configure(meteorCode);		
+		}
+	}
+
+</script>
+
+_________________________________________________________________________________________________________________________________________________
+______________________________________________________________________________________________________________________________________________________
+
+IMPLEMENT JAVASCRIPT CONVERSIONS (OPTIONAL)
+
+
+*ADD MY SALUTE - any click on the "Add My Salute" Button,
+
+<input type="button" onClick="meteor.tracking.track_conversion('595dd3d1-9ce8-4e58-8033-e7473bdf7ea0',{'name':'AddMySalute'});">
+
+
+*PHOTO SALUTE UPLOAD
+
+<input type="button" onClick="meteor.tracking.track_conversion('595dd3d1-9ce8-4e58-8033-e7473bdf7ea0',{'name':'PhotoUploadSalute'});">
+
+
+*PHOTO SALUTE WEBCAM
+
+<input type="button" onClick="meteor.tracking.track_conversion('595dd3d1-9ce8-4e58-8033-e7473bdf7ea0',{'name':'WebcamPhotoSalute'});">
+
+
+*PHOTO SALUTE FACEBOOK
+
+<input type="button" onClick="meteor.tracking.track_conversion('595dd3d1-9ce8-4e58-8033-e7473bdf7ea0',{'name':'FacebookPhotoSalute'});">
+
+
+*PHOTO SALUTE INSTAGRAM
+
+<input type="button" onClick="meteor.tracking.track_conversion('595dd3d1-9ce8-4e58-8033-e7473bdf7ea0',{'name':'InstagramPhotoSalute'});">
+__________________________
+
+LINK ONCLICK CONVERSIONS link (<a href=...), use the following format:
+
+
+CLICK TO BoA HOMEPAGE: 
+<a href="http://example.com" onClick="meteor.tracking.track_conversion('595dd3d1-9ce8-4e58-8033-e7473bdf7ea0',{'name':'BankHome'}, this);">
+
+CLICK TO BoA CONTACT US
+<a href="http://example.com" onClick="meteor.tracking.track_conversion('595dd3d1-9ce8-4e58-8033-e7473bdf7ea0',{'name':'ContactUs'}, this);">
+
+The "this" is needed to prevent the original link from firing, which can cause issues.  If you are already blocking the original link, use the "non-this" format.
+
+
+
+
+_________________________________________________________________________________________________________________________________________________
+______________________________________________________________________________________________________________________________________________________
+
+To obtain the 11 alphanumeric Meteor tracking id, commonly referred to as fbid, please call meteor.tracking.get_id()
+
+This is safer than trying to get the data from the dom with a getElementById() call and is only available once the meteor.tracking.track call has been made.

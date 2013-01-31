@@ -1,0 +1,68 @@
+This document explains implementing Meteor on the TechED Registration Confirmation page.
+
+
+Please note that there are 2 Campaign IDs for use within US Tech's registration pages for TechED.
+
+The Meteor code and configurations should be similiar regardless of which section the code resides but the Campaign ID will be different to reflect the type of the pages mainly in order to differentiate between North American (NA) and European (EU) registrations.
+
+Listed below are the 2 Campaign Names with associated Campaign IDs. 
+
+Campaign Names                Campaign ID
+# TechED NA (North America)   7a3b7d94-989d-4f69-bb93-2f2ad68c89e3
+# TechED EU (Europe)          de3f8220-d39e-4003-a110-2fdfe713ea21
+
+
+All the code listed on this document is using the TechED NA (North America)  7a3b7d94-989d-4f69-bb93-2f2ad68c89e3  
+Please replace this campaign ID with TechED EU (Europe) Campaign ID de3f8220-d39e-4003-a110-2fdfe713ea21  for European registration pages 
+
+
+
+1.
+Please insert the following Meteor Tracker code in the header which is necessary for Javascript conversion tracking and to use Meteor Share tool. This code will append the URL with #fbid=11 digit alpha num ID and set cookies for tracking and retargeting.
+
+<!-- Meteor tracking code in header --> 
+<script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script>
+<script type="text/javascript">
+meteor.tracking.track('7a3b7d94-989d-4f69-bb93-2f2ad68c89e3', {'url_storage_source': 'hash', 'query_string_tag_key': ['mtag', 'src', 'source', 'CR_CC', 'cr_cc']});
+meteor.orion.init();
+</script>
+
+
+2.
+Javascript conversion to track the registration confirmation page
+
+The best method of implementing conversion tracking for users who have registered is to use the Javascript conversion. 
+Unlike pixel conversion which uses third party cookie, it uses first party cookie and thus will track users on browsers which turn-off third party cookies by default (IE10 and Safari)
+
+Please call the following Javascript conversion on the registration confirmation page. The example below is set to trigger the conversion on the page load. 
+Alternatively, if jQuery is being used, the conversion can be attached to $(document).ready function.
+
+<body onload="meteor.tracking.track_conversion('7a3b7d94-989d-4f69-bb93-2f2ad68c89e3',{'name':'REG_2013'});">
+
+
+
+3.
+
+Meteor tracking tag for TechED registration URL posted by users on Social Sites
+
+
+
+In order to track the shared URL posted by registered users on Social sites, please append the shared URL with querystring in this format: ?mtag=reg_2013_share
+
+So if the shared URL is http://www.teched.com/Pages/Home.aspx then the shared URL should be http://www.teched.com/Pages/Home.aspx?mtag=reg_2013_share
+
+If there are already other querystring values in the shared URL, please use &mtag=reg_2013_share 
+
+An example of this would be: http://www.teched.com/Pages/Home.aspx?src=somevalue&mtag=reg_2013_share
+
+
+4.
+Attaching pixel conversions to each of the social sharing buttons 
+
+On each of the 3 social sharing buttons, please call one of following pixel conversion with appropriate name for that social button:
+
+<img src="http://cdnt.meteorsolutions.com/api/conversion_pixel?cookie_name=7a3b7d94-989d-4f69-bb93-2f2ad68c89e3&name=twitter_register_share" />
+<img src="http://cdnt.meteorsolutions.com/api/conversion_pixel?cookie_name=7a3b7d94-989d-4f69-bb93-2f2ad68c89e3&name=facebook_register_share" />
+<img src="http://cdnt.meteorsolutions.com/api/conversion_pixel?cookie_name=7a3b7d94-989d-4f69-bb93-2f2ad68c89e3&name=linkedin_register_share" />
+
+

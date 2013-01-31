@@ -1,0 +1,84 @@
+﻿__________________________________________________________________________________________________________________________________________________
+1. Please install the Meteor Tag and Trace code in order for Meteor to track social sharing. This will enable us to report on social traffic. 
+CODE IS BELOW:
+
+
+Here is Meteor Tag and Trace code in an Async wrapper.  We suggest this implementation for minimal load time impact.
+
+(function(){
+       var load = function() {
+         var s, p, track;
+         s = document.createElement('script');
+         s.type = 'text/javascript';
+         s.async = true;
+         s.src = 'http://static.meteorsolutions.com/metsol.js';
+         p = document.getElementsByTagName('script')[0];
+         p.parentNode.insertBefore(s, p);
+         track = function() {
+           if (typeof meteor !== 'undefined') {
+             meteor.tracking.track('e012f1cc-a627-4c7f-930b-f0f51da17e9f', {'url_storage_source': 'hash', 'query_string_tag_key': ['mtag','mvpd','sx','topic','cx','fx','ox','vx','px','aff','chrcontext','ref','video','vpl','q','etx','cid']});
+           } else {
+             setTimeout(function() { track(); }, 200);
+           }
+         };
+         track();
+       }
+       if (window.attachEvent) {
+         window.attachEvent('onload', load);
+       } else {
+         window.addEventListener('load', load, false);
+       }
+     })();
+
+
+
+
+Below is the Meteor Tag and Trace code that is NOT in an Async wrapper. This is provided for informational purposes only and SHOULD NOT be deployed unless in an Async wrapper.
+
+
+<script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script> 
+<script type="text/javascript"> 
+meteor.tracking.track('e012f1cc-a627-4c7f-930b-f0f51da17e9f',
+{'url_storage_source': 'hash',
+'query_string_tag_key' : ['mtag','mvpd','sx','topic','cx','fx','ox','vx','px','aff','chrcontext','ref','video','vpl','q','etx','cid' ]});
+</script>
+
+
+______________________________________________________________________________________________________________________________________________________
+
+2.IMPLEMENT CONVERSIONS (OPTIONAL)
+
+
+Tracking conversions is very easy with Meteor Solutions. We offer the ability to name tracking events so that they are easily distinguished, giving you a great deal of flexibility in how you measure your campaign or site's effectiveness. 
+
+
+OPTION 1 for COVERSION IMPLEMENTATION - Javascript (The preferred method of tracking conversions is to call our track_conversion() method, e.g.:_)
+
+
+
+<input type="button" onClick="meteor.tracking.track_conversion('b408ffc3-0ef5-4986-ab31-9973b4aa59f4',{'name':'myconversion2'});">
+
+
+
+_________
+
+
+OPTION 2 for COVERSION IMPLEMENTATION - HREF (If the conversion that you are tracking is a link (<a href=...)
+NOTE:  The "this" is needed to prevent the original link from firing, which can cause issues.  If you are already blocking the original link, use the "non-this" format.
+NOTE: please name conversions clearly and uniquely
+
+
+
+<a href="http://example.com" onClick="meteor.tracking.track_conversion('b408ffc3-0ef5-4986-ab31-9973b4aa59f4',{'name':'myconversion2'}, this);">
+
+
+
+_________
+
+
+OPTION 3 for COVERSION IMPLEMENTATION - Pixel (For tracking on third-party sites, or places where incorporating Javascript is not possible, use the pixel conversion:)
+
+
+
+<img src="http://cdnt.meteorsolutions.com/api/conversion_pixel?cookie_name=b408ffc3-0ef5-4986-ab31-9973b4aa59f4&name=myconversion" 
+

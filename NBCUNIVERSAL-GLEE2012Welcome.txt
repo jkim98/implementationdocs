@@ -1,0 +1,309 @@
+﻿We're very excited to be working with you on this project!
+The setup process is very straightforward. 
+
+
+1. Tracking Code.
+
+Install our tracking code on any of your HTML page(s) (registration page, registration confirmation page, core page with daily offers) where you would like to track traffic. Installation is simply placing the following javascript call in your page. We recommend placing it as early as possible in the <HEAD></HEAD> section though this is not required.
+
+
+<script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script> 
+<script type="text/javascript">
+        meteor.tracking.track('88ee0445-b46f-4b01-8a89-987c53c0ae1a', {'url_storage_source': 'hash', 'query_string_tag_key': ['mtag', 'cid'] });
+meteor.orion.init();
+</script>
+
+
+For the Video pages which is already using # for name of the video, please use the code below which appends Meteor's unique ID via querystring instead of #.
+
+<script type="text/javascript" src="http://static.meteorsolutions.com/ metsol.js"></script> 
+<script type="text/javascript">
+        meteor.tracking.track('88ee0445-b46f-4b01-8a89-987c53c0ae1a', {'url_storage_source': 'query_string', 'query_string_tag_key': ['mtag', 'cid'] });
+meteor.orion.init();
+</script>
+
+
+That's it. This will deploy Meteor and enable tracking of your site.
+We're happy to offer an API document should you desire more information on all the customizable features of Meteor's Tracker, common solutions for your own deployments, and more information on the additional tools available.
+
+
+
+
+2. Conversion Tracking
+Tracking conversions is very easy with Meteor Solutions. We offer the ability to name tracking events so that they are easily distinguished, giving you a great deal of flexibility in how you measure your campaign or site's effectiveness.
+1) Javascript
+The preferred method of tracking conversions is to call our track_conversion() method, e.g.:
+________________
+
+
+<input type="button" onClick="meteor.tracking.track_conversion('88ee0445-b46f-4b01-8a89-987c53c0ae1a',{'name':'myconversion'});">
+
+
+If the conversion that you are tracking is a link (<a href=...), use the following format:
+<a href="http://example.com" onClick="meteor.tracking.track_conversion('88ee0445-b46f-4b01-8a89-987c53c0ae1a',{'name':'myconversion'}, this);">
+
+
+The "this" is needed to prevent the original link from firing, which can cause issues. If you are already blocking the original link, use the "non-this" format.
+
+
+2) Pixel
+For tracking on third-party sites, or places where incorporating Javascript is not possible, use the pixel conversion:
+<img src="http://cdnt.meteorsolutions.com/api/conversion_pixel?cookie_name=88ee0445-b46f-4b01-8a89-987c53c0ae1a&name=myconversion" />
+
+
+
+
+3. Meta Headers
+Each page should contain three meta headers to ensure proper operation with external sites like Facebook:
+
+
+<meta name="title" content="content" />
+<meta name="description" content="content" />
+<link rel="image_src" href="content" />
+
+
+These should be populated with:
+
+
+Title: set content to the <title> of the page. In Facebook, this will be the Title.
+Description: This is a longer description which will be used by Facebook
+Image_src: This should be set to fully qualified URL of picture to be shared in Facebook.
+
+
+Facebook requires that the picture’s width AND height must be at least 50 pixels, and cannot exceed 130x110 pixels. The ratio of both height divided by width and width divided by height (w/h, h/w) cannot exceed 3.0.
+
+
+For the Twitter and Windows Live sharing, Title will be defaulted automatically to document.title. For email, document.title will be used as the subject line of email link.
+
+
+4. Sharing on email, Facebook share.
+
+
+Sharing for email, Facebook share, Twitter, Tumbler.
+The following code is needed to load and setup Meteor’s Javascript library and needs to be run before the following code need to track the sharing buttons.
+
+
+<script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js">
+</script>
+
+
+<script type="text/javascript">
+meteor.sharing.configure('88ee0445-b46f-4b01-8a89-987c53c0ae1a');
+</script>
+
+
+The following code should added to existing sharing buttons. Please modify the parameters appropriately.
+
+
+Email
+
+
+<a href="#" target="_blank" onclick="this.href=meteor.sharing.href('Email', {‘title': 'SET EMAIL SUBJECT', 'desc': 'SET EMAIL BODY'});">Share on Email</a>
+
+
+Twitter
+
+
+<a href="#" target="_blank" onclick="this.href=meteor.sharing.href('Twitter', {'url': 'SET URL HERE', 'title': 'SET SHARING TEXT'});">Share on Twitter</a>
+
+
+
+
+Facebook
+
+
+<a href="#" target="_blank" onclick="this.href=meteor.sharing.href('Facebook', {'url': 'SET URL HERE'});">Share on Facebook</a>
+
+
+
+
+5. Activating FaceBook Like and Twitter follow, Tumblr share
+
+
+The following code is set up for a FB Like, Twitter follow and Tumblr share with common options enabled. Please see below for complete list of options and customizations. Documentation is also available at: app.meteorsolutions.com/sites/881/like_help/
+
+
+Please insert this code on every page where you would like to incorporate  FB Like, Twitter follow and Tumblr share.
+
+
+
+
+<script type="text/javascript" src="http://cdnt.meteorsolutions.com/metlike.js"></script>
+    
+<script type="text/javascript">
+     
+var config = {'fblike':
+                {'enabled': 'true','send': 'false'},
+              'twtweet':
+                {'enabled': 'true','send': 'false', 'related': 'Set Name of Twitter account to follow'},
+              'tumblr':
+                {'enabled': 'true','name': 'Title of Post', 'description': 'Set Description of Post'},
+             };
+meteor.sharing.liketool.init(config);
+</script>
+
+
+<div class="meteor:fblike"></div>
+<div class="meteor:tumblr"></div>
+<div class="meteor:twtweet"></div>
+
+
+
+
+Facebook Like / Send
+The Facebook Like and Send buttons are two different but complementary sharing widgets. When a Facebook user clicks the Like button, a story appears in their friends' News Feed with a link back to your website. The Send button is more personalized. With the Send button, a user can send your URL along with a message to their Facebook friends, the group wall of one of their Facebook groups, or as an email to any email address.
+
+
+
+
+Setting
+	Description
+	Default Value
+	Other Values
+	enabled
+	Whether the Facebook like button is enabled.
+	false
+	true
+	send
+	Where the Facebook send button is enabled.
+	false
+	true
+	layout
+	The layout of like button, including the position of the count annotation.
+	button_count (displays the total number of likes to the right of the button)
+	standard (includes social text and profile photos), box_count (displays total number of likes above the button)
+	colorscheme
+	The like button's color scheme.
+	light
+	dark
+	font
+	The like button's font.
+	Lucida Grande
+	Arial, Sagoe UI, Tahoma, Trebuchet MS, Verdana
+	action
+	The action the user will take in reference to the page.
+	like
+	recommend
+	Twitter
+The Twitter tweet button allows Twitter users to share your website with their followers by posting a link, with optional comments, to their Twitter stream. This tweet will be seen by everyone who is allowed to see the user's regular posts, a list determined by their privacy settings.
+
+
+
+
+Setting
+	Description
+	Default Value
+	Other Values
+	enabled
+	Whether the Twitter tweet button is enabled.
+	false
+	true
+	text
+	The default message for the tweet.
+	Content of the<title> tag
+	Any text.
+	count
+	The layout of the tweet count annotation.
+	horizontal
+	none, vertical
+	related
+	Related Twitter accounts.
+	NONE
+	A string that takes the form of (account name):(account descriptor), with additional accounts separated by commas. The first related account that the user does not follow will be shown, or the first two if the user already follows the 'via' user. If the user follows all accounts, no accounts will be shown.
+	via
+	The screen name of the user to attribute the tweet to.
+	NONE
+	Any Twitter user name.
+	
+
+Tumblr
+The Tumblr share button allows Tumblr bloggers to easily promote your site on their blog. Clicking on the button will allow them to post a link to your site on their blog along with a customized message / description of the site.
+
+
+Note: settings highlighted in yellow are set by the configuration page, while settings highlighted in blue can only be set via JavaScript. SeeCustomization for more details.
+Setting
+	Description
+	Default Value
+	Other Values
+	enabled
+	Whether the Tumblr share button is enabled.
+	false
+	true
+	layout
+	The layout of the Tumblr share button, including its size.
+	standard (between medium and large)
+	small, medium, large
+	name
+	The Tumblr post's title.
+	The contents of the <title> tag.
+	Any text.
+	description
+	The contents of the Tumblr post, which describes the link.
+	Auto-populated from the <meta="description"> tag, if one is included, or the <title> tag, otherwise.
+	Any text.
+	color
+	The color of the Tumblr share button.
+	blue
+	gray
+	Customization
+The simplest way to customize the like buttons is via the configuration page in the Meteor dashboard. Settings customizable via the configuration page are listed in yellow above. Note: This is not a replacement for dashboard configuration. It will, however, allow you to set attributes not available in the dashboard configuration page and overwrite settings chosen in the dashboard configuration page.
+Custom URL
+By default, the URL shared is the URL found in <link rel="canonical"> or window.location.href, if the former isn't available. To include a custom URL, include it as a string in the init function, after the customization object (or an empty object if not using additional customization). For example:
+meteor.metlike.init({}, 'http://www.meteorsolutions.com');
+will set google.com as the URL to be shared.
+JavaScript Customization
+For more fine-grained control over the like buttons, additional customization is available via JavaScript. To do so, include a JavaScript object in the init function with any settings to be set or overridden. For example, the following:
+var config = {'fblike':
+               {'send': 'false'},
+             'twtweet':
+               {'related': 'Company: The best company around'}
+            };
+meteor.metlike.init(config);
+
+would disable the Facebook send button, overriding the configuration page setting, and add a related account listing to the Twitter tweet.
+Per-button Customization
+Per-button customization is also available. To customize a specific button, give the button's div a unique id:
+<div class="meteor:twtweet" id="custom1">
+Then, in the customization object, include any custom settings for that button under the appropriate sharing site. For example, the following:
+var config = {'twtweet':
+               {'custom1': {'count': 'vertical', 'via': 'twitteruser'}
+            };
+meteor.metlike.init(config);
+
+would change one Twitter button's layout and add a linked Twitter account only to tweets from that button.
+Multiple Button Customization
+Per-button customization can also be used to customize multiple buttons from the same sharing site. To customize multiple buttons, give each button's div a unique id:
+<div class="meteor:pinterest" id="pin1">
+<div class="meteor:pinterest" id="pin2">
+
+(Note: On a live site, each div can be placed anywhere; they do not need to be next to one another.)
+Then, in the customization object, include custom settings for each button under the appropriate sharing site. For example, the following:
+var config = {'pinterest':
+                {'pin1': {'media': 'http://www.meteorsolutions.com/image1.png'},
+                 'pin2': {'media': 'http://www.meteorsolutions.com/image2.png'}}
+            };
+meteor.metlike.init(config);
+
+would associate the Pinterest buttons pin1 and pin2 with image1 and image2, respectively.
+
+
+6. Media Tagging
+By seeding your campaigns with known values, we are able to give you an even more accurate picture of how your campaign is going. All we need in order to provide media tags for your display, search, seeding (blogs/forums), social network (Facebook, Twitter, etc.) and content site (partner/sister sites) efforts is a list of the different sources you'd like to have tagged. Following, we'll send you a list of click-through URLs with media tags which you can seed at those various sites.
+A media tag is simply a value added to the URL for your site running Meteor's tracker. For example, if you are trying to drive traffic from your Twitter to your main page, you may want to seed a destination with a link such as: http://www.mysite.com/index.html?mtag=twitter
+Using media tags in combination opens up a world of tracking and identification. Simply add additional values to gain more insight into how your external advertising efforts are performing such as (in this particular case, paid and magazine placements): http://www.mysite.com/index.html?mtag=paid&mtag=magazine1
+
+
+7. Registering Users
+
+
+
+
+Registration code:
+
+
+It is possible to send in a unique user ID such as email or userID. To do this, please call the following register method.  As an example, you could call it like so:
+
+
+<script type="text/javascript">
+meteor.tracking.register_key("set registration ID or email");
+</script>

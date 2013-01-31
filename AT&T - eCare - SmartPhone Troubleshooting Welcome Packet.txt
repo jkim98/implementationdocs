@@ -1,0 +1,120 @@
+﻿TRACKING CODE
+
+
+Install our tracking code on any of your HTML page(s) (registration page, registration confirmation page, core page with daily offers) where you would like to track traffic. Installation is simply placing the following javascript call in your page. We recommend placing it as early as possible in the <HEAD></HEAD> section though this is not required.
+
+
+Hashtag configuration
+<script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script>
+<script type="text/javascript">
+        meteor.tracking.track('8a38d940-b0a9-45dc-aed1-7ebace2e9315', {'url_storage_source': 'hash', 'query_string_tag_key': ['mtag', 'source']
+});
+meteor.orion.init();
+</script>
+_______________________________________________________
+
+
+CONVERSION TRACKING (any end action)
+
+
+CONVERSION OPTION - 1 Javascript
+
+
+The preferred method of tracking conversions is to call our track_conversion() method, e.g.:
+
+
+<input type="button" onClick="meteor.tracking.track_conversion('8a38d940-b0a9-45dc-aed1-7ebace2e9315',{'name':'myconversion'});">
+
+
+If the conversion that you are tracking is a link (<a href=...), use the following format:
+
+
+<a href="http://example.com" onClick="meteor.tracking.track_conversion('8a38d940-b0a9-45dc-aed1-7ebace2e9315',{'name':'myconversion'}, this);">
+
+
+The "this" is needed to prevent the original link from firing, which can cause issues.  If you are already blocking the original link, use the "non-this" format.
+
+
+CONVERSION OPTION 2 -  Pixel
+
+
+For tracking on third-party sites, or places where incorporating Javascript is not possible, use the pixel conversion:
+
+
+<img src="http://cdnt.meteorsolutions.com/api/conversion_pixel?cookie_name=8a38d940-b0a9-45dc-aed1-7ebace2e9315&name=myconversion" />
+
+
+AT&T PURCHASE CONVERSION - Atlas Pixel:
+
+
+https://cdnt.meteorsolutions.com/api/conversion_pixel?cookie_name=8a38d940-b0a9-45dc-aed1-7ebace2e9315&name=<insert name of UAT>
+
+
+This pixel can be deployed in any Atlas Universal Action Tag (UAT).
+
+
+_______________________________________________________
+META HEADERS 
+
+
+Each page should contain three meta headers to ensure proper operation with external sites like Facebook:
+
+
+<meta name="title" content="content" />
+<meta name="description" content="content" />
+<link rel="image_src" href="content" />
+
+
+These should be populated with:
+
+
+Title: set content to the <title> of the page
+Description: This should be set by the SEO team, and should not be altered.
+Image_src: This should be set to the 90x90 AT&T Ball logo.
+
+
+_______________________________________________________
+SHARING TOOLBAR (AT&T CUSTOM)
+You can add the Sharing Toolbar by simply placing the following code on your site where you would like the Toolbar to display.
+
+Please replace <<set URL here>> to the actual URL to share.
+Note that the imagemap parameters may have to be altered depending on which imagemap icons are used.
+
+
+
+Vertical Banner without text, alternate share URL
+
+       
+<script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script>
+        <script type="text/javascript"> 
+                meteor.sharing.configure('8a38d940-b0a9-45dc-aed1-7ebace2e9315', {'id':'1', 'url': '<<set URL here>>'});
+        </script> 
+
+<map name="sharemap">  
+                <area target="_blank" shape="rect" coords="10,15,42,34" href="http://www.twitter.com" onclick="this.href=meteor.sharing.href('Twitter' {'id':'1'});">
+                <area target="_blank" shape="rect" coords="10,35,42,54" href="http://www.facebook.com" onclick="this.href=meteor.sharing.href('Facebook' {'id':'1'});">
+                <area target="_blank" shape="rect" coords="10,55,42,74" href="http://www.linkedin.com" onclick="this.href=meteor.sharing.href('Linkedin' {'id':'1'});">
+                <area target="_blank" shape="rect" coords="10,75,42,94" href="http://del.icio.us" onclick="this.href=meteor.sharing.href('del.icio.us' {'id':'1'});">
+                <area target="_blank" shape="rect" coords="10,95,42,114" href="http://www.digg.com" onclick="this.href=meteor.sharing.href('Digg' {'id':'1'});">
+                <area target="_blank" shape="rect" coords="10,119,42,150" href="mailto:" onclick="this.href=meteor.sharing.href('Email', {'id': '1', 'title': 'Email Subject', 'desc': 'Email Body'});">        
+        </map>
+
+<img id="socialMedia" src="http://1.ecom.attccc.com/media/att/2011/shop/common/ico-social-media-share.png" alt="Share" usemap="#sharemap">
+
+
+
+Horizontal Banner without text, alternate share URL
+
+<script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script>
+        <script type="text/javascript"> 
+                meteor.sharing.configure('8a38d940-b0a9-45dc-aed1-7ebace2e9315', {'id':'1', 'url': '<<set URL here>>'});
+        </script> 
+
+<map name="horiz_sharemap"> 		<area target="_blank" tabindex="0" shape="rect" coords="86,15,102,31" title="Twitter" alt="Twitter" href="http://www.twitter.com" onclick="this.href=meteor.sharing.href('Twitter' {'id':'1'});"> 
+		<area target="_blank" tabindex="0" shape="rect" coords="65,15,81,31" title="Facebook" alt="Facebook" href="http://www.facebook.com" onclick="this.href=meteor.sharing.href('Facebook' {'id':'1'});"> 
+		<area target="_blank" tabindex="0" shape="rect" coords="107,15,123,31" title="LinkedIn" alt="LinkedIn" href="http://www.linkedin.com" onclick="this.href=meteor.sharing.href('Linkedin' {'id':'1'} );"> 
+		<area target="_blank" tabindex="0" shape="rect" coords="128,15,144,31" title="del.icio.us" alt="del.icio.us" href="http://del.icio.us" onclick="this.href=meteor.sharing.href('del.icio.us' {'id':'1'});"> 
+		<area target="_blank" tabindex="0" shape="rect" coords="149,15,165,31" title="digg" alt="digg" href="http://www.digg.com" onclick="this.href=meteor.sharing.href('Digg' {'id':'1'});"> 
+		<area target="_blank" tabindex="0" shape="rect" coords="170,15,188,31" title="email" alt="email" href="mailto:" onclick="this.href=meteor.sharing.href('Email', {'id': '1', 'title': 'Email Subject', 'desc': 'Email Body'});"> 
+</map> 
+	<img id="horiz_socialMedia" src="https://www.att.com/shopcms/media/att/2011/shop/common/ico_share.jpg" alt="Share" usemap="#horiz_sharemap"/> 

@@ -1,0 +1,28 @@
+Integration guidelines to allow Meteor Social tracking within a share tool.
+
+
+The main technology underpinning Meteor's social tracking is the Tag and Trace component which enables tracking of social sharing by generating an 11 digit unique ID for each user and appending this ID to the URL in the browser environment. 
+
+Note that the code provided in all the welcome packets should be placed in all web sites where Meteor social tracking is desired. This results in the URL on the browser being appended in this format: http://www.history.com/shows/mankind-the-story-of-all-of-us#fbid=(unique 11 alphanumeric characters)
+
+
+<script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script> 
+<script type="text/javascript">
+meteor.tracking.track('3f2412a8-f11b-4f28-a77b-606a382a1a1b', {'url_storage_source': 'hash', 'query_string_tag_key': ['mtag', 'cid', 'source', 'src']});
+meteor.orion.init();
+</script>
+
+
+In order to track multi-generational social sharing, window.location.href property can be used to construct the link to shared in the A&E's own share tool (please do note use document.URL since document.URL on some browsers will ignore the portion of URL containg #). window.location.href should have Meteor's #fbid=(unique 11 alphanumeric characters) appended and thus provides the easiest method of obtaining the Meteor's #fbid along with the current URL.
+
+Alternatively, fbid can also be obtained by calling calling the Javascript method meteor.tracking.get_id() (this call will only work after the Tag and Trace code component listed above has been executed). This client side Javascript method will return the fbid of the current user which can then be used to construct the shared URL.
+
+Finally, Meteor recommends that another parameter be added to identify the type of social sharing.  The format should be mtag=(type of social sharing) such as: mtag=twitter-share, mtag=facebook-share, mtag=email-share as to identify the type of sharing within the Meteor's analytical Dashboard.
+
+The specific format of the shared URL should comprise of the following: URL of shared link#fbid=(11 alphanumeric characters in window.location.href or from meteor.tracking.get_id())&mtag=(type of sharing).
+
+Here is a sample of what an actual shared URL should be: http://www.history.com/shows/mankind-the-story-of-all-of-us#fbid=uAgIjN5iKnv&mtag=twitter-share
+
+
+
+

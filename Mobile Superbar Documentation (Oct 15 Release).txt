@@ -1,0 +1,297 @@
+﻿Table of Contents:
+Implementation
+Standard Superbar
+Minimum Implementation
+Custom Placement
+Per-Channel Customization
+Trigger Initialization
+Mobile Superbar
+Scenario 1: Mobile-specific domain / page
+Scenario 2: No mobile support / limited mobile support
+Settings
+Universal
+node
+parentID
+id
+size
+sites
+url
+application_id
+message
+title
+image
+redirect_uri
+device
+Standard Tool Only
+orientation
+Mobile Tool Only
+page_position
+Sharing Channel Specific
+Digg
+Delicious
+Email
+Facebook
+LinkedIn
+Live
+Reddit
+Twitter
+Implementation
+Standard Superbar
+Minimum Implementation
+1. Create a standard tool on the dashboard, configured how you'd like.
+2. Include the following code on your page, where you want the standard tool to be located.
+<script src="http://static.meteorsolutions.com/metshare.js"></script>
+<script>
+        meteor.sharing.superbar.init({'id': 'STANDARD_ID'});
+</script>
+Replace STANDARD_ID with the ID of the tool you made in the dashboard.
+Custom Placement
+In some situations, such as placing the toolbar in AJAX-fetched resources, it is not practical to place the superbar within the page flow. To place the superbar in an arbitrary <div> in the page, after page load, follow these steps:
+1. Create a standard tool in the dashboard, configured how you'd like.
+2. Create a <div> where you want the superbar to be placed and set the id to a value of your choice.
+3. Place the following code in within the <head> tags of your page.
+<script src="http://static.meteorsolutions.com/metshare.js"></script>
+<script>
+        meteor.sharing.superbar.init({'id': 'STANDARD_ID', 'parentID': 'DIV_ID'});
+</script>
+
+
+Replace STANDARD_ID with the ID of the tool you made in the dashboard. Replace DIV_ID with the ID of the <div> created to contain the superbar. It will be placed there automatically when it loads. 
+
+
+Note: Using this parameter with the mobile superbar will also result in the code being placed within the <div>, but it will not affect where the mobile superbar displays.
+Per-Channel Customization
+With the Oct 15 release, the title, message, and display icon can now be customized per sharing channel. To do so, follow these steps:
+1. Create a standard tool in the dashboard as normal. The message and title configured here will be used as the default for all sharing channels.
+2. Create a configuration object containing the channel-specific parameters desired. For example, to change the title, message, and display icon for Facebook, the following configuration object would be created:
+var config = {
+'id': 'STANDARD_ID',
+'facebook': {
+                'icon_url': 'ICON_URI',
+                'title': 'Meteor Solutions',
+'message': 'Click here to learn how to get people talking about your website'}};
+Replace STANDARD_ID with the id of the tool you made in the dashboard. Replace ICON_URI with the fully qualified URI of the new display icon.
+Note: If the new icon is not roughly the same size as the other icons, it will not display properly. If this happens, consider changing the tool's size.
+1. Pass this configuration object into the initialization function.
+meteor.sharing.superbar.init(config);
+Different sharing channels accept different values, which are listed later in this documentation. An id value must always be included in the configuration.
+Multiple sharing channels can be customized in this way. For example, to change the message for both Twitter and Facebook, as well as Facebook's display icon, the following config object might be used:
+var config = {
+        'id': 'mainpage',
+        'facebook': {
+                'message': 'I thought this might interest you....',
+                'icon_url': 'http://static.meteorsolutions.com/facebook.png'},
+        'twitter': {
+                'message': 'Check out what I found @meteorsolutions!'}};
+Trigger Initialization
+If you don't want to use the superbar itself, the sharing functionality can also be linked to an arbitrary anchor tag. In that case, the setup is slightly different.
+1. Create a sharing tool on the dashboard, configured how you'd like.
+2. Place the following code after the call to Meteor tracking. The precise location isn't important, but by convention it is located in the <body>, by the anchor tags being linked.
+<script src="http://static.meteorsolutions.com/metshare.js"></script>
+<script>
+meteor.sharing.superbar.configure({'id': 'STANDARD_ID'});
+</script>
+Replace STANDARD_ID with the id of the tool you made in the dashboard.
+1. If desired, a config object can be passed into the previous function. The same configuration options are available for this method, though some (size, for example) do not apply.
+2. Set the 'onclick' attribute of each anchor tag with an invocation to the superbar's trigger function. Parameters set in the config step can be overwritten here. For example, to create multiple share links, each with a different message, the following code might be used:
+<p><a href="#" onclick="meteor.sharing.superbar.trigger('twitter', {'message': 'Check out this awesome article. #rockyoursocks'});">Share via Twitter</a></p>
+<p><a href="#" onclick="meteor.sharing.superbar.trigger('facebook', {'message': 'Hey everyone! Check out this amazing article!'});">Share via Facebook</a></p>
+<p><a href="#" onclick="meteor.sharing.superbar.trigger('email', {'message': 'I saw this and thought of you. You should check it out!'});">Share via Email</a></p>
+The anchor tag can be used the same as any other anchor tag, which means it can be wrapped around arbitrary page elements to make custom sharing displays.
+Note: "Trigger" invocation can only be used with the standard tool.
+Mobile Superbar
+The previous customization options also apply to the mobile superbar, but there are additional features in the mobile superbar to help provide an optimal sharing experience.
+Scenario 1: Mobile-specific domain / page
+1. Create a mobile tool on the dashboard, configured how you'd like
+2. Include the following code in the at the bottom of the <body> section of your webpage (right before the </body> tag)
+<script src="http://static.meteorsolutions.com/metshare.js"></script>
+<script>
+meteor.sharing.superbar.init({'id': 'MOBILE_ID'});
+</script>
+
+Replace MOBILE_ID with the ID of the tool you made in the dashboard.
+
+To use the mobile tool without going into the dashboard, place the following code in the same place, right before the </body> tag:
+
+<script src="http://static.meteorsolutions.com/metshare.js"></script>
+<script>
+meteor.sharing.superbar.init({'id': '1', device: 'mobile'});
+</script>
+
+Note: The mobile superbar is positioned automatically, so its placement within the <body> tags does not matter.
+Scenario 2: No mobile support / limited mobile support
+The following code will enable both the normal and the mobile superbar, and will determine which should be shown, depending on the user's device.
+1. Create a standard tool on the dashboard, configured how you'd like
+2. Create a mobile tool on the dashboard, configured how you'd like
+3. Include the following code on your page, where you want the standard tool to be located. The mobile tool is placed automatically.
+<script src="http://static.meteorsolutions.com/metshare.js"></script>
+<script>
+   if (meteor.detect_browser().device === "mobile") {
+       meteor.sharing.superbar.init({'id': 'MOBILE_ID'});
+    } else {
+       meteor.sharing.superbar.init({'id': 'STANDARD_ID'});
+   }
+</script>
+
+Replace STANDARD_ID and MOBILE_ID with the respective IDs of the tools you made in the dashboard.
+
+To use either tool without going into the dashboard, place the following code wherever you would like the standard tool to be located. Again, the mobile tool will be placed automatically.
+
+<script src="http://static.meteorsolutions.com/metshare.js"></script>
+<script>
+   if (meteor.detect_browser().device === "mobile") {
+       meteor.sharing.superbar.init({'id': 'MOBILE_ID', 'device': 'mobile'});
+   } else {
+       meteor.sharing.superbar.init({'id': 'STANDARD_ID', 'device': 'standard'});
+   }
+</script>
+Settings
+To alter these settings at runtime, include them in a config object passed to the initialization function. For example, to set a parent <div> id, change the superbar's size, and share a page other than the current page, the following config might be used:
+var config = {
+        'id': '2',
+'parentID': 'meteor-superbar',
+        'size': 'xlarge',
+        'url': 'http://www.meteorsolutions.com/what-we-offer/white-papers/'}};
+Universal
+node
+Unalterable.
+This is for use by the script. This should not be changed, but if it is, it will be overwritten.
+parentID
+No default.
+The id of the element (most likely a <div>) that should contain the superbar. If this is set for the standard superbar, it will be rendered wherever in the page flow element is located. If this is set for the mobile superbar, the code will be located inside the element, but the rendered tool will still float.
+id
+Required. Defaults to 1.
+The id of the sharetool configuration, as set in the dashboard config page. It is possible to initialize without an id, but it is not recommended. The config belonging to the given id will be overwritten by the user's settings. Can be any string that would also be valid as a CSS id.
+size
+Defaults to 'med' or 'mobile_med'.
+The size of the superbar / superbar icons. All sizes are in pixels.
+Standard options:
+small: 16 x 16
+med: 24 x 24
+large: 32 x 32
+xlarge: 40 x 40
+2xlarge: 48 x 48
+
+
+Mobile options:
+mobile-small: 64 x 64
+mobile-med: 72 x 72
+mobile-large: 88 x 88
+sites
+Required if no config object has been made in the dashboard. No default.
+The sites included in the superbar. The options are:
+Delicious
+Digg
+Email
+LinkedIn
+Live
+reddit
+Twitter
+Facebook
+url
+Defaults to the current URL on the page.
+The URL to be shared. This URL is currently the same for all sharing channels and cannot be changed on a per-channel basis.
+
+
+application_id
+Defaults to the application_id value included in the tracker initialization. Only required if multiple superbar instances on the same page should belong to different campaigns.
+The application/campaign id to be associated with the share tool. This option allows the superbar to be used on pages with multiple campaigns.
+
+
+message
+Defaults to the value of <meta name="description"> or nothing.
+The suggested message to be shared.
+
+
+title
+Defaults to the value of <title> or nothing.
+The title of the shared message, generally the title of the website.
+image
+Only works with Facebook. Defaults to a blank image.
+An image to accompany the post. Must be included as a fully qualified URI to a public resource.
+redirect_uri
+Only works with Facebook. Defaults to the Facebook main page.
+A fully qualified URI to direct users to upon completion of a share.
+device
+Required for initializing mobile superbars, if a mobile-specific superbar was not made in the dashboard. Defaults to 'desktop'.
+Indicates what device the superbar will be optimized for. Current options are 'desktop' and 'mobile'. If the superbar is made via the dashboard, this field will be pre-configured with the proper value. Since the default is desktop, this parameter is only needed if overwriting a standard tool to display for mobile devices.
+Standard Tool Only
+orientation
+Defaults to horizontal.
+The orientation of the superbar on the page. Options are 'horizontal' and 'vertical'.
+Mobile Tool Only
+page_position
+Defaults to 'left'.
+Where the mobile superbar will float on the page. Options are 'left', 'right', 'top', 'bottom'.
+
+
+inset_ratio (mobile only)
+Defaults to 0.25.
+The amount the superbar should be inset as a percentage of the icon's width or height, depending on the superbar's placement (height if on top or bottom, width if on left or right). Any number between 1 (hidden) and 0 (no inset) is allowed.
+
+
+corner_offset (mobile only)
+Defaults to 50
+The distance, in pixels, that the mobile superbar should be offset from the anchor corner. The anchor corner depends on the positioning of the superbar.
+left: top left corner
+right: top right corner
+top: top left corner
+bottom: bottom left corner
+
+
+margin (mobile only)
+Defaults to 8
+The space, in pixels, between the individual icons of the superbar.
+Sharing Channel Specific
+Different sharing channels have different parameters available for customization. These parameters should be part of a config object. To use them, create an object with the first-level keys set to channel names, and the values set to a dictionary of parameters. For example, to customize Digg's title, the config object would look like.
+var config = {
+'id': 'ID_OF_DASHBOARD_TOOL',
+        … (any other options listed above go on this level)
+'digg': {
+'title': 'Meteor Solutions Sharing'}};  
+Digg
+title
+The title of the shared article or page.
+icon_url
+A fully qualified URI to a custom sharing channel icon. (Note: Be careful to choose the correct 'size' parameter when using this or the icons may be clipped or be positioned oddly.)
+Delicious
+title
+The title of the shared article or page
+icon_url
+A fully qualified URI to a custom sharing channel icon. (Note: Be careful to choose the correct 'size' parameter when using this or the icons may be clipped or be positioned oddly.)
+Email
+title
+The title of the email
+message
+The body of the email
+icon_url
+A fully qualified URI to a custom sharing channel icon. (Note: Be careful to choose the correct 'size' parameter when using this or the icons may be clipped or be positioned oddly.)
+Facebook
+title
+The title of the shared article or page
+message
+The accompanying message to friends, normally describing the content of the shared story or page.
+icon_url
+A fully qualified URI to a custom sharing channel icon. (Note: Be careful to choose the correct 'size' parameter when using this or the icons may be clipped or be positioned oddly.)
+LinkedIn
+message
+A message to connections, normally describing the content of the shared story or page.
+icon_url
+A fully qualified URI to a custom sharing channel icon. (Note: Be careful to choose the correct 'size' parameter when using this or the icons may be clipped or be positioned oddly.)
+Live
+title
+The title of the shared article or page
+message
+The accompanying message to friends, normally describing the content of the shared story or page.
+icon_url
+A fully qualified URI to a custom sharing channel icon. (Note: Be careful to choose the correct 'size' parameter when using this or the icons may be clipped or be positioned oddly.)
+Reddit
+title
+The title of the shared article or page.
+icon_url
+A fully qualified URI to a custom sharing channel icon. (Note: Be careful to choose the correct 'size' parameter when using this or the icons may be clipped or be positioned oddly.)
+Twitter
+message
+A message to followers. Can include hash tags and references to other Twitter users. (Ex: @meteorsolutions, #activate)
+icon_url
+A fully qualified URI to a custom sharing channel icon. (Note: Be careful to choose the correct 'size' parameter when using this or the icons may be clipped or be positioned oddly.)

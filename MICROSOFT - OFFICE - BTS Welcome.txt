@@ -1,0 +1,91 @@
+﻿
+
+
+1. Tracking Code.
+This code should go on every page in the site.
+
+
+(Hashtag configuration)
+
+<script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script> 
+
+
+<script type="text/javascript"> 
+        meteor.tracking.track('0685391a-daaf-4df9-9c21-c6dbc0237876',
+{'url_storage_source': 'hash', 'query_string_tag_key': ['mtag','CR_CC', 'cr_cc']});
+</script>
+
+
+
+______________________________________________________________________________________________________________________________
+
+SHARING TOOLBAR
+
+You can add the Sharing Toolbar by simply placing the following code on your site where you would like the Toolbar to display:
+
+
+<script src='http://static.meteorsolutions.com/metshare.js'></script>
+<script type='text/javascript'>
+meteor.sharing.superbar.init({'id': '1'});
+</script>
+
+
+___________________________________________________________________________________________________________________________
+
+CONVERSION TRACKING
+
+Please replace the myconversion2 with appropriate named conversions.
+
+
+Javascript is the preferred method of tracking conversions. 
+
+For inclusion into UAT tag, please use the following format::
+
+meteor.tracking.track_conversion('0685391a-daaf-4df9-9c21-c6dbc0237876',{'name':'myconversion2'});
+
+
+If the conversion that you are tracking is a button, use the following format:
+
+<input type="button" onClick="meteor.tracking.track_conversion('0685391a-daaf-4df9-9c21-c6dbc0237876',{'name':'myconversion2'});">
+
+
+If the conversion that you are tracking is a link (<a href=...), use the following format:
+
+<a href="http://example.com" onClick="meteor.tracking.track_conversion('0685391a-daaf-4df9-9c21-c6dbc0237876',{'name':'myconversion2'}, this);">
+
+The "this" is needed to prevent the original link from firing, which can cause issues.  If you are already blocking the original link, use the "non-this" format.
+
+
+Pixel
+
+For tracking on third-party sites, or places where incorporating Javascript is not possible, use the pixel conversion:
+
+
+<img src="http://cdnt.meteorsolutions.com/api/conversion_pixel?cookie_name=0685391a-daaf-4df9-9c21-c6dbc0237876&name=myconversion2" />
+
+
+
+
+With properly deployed conversion tracking, you'll not only see how your site is contributing towards your end goals, but you'll also be able to monitor each step of your process and identify areas where you can increase your conversion ratio.  We are always happy to discuss naming and deployment strategies so that you get the most out of your deployment.
+
+____________________________________________________________________________________________________________________________
+
+
+META HEADERS
+Each page should contain three meta headers to ensure proper operation with external sites like Facebook:
+
+
+<meta name="title" content="content" />
+<meta name="description" content="content" />
+<link rel="image_src" href="content" />
+
+
+These should be populated with:
+
+
+Title: set content to the <title> of the page
+Description: This is a longer description.
+Image_src: This should be set to the site/brand logo: 100x100 max size recommended.
+
+
+____________________________________________________________________________________________________________________________

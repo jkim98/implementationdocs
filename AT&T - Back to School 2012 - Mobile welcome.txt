@@ -1,0 +1,255 @@
+﻿We're very excited to be working with you on this project!
+The setup process is very straightforward. 
+
+
+1. Tracking Code.
+Install our tracking code on any of your HTML page(s) (registration page, registration confirmation page, core page with daily offers) where you would like to track traffic. Installation is simply placing the following javascript call in your page. We recommend placing it as early as possible in the <HEAD></HEAD> section though this is not required.
+Hashtag configuration
+<script type="text/javascript" src="http://static.meteorsolutions.com/ metsol.js"></script> 
+<script type="text/javascript">
+        meteor.tracking.track('54c98689-49b4-43aa-99fa-25d86950282e', {'url_storage_source': 'hash', 'query_string_tag_key': ['mtag', 'source']
+});
+meteor.orion.init();
+</script>
+
+
+That's it. This will deploy Meteor and enable tracking of your site.
+We're happy to offer an API document should you desire more information on all the customizable features of Meteor's Tracker, common solutions for your own deployments, and more information on the additional tools available.
+
+
+
+
+2. Conversion Tracking
+Tracking conversions is very easy with Meteor Solutions. We offer the ability to name tracking events so that they are easily distinguished, giving you a great deal of flexibility in how you measure your campaign or site's effectiveness.
+1) Javascript
+The preferred method of tracking conversions is to call our track_conversion() method, e.g.:
+________________
+
+
+<input type="button" onClick="meteor.tracking.track_conversion('54c98689-49b4-43aa-99fa-25d86950282e',{'name':'myconversion'});">
+
+
+If the conversion that you are tracking is a link (<a href=...), use the following format:
+<a href="http://example.com" onClick="meteor.tracking.track_conversion('54c98689-49b4-43aa-99fa-25d86950282e',{'name':'myconversion'}, this);">
+
+
+The "this" is needed to prevent the original link from firing, which can cause issues. If you are already blocking the original link, use the "non-this" format.
+
+
+2) Pixel
+For tracking on third-party sites, or places where incorporating Javascript is not possible, use the pixel conversion:
+<img src="http://cdnt.meteorsolutions.com/api/conversion_pixel? cookie_name=54c98689-49b4-43aa-99fa-25d86950282e&name=myconversion" />
+
+
+Atlas Pixel:
+https://cdnt.meteorsolutions.com/api/conversion_pixel?cookie_name=54c98689-49b4-43aa-99fa-25d86950282e&name=<insert name of UAT>
+This pixel can be deployed in any Atlas Universal Action Tag (UAT).
+With properly deployed conversion tracking, you'll not only see how your site is contributing towards your end goals, but you'll also be able to monitor each step of your process and identify areas where you can increase your conversion ratio. We are always happy to discuss naming and deployment strategies so that you get the most out of your deployment.
+
+
+
+
+3. Meta Headers
+Each page should contain three meta headers to ensure proper operation with external sites like Facebook and LinkedIn:
+________________
+
+
+<meta name="title" content="content" /> 
+<meta name="description" content="content" /> 
+<link rel="image_src" href="content" />
+
+
+These should be populated with:
+Title: set content to the <title> of the page 
+Description: This should be set by the SEO team, and should not be altered. 
+Image_src: This should be set to the 90x90 AT&T Ball logo.
+
+
+4. Customizable Sharing Toolbar
+Want to give your users an easy way to spread your content? Meteor offers its Customizable Sharing Toolbar. Focused on simplicity to make sharing as easy as possible for your user, our Sharing Toolbar by default includes all the sharing information you need to seamlessly track the sharing activity of your users including the tracking id and prepared media tagging. You can add the Sharing Toolbar by simply placing the following code on your site where you would like the Toolbar to display:
+
+
+Vertical Banner without text for Twitter, FB Share, LinkedIn, and Email.
+
+
+<img style="position: absolute; top: 150px; right: -53px;" usemap="#sharemap" src="/global/images/social-media-share.gif" alt="Share:"></img>
+<script type="text/javascript" src="http://static.meteorsolutions.com/ metsol.js"></script>
+<script type="text/javascript">
+meteor.sharing.configure('54c98689-49b4-43aa-99fa-25d86950282e', {'id':1, });
+</script>
+<map name="sharemap">
+
+
+<area target="_blank" shape="rect" coords="0,61,39,80" href="http://www.twitter.com" onclick="this.href=meteor.sharing.href('Twitter'});">
+<area target="_blank" shape="rect" coords="0,81,39,100" href="http://www.facebook.com" onclick="this.href=meteor.sharing.href('Facebook');">
+<area target="_blank" shape="rect" coords="0,101,39,120" href="http://www.linkedin.com" onclick="this.href=meteor.sharing.href('Linkedin');">
+<area target="_blank" shape="rect" coords="0,121,39,140" href="mailto:" onclick="this.href=meteor.sharing.href('Email', {'title': 'Email Subject', 'desc': 'Email Body'});">
+</map>
+
+
+If for some reason you choose not to use our Sharing Toolbar, Meteor can enable your links to fully leverage its advanced tracking and reporting capabilities with a few simple Javascript calls. Instructions for this and many more features are available through our Sharing Tool API document. This document will guide you through customizable features of the Sharing Toolbar, common solutions for your own deployments, and even using other 3rd party sharing tools in conjunction with Meteor's tracker. 
+
+
+
+
+5. Activating FaceBook Like and Pinterest.
+
+
+The following code is setup for a FB Like and Pinterest with 2 images to be pinned named 'pin1' and  'pin2' respectively. Please replace the 2 URLs associated with media with fully qualified URLs to the images.  
+
+
+Additional Pinterest images may be pinned by continuing to create additional 'pinX' with media URLs. 
+
+
+
+
+<script type="text/javascript" src="http://cdnt.meteorsolutions.com/metlike.js"></script>
+<script type="text/javascript">
+     
+meteor.metlike.init({
+'fblike': {
+'enabled': 'true','send': 'false'},
+'pinterest': {
+                          'enabled': 'true',
+                                  'pin1': {
+                                              'media': 'http://ecomdyauth.edc.cingular.net/content/dam/att/2012/shop/wireless/promotions/Mothers-Day/clo-MothersDay-tile13.jpg'
+                                          },
+                                  'pin2': {
+                                               'media': 'http://www.att.com/media/Wireless/Promotions/LandingPages/112354_MothersDay_LP/MothersDay-Overview_slices/clo-MothersDay-tile13_AA001JSR.jpg'
+                                          }
+                        }
+});
+ 
+</script>
+
+
+
+
+Place the following tags wherever you want Facebook Like button to show. You can include multiple buttons of the same type on one page.
+
+
+<div class="meteor:fblike"></div>
+
+
+
+
+Place the following tags wherever you want Pinterest Pin It button to show. You can include multiple buttons of the same type on one page.
+
+
+<div class="meteor:pinterest" id=”pin1”></div>
+
+
+<div class="meteor:pinterest" id=”pin2”></div>
+
+
+Please note that the actual images to be shared via Pinterest must be accessible. This means that if the testing is done behind a firewall, Pinterest site needs be able to access the images to be shared.
+
+
+Otherwise Pinterest can not find the image to pin as they can't access it. 
+
+
+
+
+Please read below for additional documentation on FB like and Pinterest.
+
+
+Facebook Like / Send
+The Facebook Like and Send buttons are two different but complementary sharing widgets. When a Facebook user clicks the Like button, a story appears in their friends' News Feed with a link back to your website. The Send button is more personalized. With the Send button, a user can send your URL along with a message to their Facebook friends, the group wall of one of their Facebook groups, or as an email to any email address.
+
+
+The Like and Send buttons can be customized using the following settings. Note: settings highlighted in yellow are set by the configuration page, while settings highlighted in blue can only be set via JavaScript. See Customization for more details.
+Setting
+	Description
+	Default Value
+	Other Values
+	enabled
+	Whether the Facebook like button is enabled.
+	false
+	true
+	send
+	Where the Facebook send button is enabled.
+	false
+	true
+	layout
+	The layout of like button, including the position of the count annotation.
+	button_count (displays the total number of likes to the right of the button)
+	standard (includes social text and profile photos), box_count (displays total number of likes above the button)
+	colorscheme
+	The like button's color scheme.
+	light
+	dark
+	font
+	The like button's font.
+	Lucida Grande
+	Arial, Sagoe UI, Tahoma, Trebuchet MS, Verdana
+	action
+	The action the user will take in reference to the page.
+	like
+	recommend
+	Pinterest
+The Pinterest Pin It button allows Pinterest users to grab an image from your site and add it to one of their pinboards. When an image is pinned, the tool automatically grabs the source link so viewers know that the image came from your site. When an image is pinned, the tool will also prompt the user to share the image via Twitter and Facebook.
+
+
+Note: settings highlighted in yellow are set by the configuration page, while settings highlighted in blue can only be set via JavaScript. SeeCustomization for more details.
+Setting
+	Description
+	Default Value
+	Other Values
+	enabled
+	Whether the Pinterest Pin It button is enabled.
+	false
+	true
+	media
+	The full URL of the picture to be shared, including 'http://'. This can also be set per-button id.
+	NONE. Note this is a required field.
+	A full URL
+	description
+	A description of the picture being pinned.
+	Auto-populated from the <meta="description"> tag, if one is included, or the <title> tag, otherwise.
+	Any text
+	Customization
+The simplest way to customize the like buttons is via the configuration page in the Meteor dashboard. Settings customizable via the configuration page are listed in yellow above. Note: This is not a replacement for dashboard configuration. It will, however, allow you to set attributes not available in the dashboard configuration page and overwrite settings chosen in the dashboard configuration page.
+Custom URL
+By default, the URL shared is the URL found in <link rel="canonical"> or window.location.href, if the former isn't available. To include a custom URL, include it as a string in the init function, after the customization object (or an empty object if not using additional customization). For example:
+meteor.metlike.init({}, 'http://www.meteorsolutions.com');
+will set google.com as the URL to be shared.
+JavaScript Customization
+For more fine-grained control over the like buttons, additional customization is available via JavaScript. To do so, include a JavaScript object in the init function with any settings to be set or overridden. For example, the following:
+var config = {'fblike':
+               {'send': 'false'},
+             'twtweet':
+               {'related': 'Company: The best company around'}
+            };
+meteor.metlike.init(config);
+
+would disable the Facebook send button, overriding the configuration page setting, and add a related account listing to the Twitter tweet.
+Per-button Customization
+Per-button customization is also available. To customize a specific button, give the button's div a unique id:
+<div class="meteor:twtweet" id="custom1">
+Then, in the customization object, include any custom settings for that button under the appropriate sharing site. For example, the following:
+var config = {'twtweet':
+               {'custom1': {'count': 'vertical', 'via': 'twitteruser'}
+            };
+meteor.metlike.init(config);
+
+would change one Twitter button's layout and add a linked Twitter account only to tweets from that button.
+Multiple Button Customization
+Per-button customization can also be used to customize multiple buttons from the same sharing site. To customize multiple buttons, give each button's div a unique id:
+<div class="meteor:pinterest" id="pin1">
+<div class="meteor:pinterest" id="pin2">
+
+(Note: On a live site, each div can be placed anywhere; they do not need to be next to one another.)
+Then, in the customization object, include custom settings for each button under the appropriate sharing site. For example, the following:
+var config = {'pinterest':
+                {'pin1': {'media': 'http://www.meteorsolutions.com/image1.png'},
+                 'pin2': {'media': 'http://www.meteorsolutions.com/image2.png'}}
+            };
+meteor.metlike.init(config);
+
+would associate the Pinterest buttons pin1 and pin2 with image1 and image2, respectively.
+
+
+6. Media Tagging
+By seeding your campaigns with known values, we are able to give you an even more accurate picture of how your campaign is going. All we need in order to provide media tags for your display, search, seeding (blogs/forums), social network (Facebook, Twitter, etc.) and content site (partner/sister sites) efforts is a list of the different sources you'd like to have tagged. Following, we'll send you a list of click-through URLs with media tags which you can seed at those various sites.
+A media tag is simply a value added to the URL for your site running Meteor's tracker. For example, if you are trying to drive traffic from your Twitter to your main page, you may want to seed a destination with a link such as: http://www.mysite.com/index.html?mtag=twitter
+Using media tags in combination opens up a world of tracking and identification. Simply add additional values to gain more insight into how your external advertising efforts are performing such as (in this particular case, paid and magazine placements): http://www.mysite.com/index.html?mtag=paid&mtag=magazine1

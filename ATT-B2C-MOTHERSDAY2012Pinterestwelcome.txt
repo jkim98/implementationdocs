@@ -1,0 +1,72 @@
+﻿1. Activating Pinterest.
+
+
+Copy the following code into the HTML header of every page on your site you want to track. (Between the <head> and </head> tags.) If your site has dynamic content you can add this code to an include or template file. metsol.js must be included before this block of code in order for the code to function properly. If metsol.js and meteor.tracking.track is already being called on the page, it does not need to be called again.
+
+
+<script type="text/javascript" src="http://cdnt.meteorsolutions.com/metsol.js"></script>
+<script type="text/javascript"> 
+          meteor.tracking.track('4341bfc9-042e-4001-99cc-915aaadacde2', {'url_storage_source': 'hash'}); 
+ </script>
+
+
+
+
+
+
+<script type="text/javascript" src="http://cdnt.meteorsolutions.com/metlike.js"></script>
+<script type="text/javascript"> 
+      
+meteor.metlike.init({'pinterest': {
+                   'enabled': 'true',
+                   'pin1': {
+                       'media': 'http://ecomdyauth.edc.cingular.net/content/dam/att/2012/shop/wireless/promotions/Mothers-Day/clo-MothersDay-tile13.jpg'
+                   },
+                   'pin2': {
+                        'media': 'http://www.att.com/media/Wireless/Promotions/LandingPages/112354_MothersDay_LP/MothersDay-Overview_slices/clo-MothersDay-tile13_AA001JSR.jpg'
+                   }
+                 }
+               });
+  
+</script>
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+Place the following tags wherever you want Pinterest sharing button to show. You can include multiple buttons of the same type on one page.
+
+
+For Pinterest with image: http://ecomdyauth.edc.cingular.net/content/dam/att/2012/shop/wireless/promotions/Mothers-Day/clo-MothersDay-tile13.jpg
+
+
+<div class="meteor:pinterest" id=”pin1”></div>
+
+
+
+
+For Pinterest with image:  
+http://www.att.com/media/Wireless/Promotions/LandingPages/112354_MothersDay_LP/MothersDay-Overview_slices/clo-MothersDay-tile13_AA001JSR.jpg
+
+
+
+
+<div class="meteor:pinterest" id=”pin2”></div>
+
+
+
+
+Please note that the actual images to be shared via Pinterest must be accessible. This means that if the testing is done behind a firewall, Pinterest site needs be able to access the images to be shared. 
+
+
+Otherwise Pinterest can not find the image to pin as they can't access it.

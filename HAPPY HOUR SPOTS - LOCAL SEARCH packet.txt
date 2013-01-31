@@ -1,0 +1,121 @@
+
+HAPPY HOUR SPOTS - LOCAL SEARCH Campaign 12/3/2012
+	
+We're very excited to be working with you on this project! Please contact jkim@rioseo.com with any questions.
+
+
+General Overview
+
+RioSEO Social Tracking's core components are written in Javascript and designed to be called from Javascript. The main library is metsol.js which is served via Akamai CDN. 
+  
+
+1. Meteor tracking Code.
+
+The code below is the Tag and Trace component which enables tracking of social sharing by generating an 11 digit unique ID for each user and appends this ID to the URL in the browser environment. 
+
+Please add the following code in the header section of the every page where RioSEO Social tracking is desired.
+
+<!-- Meteor tracking code in header --> 
+<script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script>
+<script type="text/javascript">
+meteor.tracking.track('dbb171d6-57c9-4ad3-a1a9-0bd6738ea3fe', {'url_storage_source': 'hash', 'cookie_domain': '.happyhourspots.com', 'query_string_tag_key': ['mtag', 'source', 'src']});
+meteor.orion.init();
+</script>
+            
+            
+That's it. This will enable social tracking on your site and must execute first on a page in order to utilize the rest of the functionalities listed below with sole exception of Pixel Conversion call detailed below. 
+
+Please see "TrackingAPI.html.rtf" for further details and configuration options.  
+
+
+
+SHARE TOOL IMPLEMENTATION - RioSEO Social Share Tool
+
+The following code is designed to allow Twitter, Facebook, Email and Google+ social sharing using RioSEO Social icons on top level pages such as happyhourspots.com. Please note that Google+ code is different from Twitter, Facebook and Email share code.
+
+
+Twitter, Facebook and Email Share code:
+
+Place the following block of code to initialize the share tool in the body before Twitter, Facebook and Email sharing but after the meteor.tracking.track code in section 1 above.
+
+<script src="http://static.meteorsolutions.com/metshare.js"></script>
+<script>
+meteor.sharing.superbar.configure({'id': 'share1'});
+</script>
+
+Please note that a Dashboard GUI configuration of the Share tool is available at https://app.meteorsolutions.com/sites/1014/sharing_setup/ 
+
+
+Google+ Share code:
+
+Place the following block of code to initialize the share tool in the body before the Google+ sharing but after the meteor.tracking.track code in section 1 above.
+Please note that the configuration settings may be changed. Please see https://app.meteorsolutions.com/sites/1014/like_help/ for all the configurations and documentation.
+
+<script type="text/javascript" src="http://cdnt.meteorsolutions.com/metlike.js"></script>
+<script type="text/javascript"> meteor.sharing.liketool.init(); </script>
+                
+Please create a div tag with the following class name where you would like the Google+ share icon to appear:  <div class="meteor:google"></div>
+
+Please note that a Dashboard GUI configuration of the Google+ tool is available at https://app.meteorsolutions.com/sites/1014/like_setup/
+
+
+
+The following code is designed to integrate with Twitter and Facebook share icons currently on the city level search pages such as ny.newyork.happyhourspots.com
+
+Place the following block of code to initialize the share tool in the body before the Twitter and Facebook Share icons but after the meteor.tracking.track code in section 1 above.
+
+<script src="http://static.meteorsolutions.com/metshare.js"></script>
+<script>
+meteor.sharing.superbar.configure({'id': 'share2'});
+</script>
+
+
+For Twitter share, use the following onclick call on the existing anchor tag. 'message' parameter is optional and is used to set the share message.
+
+<a href="#" onclick="meteor.sharing.superbar.trigger('twitter', {'message': 'Find Happy Hour SPOTS in San Diego'});"</a>
+
+
+For Facebook share, use the following onclick call on the existing anchor tag. Both 'title' and 'message' parameter is optional and is used to set the share message.
+
+<a href="#" onclick="meteor.sharing.superbar.trigger('facebook', {'title' : 'San Diego Happy Hour Spots - Best Happy Hours San Diego CA', 'message': 'San Diego Happy Hour Spots - Find the best Happy Hours San Diego on Happy Hour SPOTS.com'});"</a>
+
+
+Myspace share is not currently supported in the product. However, if the Myspace share button shares the URL listed on the URL bar in the browser, it should include the 11 digit unique identifier when shared which will allow social tracking.
+
+Please see "Superbar Documentation 11_16_12 Release" for further details and configuration options.
+ 
+  
+  
+  
+
+
+Conversion/End-Action Tracking
+
+We offer the ability to name tracking events so that they are easily distinguished, giving you a great deal of flexibility in how you measure your campaign or site's effectiveness.
+
+***In all cases - please rename the 'myconversion' to something that will allow us to track each conversions
+
+
+Option One -  Javascript  (The preferred method of tracking conversions) 
+
+This calls our track_conversion() method
+
+<input type="button" onClick="meteor.tracking.track_conversion('dbb171d6-57c9-4ad3-a1a9-0bd6738ea3fe',{'name':'myconversion'});">
+_____
+
+
+HREF  Javascript Configuration
+(use for conversion that are links (<a href=...))
+
+<a href="http://example.com" onClick="meteor.tracking.track_conversion('dbb171d6-57c9-4ad3-a1a9-0bd6738ea3fe',{'name':'myconversion'}, this);">
+***The "this" is needed to prevent the original link from firing, which can cause issues. If you are already blocking the original link, use the "non-this" format.
+
+
+Option Two -  Pixel
+
+For tracking on third-party sites, or places where incorporating Javascript is not possible, use the pixel conversion:
+
+<img src="http://cdnt.meteorsolutions.com/api/conversion_pixel?cookie_name=dbb171d6-57c9-4ad3-a1a9-0bd6738ea3fe&name=myconversion" />
+
+
+

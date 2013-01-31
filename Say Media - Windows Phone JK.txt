@@ -1,0 +1,286 @@
+﻿Con call on 4/4/12
+
+
+Say Media
+Michael - Acct Mg
+Jen - Content mg
+Jay - Lead prod. mg
+Elizabeth - Reports
+
+
+Implementation discuss
+
+
+No campaigns to drive people to blog posts - no mtag req. 
+
+
+1 of 7 blog is controlled by Say Media. Other 6 need to be worked along with bloggers. 
+
+
+
+
+7 blogs - issues to examine:
+1. Issue w/ T&T Javascript
+2. Existing sharing tool?  Can we have sharing with 3 articles per blog?
+
+
+
+
+APPID of MICROSOFT - WINDOWS PHONE - 7 MOM BLOGS
+5a368a14-1a37-48b8-adb3-d7040199caad
+
+
+Name
+	URL
+	First Launch Date
+	Blogging Platform
+	Modes of sharing
+Meteor tracked
+Not tracked
+	Timestamp blog post?
+	xoJane 
+	http://www.xojane.com/
+	4/17/12
+	Custom written by Say Media
+	FB share, FB like, Tweet, Stumbled Upon, email
+	Y
+	Food52 
+	http://food52.com/
+	4/18/12
+	Custom
+	FB like, tweet with count, email, Pinterest
+	N
+	Dear Crissy
+	http://dearcrissy.com/
+	4/18/12
+	WordPress 3.3.1
+	FB like, Tweet, Google +, Stumbled Upon, Pinterest, and AddThis sharing bar
+	N
+	Divine Miss Mommy
+	http://divinemissmommy.com/
+	4/16/12
+	WordPress 3.1.3
+	Delicious, FB share, FB like, Tweet, Digg, Google+, Kirtsy, StumbledUpon, Technorati. Also Google and Yahoo Bookmark.
+	N
+	A Cup of Jo
+	http://joannagoddard.blogspot.com/
+	4/16/12
+	BlogSpot
+	Email, Twitter, FB Share. It’s on top left of page.
+	
+
+	Design Milk
+	http://design-milk.com/
+	5/1/12
+	Based on Wordpress
+	Tweet, FB like, Google +, Pinterest
+	N
+	Our Best Bites
+	http://www.ourbestbites.com/
+	4/18/12
+	Custom
+	Pinterest, FB share, Tweet, Stumbled Upon
+	Y
+	
+
+
+
+Final Launch dates for each article
+
+
+
+
+Sites
+	Dates
+	A Cup of Jo (#1); Divine Miss Mommy (#1); 
+	16-Apr
+	Food52 (#1); Dear Crissy (#1); Our Best Bites (#1); 
+	18-Apr
+	Food52 (#2); Divine Miss Mommy (#2); xoJane (#1)
+	24-Apr
+	Our Best Bites (#2); 
+	25-Apr
+	A Cup of Jo (#2); Dear Crissy (#2); xoJane (#2); Design Milk (#1)
+	1-May
+	Food52 (#3); Divine Miss Mommy (#3); Design Milk (#2)
+	8-May
+	Our Best Bites (#3); 
+	9-May
+	A Cup of Jo (#3); Dear Crissy (#3); xoJane (#3); Design Milk (#3)
+	15-May
+	
+
+
+
+
+
+Admin Acess:
+
+
+Dear Crissy         http://dearcrissy.com/wp-admin
+username: say and password: windowsphone
+
+
+Share tools located: 
+
+
+You'll need to go into appearance > editor (the theme is called Dear Crissy)
+
+
+On the Main Index Template and Single Posts pages you'll find the addthis stuff under <!-- AddThis Button BEGIN -->
+
+
+The Main Index template controls the share buttons that show up under the featured post on the home page, the single for the buttons on the individual posts.
+
+
+
+
+Divine Miss Mommy
+http://thedivinemissmommy.com/wp-admin/
+Username: stacie
+Password: robertjason160929
+
+
+
+
+
+
+
+
+
+
+Site
+	Launch
+	Working
+	Issues
+	Cup of Jo #1
+http://joannagoddard.blogspot.com/2012/04/haircut.html
+	4/16/12
+	Tag and trace
+	No twitter, FB, email sharing on the mandated Google Nav bar.
+
+
+Send code to implement meteor sharing bar
+	Food52 #1http://food52.com/blog/3149_10_passover_desserts
+	4/18/12
+	Tag and trace, email sharing
+	 Email sharing working.
+	Divine Miss Mommy (#1)
+
+
+
+
+Config #4
+	4/16/12
+	Tag and Trace, Superbar share with FB, email, Twitter, Windows Live
+	Share tool implement at bottom of post.
+	Dear Crissy (#1)
+
+
+
+
+Config #5
+	4/18/12
+	Tag and Trace, Superbar share with FB, email, Twitter, Windows Live.
+
+
+	
+
+	Our Best Bites (#1) http://www.ourbestbites.com/2012/04/what-to-do-with-leftover-ham-eggs/
+Config #6
+	4/18/12
+	Dropped.
+	Code included but doesn’t work. Check after others.
+
+
+contact@ The Girls at Our Best Bites <general@ourbestbites.com>l
+	XoJane 1
+	4/24/12
+	
+
+	Working together to add T&T and sharing buttons
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	Design Milk
+	5/1/12
+	
+
+	Need to send welcome packet. Need to determine what blogging platform they are on
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+	
+
+
+
+XOJane tech call 
+
+
+
+
+tracking is off the 
+Counters on, stumbled, twitter, FB like
+Twitter shortner
+Has AddThis buttons - brad, make sure addthis loads afterwards.
+
+
+Brad’s Questions?  He needs to talk to someone who knows technical understanding.
+
+
+#fbid=  that’s how Meteor tracks.  So just need to make sure that our fbid is pickedup 
+
+
+
+
+Twitter - It’s iframe implementation.

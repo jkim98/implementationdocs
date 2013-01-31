@@ -1,0 +1,76 @@
+﻿We're very excited to be working with you on this project!  
+
+
+The setup process is very straightforward. Listed below, you'll find 3 easy steps to get started.
+
+
+1. Tracking Code.
+This code should go on every page in the site where you want to track sharing.
+
+
+
+
+<script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script> 
+<script type="text/javascript">
+        meteor.tracking.track('eeeb57a6-8493-4599-b98c-5c7788c63920', {'url_storage_source': 'hash', 'query_string_tag_key': ['mtag', 'CR_CC', 'cr_cc']
+});
+meteor.orion.init();
+</script>
+
+
+Note: for secure, change above to use:
+<script type="text/javascript" src="https://cdnt.meteorsolutions.com/metsol.js"></script>
+
+
+That's it. This will deploy Meteor and enable tracking of your site.
+
+
+We're happy to offer an API document should you desire more information on all the customizable features of Meteor's Tracker, common solutions for your own deployments, and more information on the additional tools available.
+
+
+
+
+
+
+2. Conversion Tracking
+Tracking conversions are very easy with Meteor Solutions. We offer the ability to name tracking events so that they are easily distinguished, giving you a great deal of flexibility in how you measure your campaign or site's effectiveness. 
+
+
+1) Javascript
+The preferred method of tracking conversions is to call our track_conversion() method, e.g.:
+
+
+<input type="button" onClick="meteor.tracking.track_conversion('eeeb57a6-8493-4599-b98c-5c7788c63920',{'name':'myconversion2'});">
+
+
+e.g.: change 'myconversion2' to 'vote'
+
+
+If the conversion that you are tracking is a link (<a href=...), use the following format:
+
+
+<a href="http://example.com" onClick="meteor.tracking.track_conversion('eeeb57a6-8493-4599-b98c-5c7788c63920',{'name':'myconversion2'}, this);">
+
+
+The "this" is needed to prevent the original link from firing, which can cause issues.  If you are already blocking the original link, use the "non-this" format.
+2) Pixel
+For tracking on third-party sites, or places where incorporating Javascript is not possible, use the pixel conversion:
+
+
+<img src="http://cdnt.meteorsolutions.com/api/conversion_pixel?cookie_name=eeeb57a6-8493-4599-b98c-5c7788c63920&name=myconversion" />
+
+
+With properly deployed conversion tracking, you'll not only see how your site is contributing towards your end goals, but you'll also be able to monitor each step of your process and identify areas where you can increase your conversion ratio.  We are always happy to discuss naming and deployment strategies so that you get the most out of your deployment.
+
+
+3. Media Tagging
+By seeding your campaigns with known values, we are able to give you an even more accurate picture of how your campaign is going. All we need in order to provide media tags for your display, search, seeding (blogs/forums), social network (Facebook, Twitter, etc.) and content site (partner/sister sites) efforts is a list of the different sources you'd like to have tagged. Following, we'll send you a list of click-through URLs with media tags which you can seed at those various sites.
+
+
+A media tag is simply a value added to the URL for your site running Meteor's tracker.  For example, if you are trying to drive traffic from your Twitter to your main page, you may want to seed a destination with a link such as:
+http://www.mysite.com/index.html?mtag=twitter
+
+
+
+Using media tags in combination opens up a world of tracking and identification. Simply add additional values to gain more insight into how your external advertising efforts are performing such as (in this particular case, paid and magazine placements):
+http://www.mysite.com/index.html?mtag=paid&mtag=magazine1

@@ -1,0 +1,84 @@
+            
+
+1. Tracking Code.
+
+This code should go on every page in the site where you want to track sharing. Please insert this code in the header section if possible. We can also provide an Async wrapper if desired.
+
+<script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script> 
+<script type="text/javascript">
+meteor.tracking.track('3df84f27-e586-4db2-ae19-6bea07312012', {'url_storage_source': 'hash', 'query_string_tag_key': ['mtag', 'source', 'src']});
+meteor.orion.init();
+</script>
+
+
+That's it. This will deploy Meteor and enable tracking of your site and is required on the pages in order to use rest of Meteor technologies listed below with sole exception of Pixel Conversion call detailed below. 
+
+Please note that the Tracking code will alter the URL by appending #fbid=11 alphanumeric character which is uniquely generated per user. 
+
+
+2. Conversion Tracking
+
+Tracking conversions are very easy with Meteor Solutions. We offer the ability to name tracking events so that they are easily distinguished, giving you a great deal of flexibility in how you measure your campaign or site's effectiveness. 
+
+In meetings with Fluke's marketing team, we've identified 2 conversions. First is when a user registers their information and the second is when a user playes the game. 
+
+These conversions would be named 'registered' and 'game_played' respectively. The conversion examples below is shown with these conversion names.
+
+
+1) Javascript
+
+The preferred method of tracking conversions is to call our track_conversion() method, e.g.:
+
+<input type="button" onClick="meteor.tracking.track_conversion('3df84f27-e586-4db2-ae19-6bea07312012',{'name':'registered'});">
+
+
+
+If the conversion that you are tracking is a link (<a href=...), use the following format:
+
+
+<a href="http://example.com" onClick="meteor.tracking.track_conversion('3df84f27-e586-4db2-ae19-6bea07312012',{'name':'game_played'}, this);">
+
+
+The "this" is needed to prevent the original link from firing, which can cause issues.  If you are already blocking the original link, use the "non-this" format.
+
+
+2) Pixel
+
+For tracking on third-party sites, or places where incorporating Javascript is problematic, use the pixel conversion. This is the only meteor call which does NOT require Tracking code on section 1 to be on the same page. However, this call does assume that this user within past 365 days was on a page with Tracking code:
+
+
+<img src="http://cdnt.meteorsolutions.com/api/conversion_pixel?cookie_name=3df84f27-e586-4db2-ae19-6bea07312012&name=registered" />
+
+
+3. Registering Users
+
+Registration code:
+
+To associate PID with Meteor's unique user id (fbid), please call the following register method.  Pass in PID such as the email or user login ID as KEY. As an example, you could call it like so:
+
+<script type="text/javascript">
+meteor.tracking.register_key("bradley@meteorsolutions.com");
+</script>
+
+Please note that in previous projects the PID was obtained from Eloqua's code. Please feel free to contact us to discuss learnings from the past projects.
+
+
+4. Facebook, Twitter, Email Sharing
+
+Place the following code where you would like the share tool to render. This should be placed on the page after the Tracking call on Section 1 above.
+
+The actual configuration of the share tool can be done via Dashboard at https://app.meteorsolutions.com/sites/974/sharing_setup/  Please contact anna@meteorsolutions.com for user access.
+
+<script src="http://static.meteorsolutions.com/metshare.js"></script>
+<script>
+    if (meteor.detect_browser().device === "mobile") {
+        meteor.sharing.superbar.init({'id': '1', 'device': 'mobile'});
+    } else {
+        meteor.sharing.superbar.init({'id': '1'});
+    }
+</script>
+        
+
+
+
+

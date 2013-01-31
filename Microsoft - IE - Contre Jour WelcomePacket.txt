@@ -1,0 +1,102 @@
+﻿
+
+
+1. Tracking Code.
+
+This code should go on every page in the site where you want to track sharing. Please insert this code in the header section if possible. We can also provide an Async version of this code if desired.
+
+<script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script> 
+<script type="text/javascript">
+        meteor.tracking.track('63e3041e-d303-48f8-b0ae-c12a34ebd1de', {'url_storage_source': 'hash', 'query_string_tag_key': ['mtag', 'source', 'src' , 'utm_source', 'CR_CC', 'cr_cc']});
+meteor.orion.init();
+</script>
+
+
+That's it. This will deploy Meteor and enable tracking of your site and is required on the pages in order to use Meteor Share tool.
+
+Please note that the Tracking code will alter the URL by appending #fbid=11 alphanumeric character which is uniquely generated per user. 
+
+
+2. Conversion Tracking
+
+Tracking conversions are very easy with Meteor Solutions. We offer the ability to name tracking events so that they are easily distinguished, giving you a great deal of flexibility in how you measure your campaign or site's effectiveness. 
+
+
+1) Javascript
+The preferred method of tracking conversions is to call our track_conversion() method, e.g.:
+
+
+<input type="button" onClick="meteor.tracking.track_conversion('63e3041e-d303-48f8-b0ae-c12a34ebd1de',{'name':'myconversion'});">
+
+e.g.: change 'myconversion' to 'vote'
+
+
+If the conversion that you are tracking is a link (<a href=...), use the following format:
+
+
+<a href="http://example.com" onClick="meteor.tracking.track_conversion('63e3041e-d303-48f8-b0ae-c12a34ebd1de',{'name':'myconversion'}, this);">
+
+
+The "this" is needed to prevent the original link from firing, which can cause issues.  If you are already blocking the original link, use the "non-this" format.
+
+
+2) Pixel
+For tracking on third-party sites, or places where incorporating Javascript is problematic, use the pixel conversion:
+
+
+<img src="http://cdnt.meteorsolutions.com/api/conversion_pixel?cookie_name=63e3041e-d303-48f8-b0ae-c12a34ebd1de&name=myconversion" />
+
+
+
+3. Facebook, Twitter, StumbleUpon Sharing
+
+Place the following configuration call. This should be placed on the page after the Tracking call on Section 1 above.
+Please replace SET... portion with appropriate parameters.
+
+<script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script>
+<script type="text/javascript">
+     meteor.sharing.configure('63e3041e-d303-48f8-b0ae-c12a34ebd1de', {'shorten' : '' , 'url': 'SET SHARING URL 1', 'title' : 'SET SHARING TEXT'});
+</script>
+
+
+The actual method call to setup sharing is meteor.sharing.href with appropriate share type of 'Twitter', 'Facebook' and 'Stumbleupon'. Please see sample code below for using it with anchor tag:
+
+
+<a href="#" target="_blank" onclick="this.href=meteor.sharing.href('Twitter');">Share on Twitter</a>
+
+
+<a href="#" target="_blank" onclick="this.href=meteor.sharing.href('Facebook');">Share on Facebook</a>
+
+
+<a href="#" target="_blank" onclick="this.href=meteor.sharing.href('Stumbleupon');">Share on Stumbleupon</a>
+
+
+Additional sharing as well as configurations are possible. Please see the attached Sharing Tool API for details.
+
+
+FB Like with count and Tweet with count.
+
+
+<script type="text/javascript" src="http://cdnt.meteorsolutions.com/metlike.js"></script>
+<script type="text/javascript"> meteor.metlike.init(); 
+var config = {'fblike':
+                {'enabled': 'true'},
+              'twtweet':
+                {'enabled': 'true', 'text' : 'SET SHARING TWITTER TEXT'}
+             };
+meteor.metlike.init(config);
+
+</script>
+
+
+
+
+4. Registering Users
+
+Registration code:
+
+Once a validated contestant enters their email address, please call the following register method.  Pass in the email or a unique user ID as KEY. As an example, you could call it like so:
+
+<script type="text/javascript">
+meteor.tracking.register_key("bradley@meteorsolutions.com");
+</script>
