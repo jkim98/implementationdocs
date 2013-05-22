@@ -1,4 +1,14 @@
 
+Discuzz Authentication page Code:
+
+
+<!-- Meteor tracking code in header --> 
+<script type="text/javascript" src="https://cdnt.meteorsolutions.com/metsol.js"></script>
+<script type="text/javascript" src=https://cdnt.meteorsolutions.com/api/multi_track?application_id=089243ac-8ab5-4062-9072-4a2fd21d0023&url_storage_source=hash&query_string_tag_key=mtag&query_string_tag_key=source&query_string_tag_key=src&query_string_tag_key=CR_CC&query_string_tag_key=cr_cc">
+meteor.orion.init();
+</script>
+
+
 
 
 namespace SilverlightApplication2
@@ -45,6 +55,12 @@ namespace SilverlightApplication2
         private void LinkedinShare(object sender, RoutedEventArgs e)
         {
             System.Windows.Browser.HtmlPage.Window.Eval("var link = meteor.sharing.href('linkedin'); window.location.href = link;");
+        }
+        
+     	public void TriggerConversion(string appid, string conversion_name) {
+
+            System.Windows.Browser.HtmlPage.Window.Eval("meteor.tracking.track_conversion('"+appid+"',{'name':'"+conversion_name+"'});");
+
         }
  
     }

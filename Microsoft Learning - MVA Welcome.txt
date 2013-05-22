@@ -1,0 +1,133 @@
+
+Microsoft Learning - MVA Campaign 2/14/2013 
+
+http://www.microsoftvirtualacademy.com/Home.aspx
+
+	
+We're very excited to be working with you on this project! Please contact anna@rioseo.com with any questions.
+            
+General Overview
+
+Meteor's core components are written in Javascript and designed to be called from Javascript. The main library is metsol.js which is served via Akamai CDN. 
+
+ 
+1. Meteor tracking Code.
+
+The code below is the Tag and Trace component which enables tracking of social sharing by generating an 11 digit unique ID for each user and appends this ID to the URL in the browser environment. 
+Ideally, this code should be placed at the header section of the every page where Meteor social tracking is desired.
+
+
+HTTP configuration (appends Meteor ID behind the # in URL) 
+
+<!-- Meteor tracking code with Hash Implementation in header --> 
+<script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script>
+<script type="text/javascript">
+meteor.tracking.track('a11a6ba2-4d8f-4f7e-a4ac-eaaf0d44685a', {'url_storage_source': 'hash', 'query_string_tag_key': ['mtag', 'source', 'src', 'cr_cc', 'CR_CC']});
+meteor.orion.init();
+</script>
+        
+HTTPS configuration (appends Meteor ID behind the # in URL) 
+
+<!-- Meteor tracking code with Hash Implementation in header --> 
+<script type="text/javascript" src="https://cdnt.meteorsolutions.com/metsol.js"></script>
+<script type="text/javascript">
+meteor.tracking.track('a11a6ba2-4d8f-4f7e-a4ac-eaaf0d44685a', {'url_storage_source': 'hash', 'query_string_tag_key': ['mtag', 'source', 'src', 'cr_cc', 'CR_CC']});
+meteor.orion.init();
+</script>
+ 
+
+
+
+SHARE TOOL IMPLEMENTATION
+
+
+
+Using Custom Sharing Icons with Meteor Sharing
+
+Please insert the following script in the HTML following the Tracking script in the section 1
+
+HTTP code
+
+<script src="http://static.meteorsolutions.com/metshare.js"></script>
+<script>
+meteor.sharing.superbar.configure({'id': 'share1'});
+</script>
+
+
+HTTPS code
+
+<script src="https://cdnt.meteorsolutions.com/metshare.js"></script>
+<script>
+meteor.sharing.superbar.configure({'id': 'share1'});
+</script>
+
+
+For each custom social icon, please use the following format to set the 'onclick' attribute of each anchor tag with an invocation to the superbar's trigger function. Parameters set in the config step can be overwritten here. For example, to create multiple share links, each with a different message, the following code might be used:
+
+
+<p><a href="#" onclick="meteor.sharing.superbar.trigger('twitter', {'message': 'Check out this awesome article. #rockyoursocks'});">Share via Twitter</a></p>
+
+<p><a href="#" onclick="meteor.sharing.superbar.trigger('facebook', {'title' : 'Share Title' , 'message': 'Hey everyone! Check out this amazing article!'});">Share via Facebook</a></p>
+
+<p><a href="#" onclick="meteor.sharing.superbar.trigger('linkedin', {'message': 'Hey everyone! Check out this amazing article!'});">Share via LinkedIn</a></p>
+
+<p><a href="#" onclick="meteor.sharing.superbar.trigger('email', {'title' : 'Share Title' , 'message': 'I saw this and thought of you. You should check it out!'});">Share via Email</a></p>
+
+If present on the page, Meteor share tool will automatically use the value of HTML <title> tag to set the title of Facebook sharing and email subject and meta name="description" content will be used for Twitter, Facebook and Linkedin shared messages and the email body text. 
+
+Optionally, title and/or message can be explicitly set which will override the value of HTML <title> and meta name="description" by adding parameters of 'title' and/or 'message' to meteor.sharing.superbar.init call in the section above. 
+
+Please note that only Facebook and Email support 'title' parameters. 
+
+
+Please see "Superbar Documentation 11_16_12 Release" for further details and configuration options.
+
+
+
+The anchor tag can be used the same as any other anchor tag, which means it can be wrapped around arbitrary page elements to make custom sharing displays.
+
+
+
+
+Conversion/End-Action Tracking
+
+We offer the ability to name tracking events so that they are easily distinguished, giving you a great deal of flexibility in how you measure your campaign or site's effectiveness.
+
+***In all cases - please rename the 'myconversion' to a conversion name appropriate for a specific end action i.e. 'whitepaper1_download', 'register_page1', 'watch_welcomeVideo'
+
+
+Option One -  Javascript  (The preferred method of tracking conversions) 
+
+This calls our track_conversion() method
+
+<input type="button" onClick="meteor.tracking.track_conversion('a11a6ba2-4d8f-4f7e-a4ac-eaaf0d44685a',{'name':'myconversion'});">
+_____
+
+
+HREF  Javascript Configuration
+(use for conversion that are links (<a href=...))
+
+<a href="http://example.com" onclick="meteor.tracking.track_conversion('a11a6ba2-4d8f-4f7e-a4ac-eaaf0d44685a',{'name':'myconversion'}, this);">
+***The "this" is needed to prevent the original link from firing, which can cause issues. If you are already blocking the original link, use the "non-this" format.
+
+
+Option Two -  Pixel
+
+For tracking on third-party sites, or places where incorporating Javascript is not possible, use the pixel conversion:
+
+<img src="http://cdnt.meteorsolutions.com/api/conversion_pixel?cookie_name=a11a6ba2-4d8f-4f7e-a4ac-eaaf0d44685a&name=myconversion" />
+
+
+
+
+Accessing Meteor API
+
+The Meteor API allows Meteor clients to retrieve data about campaigns tracked by Meteor Tracker. Developers can use both server-side and client-side technologies to enhance reporting and add dynamic components that include Meteor-specific data to their pages.
+The API is documented at https://api.meteorsolutions.com.
+
+For the API, here are the required keys below.
+
+Meteor Campaign UUID:  a11a6ba2-4d8f-4f7e-a4ac-eaaf0d44685a
+Basic Auth API key:  lvYj1a_Mr4i8IGL8x3sPBtwTvsh9N6Tf
+SONP API key:  n9Gpo1_gIvFhPx7oWuA0oBRck670rmxh
+

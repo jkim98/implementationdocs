@@ -30,10 +30,12 @@ Ideally, this code should be placed at the header section of the every page wher
 <!-- Meteor tracking and configuration code in header --> 
 <script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script>
 <script type="text/javascript" src="http://static.meteorsolutions.com/metshare.js"></script>
-<script type="text/javascript">
-meteor.tracking.track('eab6c086-f2dc-48c8-b5bb-fd808db9c82e', {'url_storage_source': 'hash', 'cookie_domain': '.msteched.com' 'query_string_tag_key': ['mtag', 'source', 'src', 'cr_cc', 'CR_CC']});
+<script type="text/javascript" src=http://cdnt.meteorsolutions.com/api/multi_track?application_id=eab6c086-f2dc-48c8-b5bb-fd808db9c82e&url_storage_source=hash&query_string_tag_key=mtag&query_string_tag_key=source&query_string_tag_key=src&query_string_tag_key=cr_cc&query_string_tag_key=CR_CC">
 meteor.orion.init();
 </script>      
+        
+        
+           
                    
 That's it. This will deploy Meteor and enable tracking of your site and must execute first on a page in order to utilize the rest of Meteor technologies listed below with sole exception of Pixel Conversion call detailed below. 
    

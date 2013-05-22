@@ -1,5 +1,7 @@
 
-Microsoft - Imagine Cup Campaign 11/28/2012
+Microsoft Learning - BTL Campaign 2/14/2013
+http://borntolearn.mslearn.net/
+
 	
 We're very excited to be working with you on this project! Please contact anna@rioseo.com with any questions.
             
@@ -11,41 +13,29 @@ Meteor's core components are written in Javascript and designed to be called fro
 1. Meteor tracking Code.
 
 The code below is the Tag and Trace component which enables tracking of social sharing by generating an 11 digit unique ID for each user and appends this ID to the URL in the browser environment. 
-Please add the following code which is designed to use 1st party cookie when used within imaginecup.com and any subdomain sites. Ideally, this code should be placed at the header section of the every page where Meteor social tracking is desired.
+Ideally, this code should be placed at the header section of the every page where Meteor social tracking is desired.
 
-<!-- Meteor tracking code in header --> 
+Preferred Hash configuration (appends Meteor ID behind the # in URL) 
+
+<!-- Meteor tracking code with Hash Implementation in header --> 
 <script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script>
 <script type="text/javascript">
-meteor.tracking.track('a11a6ba2-4d8f-4f7e-a4ac-eaaf0d44685a', {'url_storage_source': 'hash', 'cookie_domain': '.', 'query_string_tag_key': ['mtag', 'source', 'src', 'cr_cc', 'CR_CC']});
-meteor.orion.init();
-</script>
-
-
-SSL (HTTPS) version
-
-<!-- Meteor tracking code in header --> 
-<script type="text/javascript" src="https://cdnt.meteorsolutions.com/metsol.js"></script>
-<script type="text/javascript">
-meteor.tracking.track('a11a6ba2-4d8f-4f7e-a4ac-eaaf0d44685a', {'url_storage_source': 'hash', 'cookie_domain': '.', 'query_string_tag_key': ['mtag', 'source', 'src', 'cr_cc', 'CR_CC']});
+meteor.tracking.track('a11a6ba2-4d8f-4f7e-a4ac-eaaf0d44685a', {'url_storage_source': 'hash', 'query_string_tag_key': ['mtag', 'source', 'src', 'cr_cc', 'CR_CC']});
 meteor.orion.init();
 </script>
         
-            
-Following is code which uses 3rd party cookie for sites which are NOT on imaginecup.com or any subdomain sites.
+ 
+ 
+Optional Query string configuration (appends Meteor ID behind the ? in URL but will cause browser to refresh the page). If using Query string configuration, it is important to insert the code below in the topmost of the header section to minimize user impact during browser refresh.
 
+<!-- Meteor tracking code with Querystring Implementation in header --> 
 <script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script>
-<script type="text/javascript" src="http://cdnt.meteorsolutions.com/api/multi_track?application_id=a11a6ba2-4d8f-4f7e-a4ac-eaaf0d44685a&url_storage_source=hash&query_string_tag_key=mtag&query_string_tag_key=source&query_string_tag_key=src&query_string_tag_key=cr_cc&query_string_tag_key=CR_CC">
+<script type="text/javascript">
+meteor.tracking.track('a11a6ba2-4d8f-4f7e-a4ac-eaaf0d44685a', {'url_storage_source': 'query_string', 'query_string_tag_key': ['mtag', 'source', 'src', 'cr_cc', 'CR_CC']});
 meteor.orion.init();
 </script>
-
-
-SSL (HTTPS) version
-
-<script type="text/javascript" src="https://cdnt.meteorsolutions.com/metsol.js"></script>
-<script type="text/javascript" src="https://cdnt.meteorsolutions.com/api/multi_track?application_id=a11a6ba2-4d8f-4f7e-a4ac-eaaf0d44685a&url_storage_source=hash&query_string_tag_key=mtag&query_string_tag_key=source&query_string_tag_key=src&query_string_tag_key=cr_cc&query_string_tag_key=CR_CC">
-meteor.orion.init();
-</script>
-                   
+ 
+     
 That's it. This will deploy Meteor and enable tracking of your site and must execute first on a page in order to utilize the rest of Meteor technologies listed below with sole exception of Pixel Conversion call detailed below. 
    
 
@@ -58,22 +48,18 @@ Please create a div id=’meteorShare’ where the Meteor Share Tool is to be po
 
 <script src="http://static.meteorsolutions.com/metshare.js"></script>
 <script>
-        meteor.sharing.superbar.init({'id': '1', 'parentID': 'meteorShare', 'sites' : ['twitter', 'email', 'facebook', 'linkedin']});
+        meteor.sharing.superbar.init({'id': '1', 'parentID': 'meteorShare', 'sites' : ['twitter', 'email', 'facebook']});
 </script>
+
+
+If sharing on linkedIN social site is desired, please append ,'linkedin' to the 'sites' parameter above.
  
-
-SSL (HTTPS) version
-
-<script src="https://cdnt.meteorsolutions.com/metshare.js"></script>
-<script>
-        meteor.sharing.superbar.init({'id': '1', 'parentID': 'meteorShare', 'sites' : ['twitter', 'email', 'facebook', 'linkedin']});
-</script>
-
 If present on the page, Meteor share tool will automatically use the value of HTML <title> tag to set the title of Facebook sharing and email subject and meta name="description" content will be used for Twitter, Facebook and Linkedin shared messages and the email body text. 
 
 Optionally, title and/or message can be explicitly set which will override the value of HTML <title> and meta name="description" by adding parameters of 'title' and/or 'message' to meteor.sharing.superbar.init call in the section above. 
 
 Please see "Superbar Documentation 11_16_12 Release" for further details and configuration options.
+ 
  
   
 Integrating Meteor social tracking into a non-Meteor share tool
@@ -119,4 +105,16 @@ For tracking on third-party sites, or places where incorporating Javascript is n
 <img src="http://cdnt.meteorsolutions.com/api/conversion_pixel?cookie_name=a11a6ba2-4d8f-4f7e-a4ac-eaaf0d44685a&name=myconversion" />
 
 
+
+
+Accessing Meteor API
+
+The Meteor API allows Meteor clients to retrieve data about campaigns tracked by Meteor Tracker. Developers can use both server-side and client-side technologies to enhance reporting and add dynamic components that include Meteor-specific data to their pages.
+The API is documented at https://api.meteorsolutions.com.
+
+For the API, here are the required keys below.
+
+Meteor Campaign UUID:  
+Basic Auth API key:  
+SONP API key:  
 

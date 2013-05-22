@@ -1,4 +1,17 @@
 ﻿
+
+The instructions in this packet is for the migration of current www.generationapp.com to www.buildforwindows.com
+
+Please note that MSFT client has asked that the same CampaignID of current www.generationapp.com 09109331-6ae8-4e07-a770-d7b2a2ea21d0 be used at www.buildforwindows.com
+
+As such, the existing Meteor code currently on www.generationapp.com can be migrated with any needed URL changes to www.buildforwindows.com
+
+
+
+
+
+
+
 1. Tracking Code.
 
 This code should go on every page in the site where you want to track sharing. Please insert this code in the header section if possible. We can also provide an Async version of this code if desired.

@@ -1,11 +1,20 @@
 ﻿
+The instructions in this packet is for the migration of current www.generationapp.com to www.generationapp.com/student
+
+Please note that the existing Meteor code currently on www.generationapp.com can be migrated easily with a search and replace of campaign ID.
+
+The current campaignID of 09109331-6ae8-4e07-a770-d7b2a2ea21d0 should be replaced with b71d4c02-b054-4727-8cc4-7b195c1e2763 for www.generationapp.com/student site. 
+All the code in the packet already incorporates the updated campaignID but again note that the existing code from www.generationapp.com can be reused once the CampaignID is changed to b71d4c02-b054-4727-8cc4-7b195c1e2763
+
+
+
 1. Tracking Code.
 
 This code should go on every page in the site where you want to track sharing. Please insert this code in the header section if possible. We can also provide an Async version of this code if desired.
 
 <script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script> 
 <script type="text/javascript">
-        meteor.tracking.track('09109331-6ae8-4e07-a770-d7b2a2ea21d0', {'url_storage_source': 'hash', 'query_string_tag_key': ['mtag', 'source', 'src' , 'utm_source', 'CR_CC', 'cr_cc']});
+        meteor.tracking.track('b71d4c02-b054-4727-8cc4-7b195c1e2763', {'url_storage_source': 'hash', 'query_string_tag_key': ['mtag', 'source', 'src' , 'utm_source', 'CR_CC', 'cr_cc', 'cm_mmc']});
 meteor.orion.init();
 </script>
 
@@ -26,13 +35,13 @@ Tracking conversions are very easy with Meteor Solutions. We offer the ability t
 The preferred method of tracking conversions is to call our track_conversion() method, e.g.:
 
 
-<input type="button" onClick="meteor.tracking.track_conversion('09109331-6ae8-4e07-a770-d7b2a2ea21d0',{'name':'myconversion'});">
+<input type="button" onClick="meteor.tracking.track_conversion('b71d4c02-b054-4727-8cc4-7b195c1e2763',{'name':'myconversion'});">
 
 
 If the conversion that you are tracking is a link (<a href=...), use the following format:
 
 
-<a href="http://example.com" onClick="meteor.tracking.track_conversion('09109331-6ae8-4e07-a770-d7b2a2ea21d0',{'name':'myconversion'}, this);">
+<a href="http://example.com" onClick="meteor.tracking.track_conversion('b71d4c02-b054-4727-8cc4-7b195c1e2763',{'name':'myconversion'}, this);">
 
 
 The "this" is needed to prevent the original link from firing, which can cause issues.  If you are already blocking the original link, use the "non-this" format.
@@ -42,7 +51,7 @@ The "this" is needed to prevent the original link from firing, which can cause i
 For tracking on third-party sites, or places where incorporating Javascript is problematic, use the pixel conversion:
 
 
-<img src="http://cdnt.meteorsolutions.com/api/conversion_pixel?cookie_name=09109331-6ae8-4e07-a770-d7b2a2ea21d0&name=myconversion" />
+<img src="http://cdnt.meteorsolutions.com/api/conversion_pixel?cookie_name=b71d4c02-b054-4727-8cc4-7b195c1e2763&name=myconversion" />
 
 
 
@@ -62,7 +71,7 @@ Initialize the sharing tool.
 
 <script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script>
 <script type="text/javascript">
-      meteor.sharing.configure('09109331-6ae8-4e07-a770-d7b2a2ea21d0');
+      meteor.sharing.configure('b71d4c02-b054-4727-8cc4-7b195c1e2763');
 </script>
 
 

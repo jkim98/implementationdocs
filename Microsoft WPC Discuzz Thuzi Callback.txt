@@ -1,0 +1,100 @@
+function getQueryVariable(variable)
+{
+  var query = window.location.search.substring(1);
+  var vars = query.split("&");
+  for (var i=0;i<vars.length;i++) {
+    var pair = vars[i].split("=");
+    if(pair[0] == variable){return pair[1];}
+  }
+  return(false);
+}
+And can be used like this:
+
+var r = getQueryVariable("r");
+
+alert(r); // outputs 'Ancho-Chile-Sauce'
+
+
+https://connect.digitalwpc.com:9443/s/Kys?u=2216.15320&contentId=2216.634932964730166697.634950936295534657#fbid=UAg5fklkQhE
+
+
+
+
+
+
+<!-- Meteor tracking code in header --> 
+<script type="text/javascript" src="https://cdnt.meteorsolutions.com/metsol.js">
+function getQueryVariable(variable)
+{
+  var query = window.location.search.substring(1);
+  var vars = query.split("&");
+  for (var i=0;i<vars.length;i++) {
+    var pair = vars[i].split("=");
+    if(pair[0] == variable){return pair[1];}
+  }
+  return(false);
+};
+var d_userId = getQueryVariable("u");
+var d_contentId = getQueryVariable("contentId");
+
+meteor.orion.init();
+
+var _tzaq = _tzaq || [];
+
+meteor.register_event_handler('fbid_replacement',
+    (function (d) {
+        return function() {
+            _tzaq.push(['_setAccount', 'mi7r12n']); 
+            _tzaq.push(['_trackEvent', 'share', {userId: d_userId, contentId: d_contentId}]);
+
+            var ta = d.createElement('script'); 
+            ta.type = 'text/javascript';
+            ta.async = true;
+            ta.src = '//tzanalytics.thuzi.com/javascripts/thuzianalytics-1.7.js'; 
+            var s = d.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(ta, s);
+        };
+    })(document)            
+);
+
+<script type="text/javascript" src="https://cdnt.meteorsolutions.com/api/multi_track?application_id=089243ac-8ab5-4062-9072-4a2fd21d0023&url_storage_source=hash&query_string_tag_key=mtag&query_string_tag_key=source&query_string_tag_key=src&query_string_tag_key=CR_CC&query_string_tag_key=cr_cc">
+</script>
+
+
+	
+
+
+
+
+
+
+
+
+
+
+	
+<script type="text/javascript">
+
+var _tzaq = _tzaq || []; 
+
+_tzaq.push(['_setAccount', 'mi7r12n']); 
+
+_tzaq.push(['_trackEvent', 'share', {userId: 'userId', contentId: 'contentId'}]);
+
+</script>
+
+<script type="text/javascript"> 
+
+(function (d, ta, s) {
+
+ta = d.createElement('script'); 
+
+ta.type = 'text/javascript';
+
+ta.async = true; ta.src = '//tzanalytics.thuzi.com/javascripts/thuzianalytics-1.7.js'; 
+
+s = d.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ta, s);
+
+}(document));
+
+</script>

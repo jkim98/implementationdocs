@@ -1,6 +1,6 @@
             
 
 <script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script>
-<script type="text/javascript" src="http://cdnt.meteorsolutions.com/api/multi_track?application_id=78c1f2a4-c799-4d50-a6ec-117c61a5e9b1&url_storage_source=hash&query_string_tag_key=mtag&query_string_tag_key=source&query_string_tag_key=src"></script>
+<script type="text/javascript" src=http://cdnt.meteorsolutions.com/api/multi_track?application_id=78c1f2a4-c799-4d50-a6ec-117c61a5e9b1&url_storage_source=hash&query_string_tag_key=mtag&query_string_tag_key=source&query_string_tag_key=src"></script>
 
             

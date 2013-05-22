@@ -1,0 +1,53 @@
+
+AT&T Ecomm - TBD product Launch 3_2013
+            
+
+
+1. Meteor tracking Code.
+
+The code below is the Tag and Trace component which enables tracking of social sharing by generating an 11 digit unique ID for each user and appends this ID to the URL in the browser environment. 
+Ideally, this code should be placed at the header section of the every page where Meteor social tracking is desired.
+
+
+<script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script>
+<script type="text/javascript">
+    meteor.tracking.track('08c411df-35b9-445f-948e-05b910a60f46', {'url_storage_source': 'hash' , 'query_string_tag_key': ['mtag', 'source', 'src']});
+    meteor.orion.init();
+</script>
+            
+
+
+2. Share Tool Implementation
+
+Please name a DIV tag where you would like the Share Tool to be rendered in the page:  <div id='SET DIV ID'> 
+
+Then insert the following code into the body section of the HTML and replace 'SET DIV ID' with the actual DIV id. 
+
+
+<script src="https://cdnt.meteorsolutions.com/metshare.js"></script>
+<script>
+    if (meteor.detect_browser().device === "mobile") {
+        meteor.sharing.superbar.init({'id': 'med_mobile' , 'device' : 'mobile', 'size' : 'mobile-small', 'page_position' : 'right', 'sites' : ['twitter', 'facebook', 'email']});
+    } else {
+        meteor.sharing.superbar.init({'id': 'med_standard' ,'parentID' : 'SET DIV ID', 'size' : 'med', 'orientation' : 'vertical', 'sites' : ['twitter', 'facebook', 'linkedin',  'email']});
+    }
+</script>
+        
+
+
+If present on the page, Meteor share tool will automatically use the value of HTML <title> tag to set the title of Facebook sharing and email subject and meta name="description" content will be used for Twitter, Facebook and Linkedin shared messages and the email body text. 
+
+Optionally, title and/or message can be explicitly set which will override the value of HTML <title> and meta name="description" by adding parameters of 'title' and/or 'message' to meteor.sharing.superbar.init call in the section above. 
+
+Please see "Superbar Documentation 11_16_12 Release" for further details and configuration options.      
+      
+
+
+3. Registering User ID
+
+
+To register User ID, please call the following register method.  Pass in the userID as KEY. As an example, if the UserID is an email, you could call it like so:
+
+<script type="text/javascript">
+meteor.tracking.register_key("bradley@meteorsolutions.com");
+</script>

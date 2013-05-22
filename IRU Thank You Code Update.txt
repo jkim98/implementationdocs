@@ -1,0 +1,44 @@
+
+
+
+Replace the following code:
+
+<a href="http://www.facebook.com" target="_blank" onclick="meteor.sharing.superbar.href('facebook','','Hello, savings! ');return false;">
+								
+with the following code:
+
+<a href="#" target="_blank" onclick="meteor.sharing.superbar.trigger('facebook', {'title' : 'Hello, savings! '});">					
+								
+
+
+Replace the following code:
+								
+<a href="http://www.twitter.com" target="_blank" onclick="meteor.sharing.superbar.href('twitter','','Hello, savings! I got a great deal on wireless at @ATTPremier--and you could, too. Check now: ');return false;">
+								
+with the following code:
+
+<a href="#" target="_blank" onclick="meteor.sharing.superbar.trigger('twitter', {'message': 'Hello, savings! I got a great deal on wireless at @ATTPremier--and you could, too. Check now: '});">
+
+
+
+Replace the following code:
+
+<a href="mailto:" onclick="meteor.sharing.superbar.href('email', 'Hello, savings! ', 'I just made a purchase at AT&T Premier, where wireless devices and service cost less. Check to see if you qualify for exclusive discounts--it is easy to find out! Restrictions apply. ');return false;">
+
+with the following code:
+
+<a href="mailto:" onclick="meteor.sharing.superbar.trigger('email', {'title' : 'Hello, savings! ' , 'message': 'I just made a purchase at AT&T Premier, where wireless devices and service cost less. Check to see if you qualify for exclusive discounts--it is easy to find out! Restrictions apply. '});">
+
+
+
+
+
+Replace the following code:
+
+<a href="http://www.linkedin.com" target="_blank" onclick="meteor.sharing.superbar.href('linkedin','', 'Hello, savings! ');return false;">
+
+
+with the following code:
+
+<a href="#" target="_blank" onclick="meteor.sharing.superbar.trigger('linkedin', {'message': 'Hello, savings! '});">
+
