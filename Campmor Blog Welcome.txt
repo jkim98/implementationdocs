@@ -1,5 +1,6 @@
 
-Campmor Blog Campaign 3/18/2012
+Campmor Blog Campaign 3/18/2012 
+Updated on 6/17/13 with 'query_string_tag_key' of 'cm_cat'
 	
 We're very excited to be working with you on this project! Please contact Rachel Ullstrom <rullstrom@rioseo.com> with any questions.
 
@@ -18,7 +19,7 @@ Please add the following code in the header section of the every page where RioS
 <!-- RioSEO Social tracking code in header --> 
 <script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script>
 <script type="text/javascript">
-meteor.tracking.track('11645bc6-f020-4d79-bb89-9d1786f30e89', {'url_storage_source': 'hash', 'query_string_tag_key': ['mtag', 'source', 'src']});
+meteor.tracking.track('11645bc6-f020-4d79-bb89-9d1786f30e89', {'url_storage_source': 'hash', 'query_string_tag_key': ['mtag', 'source', 'src', 'cm_cat']});
 meteor.orion.init();
 </script>
             

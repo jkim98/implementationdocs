@@ -1,0 +1,100 @@
+Microsoft - Store - BTS 2013
+    
+We're very excited to be working with you on this project! 
+
+Please contact anna@rioseo.com with any questions.
+
+ 
+1. Basic Tracking
+
+The code below enables tracking of social sharing by appending a unique, dynamically generated 11 digit alphanumeric string to the URL of each visitor (ex. http://www.example.com/#fbid=N46tl5MN3lJ)
+
+This should be placed within the <head>...</head> element of the page.
+
+Best configuration (appends Meteor ID in URL fragment behind '#'): 
+
+<!-- Hash tracking implementation within the <head>...</head> element --> 
+<script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script>
+<script type="text/javascript">
+    meteor.tracking.track('b5fe3521-6f4e-45a4-a295-243b97d771d1', {'url_storage_source': 'hash', 'cookie_domain': '.microsoftstore.com', 'query_string_tag_key': ['mtag', 'source', 'src', 'WT.mc_id', 'cr_cc', 'CR_CC']});
+    meteor.orion.init();
+</script>
+
+If you are unable to use the hash configuration, there is also a query string configuration (appends Meteor ID in query string behind '?'). 
+
+*** This will cause a page refresh and introduce issues with double-counting. 
+
+<!-- Query string implementation within the <head>...</head> element --> 
+<script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script>
+<script type="text/javascript">
+    meteor.tracking.track('b5fe3521-6f4e-45a4-a295-243b97d771d1', {'url_storage_source': 'query_string', 'cookie_domain': '.microsoftstore.com', 'query_string_tag_key': ['mtag', 'source', 'src', 'WT.mc_id', 'cr_cc', 'CR_CC']});
+    meteor.orion.init();
+</script>
+
+That's it! If you see an 'fbid=xxxxxxxxxxx' to the page it's working. Please contact us if you need help verifying your implementation.
+     
+'metsol.js' MUST be properly sourced to use the following features: 
+
+
+
+2. Conversion/End-Action Tracking
+
+You can easily create custom conversion/end-action events tied to social visitor data which offers a great deal of power to measure your campaign or site's effectiveness.
+
+*** In all cases - please rename the 'myconversion' to a conversion name appropriate for a specific end action i.e. 'whitepaper1_download', 'register_page1', 'watch_welcomeVideo'
+
+Best option: 
+
+Using javascript, just attach the 'meteor.tracking.track_conversion(...)' method to any page event you'd like to track. For example, this code will track clicks on a button:
+
+<input type="button" onClick="meteor.tracking.track_conversion('b5fe3521-6f4e-45a4-a295-243b97d771d1',{'name':'myconversion'});">
+
+And this will track clicks on a link:
+
+<a href="http://example.com" onclick="meteor.tracking.track_conversion('b5fe3521-6f4e-45a4-a295-243b97d771d1',{'name':'myconversion'}, this);">
+
+*** Don't forget to rename your conversion!
+
+*** The 'this' is needed to prevent the original link from firing, which can cause issues. If you are already blocking the original link, use the "non-this" format.
+
+Second option:
+
+When using javascript isn't possible (like on third-party controlled sites), we also have a pixel conversion method. This can be placed anywhere on the page, but cannot be attached to page events:
+
+<img src="http://cdnt.meteorsolutions.com/api/conversion_pixel?cookie_name=b5fe3521-6f4e-45a4-a295-243b97d771d1&name=myconversion" />
+
+*** Don't forget to name your conversion!
+
+
+
+3. Activate/User ID Tracking
+
+If you have registered users, it's possible to associate a Meteor ID ('fbid=xxxxxxxxxxx') with their username/email after login using the 'meteor.tracking.register_key()' method. Please call the following method with the string as a parameter. user_id is used as an example in this example and should be set to the user email.
+
+<script type="text/javascript">
+    meteor.tracking.register_key(user_id);
+</script>
+
+
+
+4. Sharing
+
+It's easy to integrate with custom and existing share tools.
+
+Place the following code under the call to metsol.js from above (within the <head>...</head> element):
+
+<script src='http://static.meteorsolutions.com/metshare.js'></script>
+<script type='text/javascript'>
+    meteor.sharing.superbar.configure({'id': '1'});
+</script>
+
+Once 'metshare.js' has been sourced you can call the appropriate 'meteor.sharing.superbar.trigger' method to track sharing activity.
+
+The following example shows how to use the 'meteor.sharing.superbar.trigger' method on custom Twitter and Facebook sharing links:
+
+<a href="#" onclick="meteor.sharing.superbar.trigger('twitter', {'message': 'Check out this awesome article. #rockyoursocks'});">Share via Twitter</a>
+
+<a href="#" onclick="meteor.sharing.superbar.trigger('facebook', {'title':'Set your title','message': 'Hey everyone! Check out this amazing article!'});">Share via Facebook</a>
+
+Please see 'Superbar Documentation 11_16_12 Release' for more detailed information on configuration options.
+  

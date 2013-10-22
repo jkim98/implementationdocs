@@ -1,0 +1,115 @@
+ATT - B2B - Summer Sweepstakes 2013 Campaign 8/2/2013
+
+
+Remove the following code:		
+
+
+		<script type="text/javascript" src="https://cdnt.meteorsolutions.com/metsol.js"></script>
+		<script type="text/javascript" src="https://cdnt.meteorsolutions.com/meteorapi.js"></script>
+		<script type="text/javascript">
+			meteor.tracking.track('d8030dac-9e3f-4e30-acba-eb323e736aac',
+			{'url_storage_source': 'hash', 'query_string_tag_key':
+			['mtag', 'bref']});
+			var shareBref = '';
+			var url = document.location.protocol +'//' +
+						document.location.host +
+						document.location.pathname;			
+			if(shareBref == '') {
+				url = url + document.location.hash;
+				meteor.sharing.configure('d8030dac-9e3f-4e30-acba-eb323e736aac',{'id':'custom', 'url': url});
+			} else {
+				url = url + "?bref=" + shareBref;
+				url = url + document.location.hash;
+				meteor.sharing.configure('d8030dac-9e3f-4e30-acba-eb323e736aac',{'id':'custom', 'url': url, 'safe_meteor_keys': ['bref']});						
+			}			
+		</script>
+		
+
+
+
+Replace with the following code:
+
+		<script type="text/javascript" src="https://cdnt.meteorsolutions.com/metsol.js"></script>
+		<script type="text/javascript" src="https://cdnt.meteorsolutions.com/metshare.js"></script>
+		<script type="text/javascript">
+			meteor.tracking.track('8d4cfe44-cde3-4764-b7b7-d63e7871585a',
+			{'url_storage_source': 'hash', 'query_string_tag_key':
+			['mtag', 'bref']});
+			var shareBref = '';
+			var url = document.location.protocol +'//' +
+						document.location.host +
+						document.location.pathname;			
+			if(shareBref == '') {
+				url = url + document.location.hash;
+				meteor.sharing.superbar.configure({'id':'custom', 'url': url});
+			} else {
+				url = url + "?bref=" + shareBref;
+				url = url + document.location.hash;
+				meteor.sharing.superbar.configure({'id':'custom', 'url': url});						
+			}			
+		</script>
+
+		
+		
+Remove the following code:		
+		
+meteorregister = function() {
+	if (typeof meteor !== 'undefined') {	
+		var url = window.location + "";
+		if(url.indexOf("email")>0) {
+			meteor.register_callback(function() {
+					var email = url.substring(url.indexOf("emailAddr=")+10, url.indexOf("&_requestid="));
+					meteor.api.register(email, "WTml9GBsHVLijpjDZPPlL9moMzv6BI4g",function() {});
+			});
+		}
+	} else {	
+		setTimeout(function() { meteorregister(); }, 500);
+	}
+};
+
+
+Replace with the following code:
+
+meteorregister = function() {
+	if (typeof meteor !== 'undefined') {	
+		var url = window.location + "";
+		if(url.indexOf("email")>0) {
+					var email = url.substring(url.indexOf("emailAddr=")+10, url.indexOf("&_requestid="));
+					meteor.tracking.register_key(email);
+		}
+	} else {	
+		setTimeout(function() { meteorregister(); }, 500);
+	}
+};
+
+
+
+
+
+Remove the following code:		
+
+onclick="this.href=meteor.sharing.href('Twitter',{'id':'custom','title':'Get a chance to win a MOTOROLA ATRIX 4Gand see how you could save on wirelessat #ATTPremier. '});" 
+																				
+onclick="this.href=meteor.sharing.href('Facebook',{'id':'custom', 'shorten': ''});"
+				
+onclick="this.href=meteor.sharing.href('linkedin',{'id':'custom','title':'Enter to Win a MOTOROLA ATRIX 4G from AT&T Premier'});"
+
+onclick="this.href=meteor.sharing.href('email',{'id':'custom','title':'Enter to Win a MOTOROLA ATRIX 4G from AT&T Premier', 'desc': 'It\'s easy to get your chance to win this fast, powerful smartphone--and to see how you can save money on wireless services with Premier. Enter the MOTOROLA ATRIX 4G Social Matrix Sweepstakes like I did--10 will win!'});"
+							
+
+
+Replace with the following code. Please note that the onclick function has been changed to meteor.sharing.superbar.trigger. Also, note that Twitter and Linkedin has been changed to only accept 'message' parameter instead of 'title'. Also, 'desc' parameter has been changed to 'message' for both email and Facebook.
+
+Please refer to documentation called "SuperbarDocumentation11_16_12Release.rtf" for full details on the configuration.
+
+
+
+onclick="meteor.sharing.superbar.trigger('twitter', {'message': 'Get a chance to win a MOTOROLA ATRIX 4Gand see how you could save on wirelessat #ATTPremier. '});"
+
+onclick="meteor.sharing.superbar.trigger('facebook');"
+
+onclick="meteor.sharing.superbar.trigger('linkedin', {'message': 'Enter to Win a MOTOROLA ATRIX 4G from AT&T Premier'});"
+
+onclick="meteor.sharing.superbar.trigger('email', {'title':'Enter to Win a MOTOROLA ATRIX 4G from AT&T Premier', 'message': 'It\'s easy to get your chance to win this fast, powerful smartphone--and to see how you can save money on wireless services with Premier. Enter the MOTOROLA ATRIX 4G Social Matrix Sweepstakes like I did--10 will win!'});"
+
+

@@ -1,0 +1,73 @@
+﻿CHANGES NEEDED TO MLB FAN CAVE SITE ON ALL PAGES: 
+
+Please reach out to Rachel@meteorsolutions with any questions/concerns andf to confirm execution/release for testing and reporting purposes. 
+
+______________________________________________________________________________________________________________________________________________________
+
+______________________________________________________________________________________________________________________________________________________
+
+
+INSTALL METEOR ON ALL SHARE TOOLS (All share tools within the site - at the contgent/video level, page, concert information, etc...)
+
+Your share tool needs to be configured in all instances to pick up the meteor ID in the URL (dynamically pick up URL) meteor ID always looks like "#fbid=(dynamically generated ID)"
+
+IT IS VERY IMPORTANT that you include the configuration with the title and deescription to make your user expereice cohesive. 
+
+We are happy to jump on a call to discuss but we need more context in order to support. 
+
+______
+
+
+then insert share tools:
+
+<script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script>
+        <script type="text/javascript"> 
+                meteor.sharing.configure('b408ffc3-0ef5-4986-ab31-9973b4aa59f4', {'id':'1', 'url': '<<set URL here>>'});
+        </script> 
+
+<a href="#" target="_blank" onclick="this.href=meteor.sharing.href('Twitter', {'id':'1'});">Share on Twitter</a>
+
+<a href="#" target="_blank" onclick="this.href=meteor.sharing.href('Facebook', {'id':'1'});">Share on Facebook</a>
+
+<a href="#" target="_blank" onclick="this.href=meteor.sharing.href('Email', {'id': '1', 'title': 'SET EMAIL SUBJECT 1', 'desc': 'SET EMAIL BODY 1'});">Share on Email</a>
+
+
+
+______________________________________________________________________________________________________________________________________________________
+
+IMPLEMENT CONVERSIONS (OPTIONAL)
+
+
+Tracking conversions is very easy with Meteor Solutions. We offer the ability to name tracking events so that they are easily distinguished, giving you a great deal of flexibility in how you measure your campaign or site's effectiveness. 
+
+
+OPTION 1 for COVERSION IMPLEMENTATION - Javascript (The preferred method of tracking conversions is to call our track_conversion() method, e.g.:_)
+
+
+
+<input type="button" onClick="meteor.tracking.track_conversion('b408ffc3-0ef5-4986-ab31-9973b4aa59f4',{'name':'myconversion2'});">
+
+
+
+_________
+
+
+OPTION 2 for COVERSION IMPLEMENTATION - HREF (If the conversion that you are tracking is a link (<a href=...)
+NOTE:  The "this" is needed to prevent the original link from firing, which can cause issues.  If you are already blocking the original link, use the "non-this" format.
+NOTE: please name conversions clearly and uniquely
+
+
+
+<a href="http://example.com" onClick="meteor.tracking.track_conversion('b408ffc3-0ef5-4986-ab31-9973b4aa59f4',{'name':'myconversion2'}, this);">
+
+
+
+_________
+
+
+OPTION 3 for COVERSION IMPLEMENTATION - Pixel (For tracking on third-party sites, or places where incorporating Javascript is not possible, use the pixel conversion:)
+
+
+
+<img src="http://cdnt.meteorsolutions.com/api/conversion_pixel?cookie_name=b408ffc3-0ef5-4986-ab31-9973b4aa59f4&name=myconversion" 
+

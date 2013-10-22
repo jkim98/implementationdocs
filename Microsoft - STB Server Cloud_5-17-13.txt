@@ -7,7 +7,7 @@ We're very excited to be working with you on this project! Please contact anna@r
             
 General Overview
 
-Meteor's core components are written in Javascript and designed to be called from Javascript. The main library is metsol.js which is served via Akamai CDN. 
+Meteor's core components are written in Javascript and designed to be called from Javascript.  
 
  
 1. Meteor tracking Code.

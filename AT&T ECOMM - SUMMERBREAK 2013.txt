@@ -1,0 +1,51 @@
+
+
+AT&T ECOMM - SUMMERBREAK 2013 Campaign 6/4/13
+att.com/summerbreak
+
+
+            
+
+
+1. Meteor tracking Code.
+
+
+
+
+The code below is the Tag and Trace component which enables tracking of social sharing by generating an 11 digit unique ID for each user and appends this ID to the URL in the browser environment. 
+
+
+
+Ideally, this code should be placed at the header section of the every page where Meteor social tracking is desired.
+
+
+
+
+<script type="text/javascript" src="//cdnt.meteorsolutions.com/metsol.js"></script>
+
+<script type="text/javascript" src="//cdnt.meteorsolutions.com/metshare.js"></script>
+<script type="text/javascript">
+    meteor.tracking.track('6315d11f-b9b0-47a6-9d34-fb83622fa98b', {'url_storage_source': 'hash' , 'query_string_tag_key': ['mtag', 'source', 'src']});
+    meteor.sharing.superbar.configure({'id': 'share1', 'url' : 'http://att.com/summerbreak'});
+</script>
+
+
+
+
+
+2. Share Tool Implementation
+
+
+For Facebook and Twitter social icon, please use the following format to set the 'onclick' attribute of each anchor tag with an invocation to the superbar's trigger function. Following are examples of anchor tags with appropriate onclick call with share message already set based on email from Lindsey Durham.
+
+Please note that the Twitter share message is over 140 characters once the shared URL is included.  
+
+Please note that any ' in the message will need to be escaped using Javascript escape character of \ as shown below.
+
+
+<a href="#" onclick="meteor.sharing.superbar.trigger('twitter', {'message': 'The @ATT HTC One/Samsung Galaxy S4 makes keeping up w/@SummerBreak possible. Find out what\'s happening straight from your phone!'});">Share via Twitter</a>
+
+<a href="#" onclick="meteor.sharing.superbar.trigger('facebook', {'title':'@SummerBreak','message': 'Find out what\'s happening, as it\'s happening, straight from your phone! The @ATT HTC One/Samsung Galaxy S4 makes keeping up with @SummerBreak possible.'});">Share via Facebook</a>
+
+
+

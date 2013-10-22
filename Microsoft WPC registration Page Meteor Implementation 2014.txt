@@ -1,0 +1,14 @@
+This document directions for tracking WPC Registration using Meteor conversion call.
+
+Contact jkim@rioseo.com with any questions.
+
+Please use the following pixel conversion upon completion of PAID WPC registration. 
+
+Please note that this pixel conversion should fire just ONCE for each specific user who registers.
+
+Also, please note that the  conversion uses third party cookie and thus will NOT be able to track conversions for users on browsers with third party cookie turned off.
+
+<img src="https://cdnt.meteorsolutions.com/api/conversion_pixel?cookie_name=089243ac-8ab5-4062-9072-4a2fd21d0023&name=REG_2014" />
+
+
+

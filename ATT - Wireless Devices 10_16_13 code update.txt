@@ -1,0 +1,99 @@
+AT&T Wireless Devices 10_16_13 Code update 
+
+Please note that the following code update was based on the current code on http://www.att.com/shop/wireless/devices/blackberry/curve-9360-piano-black.html as of 10/16/2013
+
+
+Please remove the following code on lines 931-969
+
+<div class="socialmedia"> 
+	<script type="text/javascript"> 
+		function setMeteorKeys(){ 
+			meteor.tracking.track('00d78e1f-01f0-45cd-9f9c-79e690335b05', { 
+				'url_storage_source':'hash', 
+				'query_string_tag_key':['mtag', 'source'] 
+			}); 
+			meteor.sharing.configure('00d78e1f-01f0-45cd-9f9c-79e690335b05'); 
+		} 
+		jQuery(document).ready(function(){ 
+			jQuery.getScript('//cdnt.meteorsolutions.com/metsol.js', function(){setMeteorKeys()},true); 
+		}); 
+	</script> 
+	<style type="text/css"> 
+		#socialMedia { 
+			height:207px; 
+			position: relative; 
+			margin-bottom:-140px; 
+			margin-top:27px; 
+			width: 41px; 
+			float: right; 
+			z-index: 3; 
+		} 
+		.socialmedia { 
+			min-width: 1060px; 
+			height: 0px; 
+			margin: 0 auto; 
+		} 
+	</style> 
+	<map name="sharemap"> 
+		<area target="_blank" tabindex="0" shape="rect" coords="10,10,42,45" title="Twitter" alt="Twitter" href="http://www.twitter.com" onclick="this.href=meteor.sharing.href('Twitter' );"> 
+		<area target="_blank" tabindex="0" shape="rect" coords="10,45,38,76" title="Facebook" alt="Facebook" href="http://www.facebook.com" onclick="this.href=meteor.sharing.href('Facebook');"> 
+		<area target="_blank" tabindex="0" shape="rect" coords="10,75,42,103" title="LinkedIn" alt="LinkedIn" href="http://www.linkedin.com" onclick="this.href=meteor.sharing.href('Linkedin' );"> 
+		<area target="_blank" tabindex="0" shape="rect" coords="10,104,42,133" title="digg" alt="digg" href="http://www.digg.com" onclick="this.href=meteor.sharing.href('Digg');"> 
+		<area target="_blank" tabindex="0" shape="rect" coords="10,132,42,161" title="del.icio.us" alt="del.icio.us" href="http://del.icio.us" onclick="this.href=meteor.sharing.href('del.icio.us');"> 
+		<area target="_blank" tabindex="0" shape="rect" coords="10,164,42,200" title="email" alt="email" href="mailto:" onclick="this.href=meteor.sharing.href('Email' );"> 
+	</map> 
+	<img id="socialMedia" src="http://1.ecom.attccc.com/shopcms/media/att/2012/shop/wireless/common/ico-social-media-share-tablet.png" alt="Share" usemap="#sharemap"> 
+</div> 
+
+
+
+
+Please replace the above code with the code below. Note that the height parameter in CSS for #socialMedia was reduced from 207px to 146px to compensate for the reduction from 6 social icons to 4. Please feel free to edit the CSS as needed.
+Also note that the jQuery wrapper was removed due to need for multiple .js files and method calls. 
+
+
+<div class="socialmedia"> 
+    <script type="text/javascript" src="//cdnt.meteorsolutions.com/metsol.js"></script>
+    <script type="text/javascript" src="//cdnt.meteorsolutions.com/metshare.js"></script>
+    <script type="text/javascript">
+        meteor.tracking.track('00d78e1f-01f0-45cd-9f9c-79e690335b05', { 'url_storage_source': 'hash', 'query_string_tag_key': ['mtag', 'source', 'src'] });
+        meteor.orion.init();
+	</script>
+    
+	<style type="text/css"> 
+		#socialMedia { 
+			height:146px; 
+			position: relative; 
+			margin-bottom:-140px; 
+			margin-top:27px; 
+			width: 41px; 
+			float: right; 
+			z-index: 3; 
+		} 
+		.socialmedia { 
+			min-width: 1060px; 
+			height: 0px; 
+			margin: 0 auto; 
+		} 
+	</style> 
+	<div class="socialMedia"> 
+		<script type="text/javascript">
+			var ShareToolConfig = {
+			'id': '1',
+			'parentID': 'socialMedia',
+			'size':'large',
+			'sites': ['facebook', 'twitter', 'email', 'pinterest'],
+			'orientation':'vertical'
+			};
+			meteor.sharing.superbar.init(ShareToolConfig); 
+		</script>
+	</div> 
+</div> 
+
+
+
+
+
+
+
+

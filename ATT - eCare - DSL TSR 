@@ -1,0 +1,33 @@
+
+This code is based on the code currently on http://www.att.com/esupport/troubleshoot.jsp 
+
+
+Place in the Header the following Initialization/configuration scripts. Please note that the metsol.js is sourced from Meteorsolutions domain. 
+
+	<script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script>
+	<script type="text/javascript"> 
+		meteor.tracking.track('49ff2bfd-1827-4488-8f34-2a8b9ffd5fd3',{'url_storage_source': 'hash' , 'query_string_tag_key': ['mtag', 'source', 'src']});
+		meteor.sharing.configure('49ff2bfd-1827-4488-8f34-2a8b9ffd5fd3',{'id':1});
+	</script>
+
+
+
+
+Share Bar Image Map - Please update any 'title' and 'desc' parameter as needed. 
+
+
+					<!-- /One Column Content -->
+					<!-- Social Networking SideTab -->
+					<img src="//www.att.com/global/images/social-media-share.gif" class="socialMedia" usemap="#sharemap" alt="Share this on "  />
+					<map name="sharemap">
+						<area shape="rect" coords="0,61,39,80" href="http://www.twitter.com" onclick="window.open(meteor.sharing.href('Twitter'));" alt="Share on Twitter" />
+						<area shape="rect" coords="0,81,39,100" href="http://www.facebook.com" onclick="window.open(meteor.sharing.href('Facebook'));" alt="Share on Facebook" />
+						<area shape="rect" coords="0,101,39,120" href="http://www.linkedin.com" onclick="window.open(meteor.sharing.href('Linkedin'));" alt="Share on LinkedIn" />
+						<area shape="rect" coords="0,121,39,140" href="http://del.icio.us" onclick="window.open(meteor.sharing.href('del.icio.us'));" alt="Share on delicious" />
+						<area shape="rect" coords="0,141,39,160" href="http://www.digg.com" onclick="window.open(meteor.sharing.href('Digg'));" alt="Share on Digg" />
+						<area shape="rect" coords="0,161,39,193" href="mailto:" onclick="this.href=meteor.sharing.href('Email', {'title': 'REPLACE WITH EMAIL SUBJECT TEXT', 'desc': 'REPLACE WITH EMAIL BODY TEXT'});" alt="Share via Email" />
+					</map>
+					<!-- /Social Networking SideTab -->
+
+
+

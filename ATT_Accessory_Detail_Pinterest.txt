@@ -1,0 +1,80 @@
+Activating Pinterest.
+
+There is two ways of implementing the Pinterest Pin-it. First method is to let the user select among all the images on the page which image(s) to pin on their Pinterest board.  Second method is to explicitly configure each Pin-it button with the fully qualified URL of the imageto pin on Pinterest.
+
+This code packet contains both methods of implementation.
+
+
+1. Implementation allowing user selected images
+
+
+Copy the following code into the HTML header of every page where you wish to activate Pinterest Pin-it. (Between the <head> and </head> tags.) 
+
+If your site has dynamic content you can add this code to an include or template file. 
+
+metsol.js and meteor.tracking.track must be called before block of code below in order for the code to function properly. 
+
+
+<script type="text/javascript" src="http://cdnt.meteorsolutions.com/metlike.js"></script>
+<script type="text/javascript">       
+meteor.metlike.init({'pinterest': {'enabled': 'true'}});
+</script>
+
+
+
+
+Place and name the following div where you want Pinterest sharing button to show. 
+
+<div class="meteor:pinterest" ></div>
+
+
+Please note that the actual images to be shared via Pinterest must be accessible. This means that if the testing is done behind a firewall, Pinterest site needs be able to access the images to be shared. 
+
+
+
+2. Implementation with explicitly configured Pin-it button
+
+
+Copy the following code into the HTML header of every page where you wish to activate Pinterest Pin-it. (Between the <head> and </head> tags.) 
+
+If your site has dynamic content you can add this code to an include or template file. 
+
+metsol.js and meteor.tracking.track must be called before block of code below in order for the code to function properly. 
+
+
+This code is configured for 2 pin-it buttons each with a different image. Please replace the 'media' configuration with fully qualified URL of the image(s) to pin
+
+You can add or remove by adding additional 'pinX' or removing the existing ones below
+
+
+<script type="text/javascript" src="//cdnt.meteorsolutions.com/metlike.js"></script>
+<script type="text/javascript"> 
+      
+meteor.metlike.init({'pinterest': {
+                   'enabled': 'true',
+                   'pin1': {
+                       'media': 'SET TO FULLY QUALIFIED URL OF IMAGE FOR PIN1'
+                   },
+                   'pin2': {
+                        'media': 'SET TO FULLY QUALIFIED URL OF IMAGE FOR PIN2'
+                   }
+                 }
+               });
+  
+</script>
+
+
+ 
+
+Place and name the following div where you want Pinterest sharing button to show. 
+
+<div class="meteor:pinterest" id=”pin1”></div>
+
+You can include multiple Pinterest buttons on one page by naming the id= to match what was configured above.
+
+<div class="meteor:pinterest" id=”pin2”></div>
+
+
+
+Please note that the actual images to be shared via Pinterest must be accessible. This means that if the testing is done behind a firewall, Pinterest site needs be able to access the images to be shared. 
+

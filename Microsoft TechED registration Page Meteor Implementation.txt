@@ -22,7 +22,7 @@ Please insert the following Meteor Tracker code in the header which is necessary
 
 <!-- Meteor tracking code in header --> 
 <script type="text/javascript" src="https://cdnt.meteorsolutions.com/metsol.js"></script>
-<script type="text/javascript" src=https://cdnt.meteorsolutions.com/api/multi_track?application_id=7a3b7d94-989d-4f69-bb93-2f2ad68c89e3&url_storage_source=hash&query_string_tag_key=mtag&query_string_tag_key=source&query_string_tag_key=src&query_string_tag_key=CR_CC&query_string_tag_key=cr_cc">
+<script type="text/javascript" src="https://cdnt.meteorsolutions.com/api/multi_track?application_id=7a3b7d94-989d-4f69-bb93-2f2ad68c89e3&url_storage_source=hash&query_string_tag_key=mtag&query_string_tag_key=source&query_string_tag_key=src&query_string_tag_key=CR_CC&query_string_tag_key=cr_cc">
 meteor.orion.init();
 </script>
 

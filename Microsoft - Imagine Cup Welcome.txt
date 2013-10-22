@@ -16,7 +16,7 @@ Please add the following code which is designed to use 1st party cookie when use
 <!-- Meteor tracking code in header --> 
 <script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script>
 <script type="text/javascript">
-meteor.tracking.track('a11a6ba2-4d8f-4f7e-a4ac-eaaf0d44685a', {'url_storage_source': 'hash', 'cookie_domain': '.', 'query_string_tag_key': ['mtag', 'source', 'src', 'cr_cc', 'CR_CC']});
+meteor.tracking.track('a11a6ba2-4d8f-4f7e-a4ac-eaaf0d44685a', {'url_storage_source': 'hash', 'cookie_domain': '.imaginecup.com', 'query_string_tag_key': ['mtag', 'source', 'src', 'cr_cc', 'CR_CC', 'cmpid', 'CMPID', 'WT.mc_id']});
 meteor.orion.init();
 </script>
 
@@ -26,7 +26,7 @@ SSL (HTTPS) version
 <!-- Meteor tracking code in header --> 
 <script type="text/javascript" src="https://cdnt.meteorsolutions.com/metsol.js"></script>
 <script type="text/javascript">
-meteor.tracking.track('a11a6ba2-4d8f-4f7e-a4ac-eaaf0d44685a', {'url_storage_source': 'hash', 'cookie_domain': '.', 'query_string_tag_key': ['mtag', 'source', 'src', 'cr_cc', 'CR_CC']});
+meteor.tracking.track('a11a6ba2-4d8f-4f7e-a4ac-eaaf0d44685a', {'url_storage_source': 'hash', 'cookie_domain': '.imaginecup.com', 'query_string_tag_key': ['mtag', 'source', 'src', 'cr_cc', 'CR_CC', 'cmpid', 'CMPID', 'WT.mc_id']});
 meteor.orion.init();
 </script>
         
@@ -34,7 +34,7 @@ meteor.orion.init();
 Following is code which uses 3rd party cookie for sites which are NOT on imaginecup.com or any subdomain sites.
 
 <script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script>
-<script type="text/javascript" src="http://cdnt.meteorsolutions.com/api/multi_track?application_id=a11a6ba2-4d8f-4f7e-a4ac-eaaf0d44685a&url_storage_source=hash&query_string_tag_key=mtag&query_string_tag_key=source&query_string_tag_key=src&query_string_tag_key=cr_cc&query_string_tag_key=CR_CC">
+<script type="text/javascript" src="http://cdnt.meteorsolutions.com/api/multi_track?application_id=a11a6ba2-4d8f-4f7e-a4ac-eaaf0d44685a&url_storage_source=hash&query_string_tag_key=mtag&query_string_tag_key=source&query_string_tag_key=src&query_string_tag_key=cr_cc&query_string_tag_key=CR_CC&query_string_tag_key=cmpid&query_string_tag_key=CMPID&query_string_tag_key=WT.mc_id">
 meteor.orion.init();
 </script>
 
@@ -42,7 +42,7 @@ meteor.orion.init();
 SSL (HTTPS) version
 
 <script type="text/javascript" src="https://cdnt.meteorsolutions.com/metsol.js"></script>
-<script type="text/javascript" src="https://cdnt.meteorsolutions.com/api/multi_track?application_id=a11a6ba2-4d8f-4f7e-a4ac-eaaf0d44685a&url_storage_source=hash&query_string_tag_key=mtag&query_string_tag_key=source&query_string_tag_key=src&query_string_tag_key=cr_cc&query_string_tag_key=CR_CC">
+<script type="text/javascript" src="https://cdnt.meteorsolutions.com/api/multi_track?application_id=a11a6ba2-4d8f-4f7e-a4ac-eaaf0d44685a&url_storage_source=hash&query_string_tag_key=mtag&query_string_tag_key=source&query_string_tag_key=src&query_string_tag_key=cr_cc&query_string_tag_key=CR_CC&query_string_tag_key=cmpid&query_string_tag_key=CMPID&query_string_tag_key=WT.mc_id">
 meteor.orion.init();
 </script>
                    

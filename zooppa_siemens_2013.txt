@@ -1,0 +1,198 @@
+ZOOPPA - SIEMENS 2013 Campaign
+    
+We're very excited to be working with you on this project! 
+
+Please contact Rachel Ullstrom <rullstrom@rioseo.com> with any questions.
+
+           
+1. Basic Tracking
+
+The code below enables tracking of social sharing by appending a unique, dynamically generated 11 digit alphanumeric string to the URL of each visitor (ex. http://www.example.com/#fbid=N46tl5MN3lJ)
+
+This should be placed within the <head>...</head> element of the page.
+
+Best configuration (appends Meteor ID in URL fragment behind '#'): 
+
+<!-- Hash tracking implementation within the <head>...</head> element --> 
+<script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script>
+<script type="text/javascript">
+    meteor.tracking.track('e4da9183-b023-4b20-bb17-4838a5bbc44e', {'url_storage_source': 'hash', 'cookie_domain': '.zooppa.com', 'query_string_tag_key': ['mtag', 'source', 'src']});
+    meteor.orion.init();
+</script>
+
+That's it! If you see an 'fbid=xxxxxxxxxxx' to the page it's working. Please contact us if you need help verifying your implementation.
+     
+'metsol.js' MUST be properly sourced to use the following features: 
+
+
+2. Sharing
+
+It's easy to integrate with custom and existing share tools. There are 2 ways to create a share tool on a page: using built-in share icons provided by the sharetool or using your own custom icons.
+
+
+TO USE BUILT-IN SHARETOOL ICONS
+
+Please create a div id='meteorShare' (the id value may be different but it must be same as the parameters set below of 'parentID') where the Meteor Share Tool is to be positioned and displayed on the web page.
+
+Place the following code under the call to metsol.js from above (within the <head>...</head> element):
+
+<script src="http://static.meteorsolutions.com/metshare.js"></script>
+<script>
+        meteor.sharing.superbar.init({'id': '1', 'size' : 'large', 'orientation' : 'horizontal', 'parentID': 'meteorShare', 'sites' : ['facebook','twitter', 'linkedin', 'email' ]});
+</script>
+
+If present on the page, Meteor share tool will automatically use the value of HTML <title> tag to set the title of Facebook sharing and email subject and meta name="description" content will be used for Twitter, Facebook and Linkedin shared messages and the email body text. 
+
+Optionally, title and/or message can be explicitly set which will override the value of HTML <title> and meta name="description" by adding parameters of 'title' and/or 'message' to meteor.sharing.superbar.init call in the section above. 
+
+Please see "Superbar Documentation 11_16_12 Release" for further details and configuration options.
+
+
+
+TO USE YOUR OWN CUSTOM SHARING ICONS
+
+Place the following code under the call to metsol.js from above (within the <head>...</head> element):
+
+<script src='http://static.meteorsolutions.com/metshare.js'></script>
+<script type='text/javascript'>
+    meteor.sharing.superbar.configure({'id': '1'});
+</script>
+
+Once 'metshare.js' has been sourced you can call the appropriate 'meteor.sharing.superbar.trigger' method to track sharing activity.
+
+The following example shows how to use the 'meteor.sharing.superbar.trigger' method on custom Twitter and Facebook sharing links:
+
+<a href="#" onclick="meteor.sharing.superbar.trigger('facebook', {'title':'OPTIONAL SET TITLE','message': 'OPTIONAL SET MESSAGE'});">Share via Facebook</a>
+
+<a href="#" onclick="meteor.sharing.superbar.trigger('twitter', {'message': 'OPTIONAL SET MESSAGE'});">Share via Twitter</a>
+
+<a href="#" onclick="meteor.sharing.superbar.trigger('linkedin', {'message': 'OPTIONAL SET MESSAGE'});">Share via Twitter</a>
+
+<a href="#" onclick="meteor.sharing.superbar.trigger('email', {'title':'OPTIONAL SET TITLE','message': 'OPTIONAL SET MESSAGE'});">Share via Facebook</a>
+
+If present on the page, Meteor share tool will automatically use the value of HTML <title> tag to set the title of Facebook sharing and email subject and meta name="description" content will be used for Twitter, Facebook and Linkedin shared messages and the email body text. 
+
+Optionally, title and/or message can be explicitly set which will override the value of HTML <title> and meta name="description" by adding parameters of 'title' and/or 'message' to meteor.sharing.superbar.trigger call in the section above. 
+
+Please see 'Superbar Documentation 11_16_12 Release' for more detailed information on configuration options.
+  
+
+
+
+
+Activating FaceBook Like, Google+ and Pinterest.
+
+
+Place the following code under the call to metsol.js from above (within the <head>...</head> element):
+
+    <script type="text/javascript" src="http://cdnt.meteorsolutions.com/metlike.js"></script>
+    <script type="text/javascript"> meteor.sharing.liketool.init(); </script>
+        
+
+
+
+Place the following tags wherever you want Facebook Like button to show. You can include multiple buttons of the same type on one page.
+
+<div class="meteor:fblike"></div>
+
+
+Place the following tags wherever you want Pinterest Pin It button to show. You can include multiple buttons of the same type on one page. 
+
+<div class="meteor:pinterest"</div>
+
+
+Place the following div where you want Google+ sharing button to show. 
+
+<div class="meteor:google"></div>       
+
+
+
+
+3. Activate/User ID Tracking
+
+If you have registered users, it's possible to associate a Meteor ID ('fbid=xxxxxxxxxxx') with their username/email after login using the 'meteor.tracking.register_key()' method. Please call the following method with the string as a parameter. user_id is used as an example in this example and should be set to the user email.
+
+<script type="text/javascript">
+    meteor.tracking.register_key(user_id);
+</script>
+
+
+
+
+4. Leaderboard API call
+
+We support REST API for getting this information via both Basic Auth and JSONP calls
+
+The full information is at: https://api.meteorsolutions.com/docs
+
+Here are the required UUID, basic auth API Key and JSONP auth API Key referred to in the API docs for making the calls. These are specific and unique only for your campaign.
+
+UUID:  e4da9183-b023-4b20-bb17-4838a5bbc44e
+basic auth API Key:  TRpl7Zafy1SlJA3w_iRKKyUip8nVFLTA
+JSONP auth API Key:  BLPFLxKqSoC1WAV4MuLXAVWahX2v-MyK
+
+
+The API call to use is below Keyed Visitors Direct Children
+
+
+Returns the "key" of the top :limit visitors sorted by a count of their direct children. Note that this request does not accept a date range.
+
+Request URL:
+/campaign/:campaign/visitors/keyed/direct_children
+
+Return format:
+[{ :visitor_key : { "direct_children" : int }},
+   ... ]
+
+replace :campaign with the UUID
+
+A curl example would be:
+
+curl -u "e4da9183-b023-4b20-bb17-4838a5bbc44e:TRpl7Zafy1SlJA3w_iRKKyUip8nVFLTA" "https://api.meteorsolutions.com/campaign/e4da9183-b023-4b20-bb17-4838a5bbc44e/visitors/keyed/direct_children" 
+
+
+
+Visitors Direct Children All 
+
+Returns the top :limit FBIDs that ever visited the campaign site, sorted by a count of their direct children.
+
+Request URL:
+/campaign/:campaign/visitors/direct_children/all
+
+Return format:
+[{ :visitor : { "direct_children" : int }}
+ ... ]
+
+A curl example would be:
+
+curl -u "e4da9183-b023-4b20-bb17-4838a5bbc44e:TRpl7Zafy1SlJA3w_iRKKyUip8nVFLTA" "https://api.meteorsolutions.com/campaign/e4da9183-b023-4b20-bb17-4838a5bbc44e/visitors/direct_children/all?limit=5" 
+
+
+
+5. Conversion/End-Action Tracking
+
+You can easily create custom conversion/end-action events tied to social visitor data which offers a great deal of power to measure your campaign or site's effectiveness.
+
+*** In all cases - please rename the 'myconversion' to a conversion name appropriate for a specific end action i.e. 'whitepaper1_download', 'register_page1', 'watch_welcomeVideo'
+
+Best option: 
+
+Using javascript, just attach the 'meteor.tracking.track_conversion(...)' method to any page event you'd like to track. For example, this code will track clicks on a button:
+
+<input type="button" onClick="meteor.tracking.track_conversion('e4da9183-b023-4b20-bb17-4838a5bbc44e',{'name':'myconversion'});">
+
+And this will track clicks on a link:
+
+<a href="http://example.com" onclick="meteor.tracking.track_conversion('e4da9183-b023-4b20-bb17-4838a5bbc44e',{'name':'myconversion'}, this);">
+
+*** Don't forget to rename your conversion!
+
+*** The 'this' is needed to prevent the original link from firing, which can cause issues. If you are already blocking the original link, use the "non-this" format.
+
+Second option:
+
+When using javascript isn't possible (like on third-party controlled sites), we also have a pixel conversion method. This can be placed anywhere on the page, but cannot be attached to page events:
+
+<img src="http://cdnt.meteorsolutions.com/api/conversion_pixel?cookie_name=e4da9183-b023-4b20-bb17-4838a5bbc44e&name=myconversion" />
+
+*** Don't forget to name your conversion!

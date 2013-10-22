@@ -1,0 +1,42 @@
+
+ATT - Turnkey Campaign 10/1/2013
+	
+We're very excited to be working with you on this project! Please contact rachel@meteorsolutions.com with any questions.
+
+
+General Overview
+
+Meteor's core components are written in Javascript and designed to be called from Javascript.  
+
+
+1. Tracking and Share Tool Code.
+
+The code below contains the component which enables tracking of social sharing by generating an 11 digit unique ID for each user and appends this ID to the URL in the browser environment. 
+
+In addition, share tool initialization code is also included
+
+Please add the following code in the header section of the every page where Meteor social tracking is desired and create a div id=’meteorShare’ where the Meteor Share Tool is to be positioned and displayed on the web page.
+
+
+
+<script type="text/javascript" src="//cdnt.meteorsolutions.com/metsol.js"></script>
+
+<script type="text/javascript" src="//cdnt.meteorsolutions.com/metshare.js"></script>
+<script type="text/javascript">
+meteor.tracking.track('b5d6e85c-6c0f-40e7-b900-e7a2fa877883', {'url_storage_source': 'hash' , 'cookie_domain' : '.att.com', 'query_string_tag_key': ['mtag', 'source', 'src']});
+meteor.sharing.superbar.init({'id': 'share1','size' : 'med', 'parentID': 'meteorShare', 'orientation' : 'vertical', 'sites' : ['twitter', 'facebook', 'email', 'pinterest'] });
+meteor.orion.init();
+</script>
+
+
+The share code above will render medium size (24 x 24 pixel buttons) share bar, orient it vertically and use 'twitter', 'facebook' and 'email' sharing. 
+   
+If present on the page, Meteor share tool will automatically use the value of HTML <title> tag to set the title of Facebook sharing and email subject and meta name="description" content will be used for Twitter and Facebook shared messages and the email body text. 
+
+Optionally, title and/or message can be explicitly set which will override the value of HTML <title> and meta name="description" by adding parameters of 'title' and/or 'message' to meteor.sharing.superbar.init call in the section above. 
+
+In addition, current page URL is used automatically for the shared URL but this can be explicitly set using 'url' parameter in case the desired shared URL is not the current page or if additional tracking parameter is needed to be inserted into the shared URL.
+
+Please see "Superbar Documentation 8_22_2013 Release" for further details and configuration options.
+
+

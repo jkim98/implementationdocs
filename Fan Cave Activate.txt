@@ -1,0 +1,20 @@
+
+            
+1. Meteor tracking Code.
+The code below is the Tag and Trace component which enables tracking of social sharing by generating an 11 digit unique ID for each user and appends this ID to the URL in the browser environment. 
+Ideally, this code should be placed at the header section of the every page where Meteor social tracking is desired.
+<script type="text/javascript" src="//cdnt.meteorsolutions.com/metsol.js"></script>
+<script type="text/javascript">
+    meteor.tracking.track('b408ffc3-0ef5-4986-ab31-9973b4aa59f4', {'url_storage_source': 'hash' , 'query_string_tag_key': ['mtag', 'source', 'src']});
+    meteor.orion.init();
+</script>
+
+
+
+      
+3. Registering User IDTo associate an user id to a user, call meteor.tracking.register_key(user_id) when you have an user_id to associate with the user. For example, this is typically done after registration or login to associate the username/user id (like an email address) to the user.
+
+<script type="text/javascript" src="//cdnt.meteorsolutions.com/metsol.js"></script>
+<script type="text/javascript">
+var user_id = "john@email.com"meteor.tracking.register_key(user_id);
+</script>

@@ -1,0 +1,95 @@
+
+AT&T - eCare - Social Standalone Page Campaign 6/6/13
+
+We're very excited to be working with you on this project! Please contact Rachel Ullstrom - rullstrom@rioseo.com with any questions.
+           
+            
+General Overview
+ 
+1. Rio Social tracking Code.
+
+The code below is the Tag and Trace component which enables tracking of social sharing by generating an 11 digit unique ID for each user and appends this ID to the URL in the browser environment. 
+Ideally, this code should be placed at the header section of the every page where Rio social tracking is desired.
+
+In addition, the following block contains sharetool initialization and configuration.
+
+
+<script type="text/javascript" src="//cdnt.meteorsolutions.com/metsol.js"></script>
+
+<script type="text/javascript" src="//cdnt.meteorsolutions.com/metshare.js"></script>
+<script type="text/javascript">
+    meteor.tracking.track('a37fd8b1-ccc8-42a7-b328-e4329c1649be', {'url_storage_source': 'hash' , 'query_string_tag_key': ['mtag', 'source', 'src']});
+    meteor.sharing.superbar.configure({'id': 'share1'});
+</script>
+
+
+
+
+
+2. Share Tool Implementation
+
+
+For Facebook and Twitter social icon, please use the following format to set the 'onclick' attribute of each anchor tag for the Facebook and Twitter icon with an invocation to the superbar's trigger function. Following are examples of anchor tags with appropriate onclick call with sample share messages.
+
+Please note that any ' (and other characters needing to be escaped in Javascript) in the message will need to be escaped using Javascript escape character of \ as shown below.
+
+
+<a href="#" onclick="meteor.sharing.superbar.trigger('twitter', {'message': 'Help\'s just a Tweet away! #attCustomerCare'});">Share via Twitter</a>
+
+<a href="#" onclick="meteor.sharing.superbar.trigger('facebook', {'title':'Help is here!','message': 'Share this with your friends!'});">Share via Facebook</a>
+
+
+
+3. Share Count Implementation
+
+
+How to access Share Counts for Twitter and Facebook sharing via API.
+
+We support REST API for getting this information via both Basic Auth and JSONP calls
+
+The full information is at: https://api.meteorsolutions.com/docs
+
+Here are the required UUID, basic auth API Key and JSONP auth API Key referred to in the API docs for making the calls. These are specific and unique only for your campaign.
+
+UUID:  a37fd8b1-ccc8-42a7-b328-e4329c1649be
+basic auth API Key:  Pqrwnn69yoitK9G3ugtv3993mxH3J6nB-qG5
+JSONP auth API Key:  4oF-em901jyEGOkwu-RzYeknQ4hxrrJ-
+
+
+The API call to use is below called Sharing Locations Site Count.
+
+
+Sharing Locations Site Count
+
+Given a content page (i.e., a Meteor-tracked URL) and a sharing site name (e.g., "twitter"), returns the number of times the supplied page was shared on the supplied site for each day in the given date range.
+Request URL:
+
+/campaign/:campaign/sharing/locations/:location/sites/:site/all
+/campaign/:campaign/sharing/locations/:location/sites/:site/dates/:YYYYMMDD/:YYYYMMDD
+
+Return format (non-reduce):
+[{ "date"  : { "year"  : int,
+               "month" : int,
+               "day"   : int },
+   "stats" : { "shares" : int}}
+ ... ]
+ 
+Return format (reduce=true):
+{ "stats" : { "shares" : int}}
+
+
+You probably would want to see shares for all date range for each social sites which means that you would probably use the call in this format: 
+
+ /campaign/:campaign/sharing/locations/:location/sites/:site/all
+
+replace :campaign with the UUID
+replace :location with the URL of the page where you want to track the sharing
+replace :site with a social sharing site which you want the count of: twitter or facebook
+
+A curl example would be:
+
+curl -u "a37fd8b1-ccc8-42a7-b328-e4329c1649be:Pqrwnn69yoitK9G3ugtv3993mxH3J6nB-qG5" "https://api.meteorsolutions.com/campaign/a37fd8b1-ccc8-42a7-b328-e4329c1649be/sharing/locations/URL OF PAGE WITH SHAREICONS//sites/facebook/all?reduce=true" 
+
+Running this would return something like this (once there is sharing activity):  {"data": {"stats": {"shares": 119}}, "ok": true}
+
+Note that the URL of the site to check for the number of sharing should end with double //.  I added ?reduce=true parameter in the end as otherwise the return data will be broken down by individual days

@@ -1,0 +1,79 @@
+
+Microsoft WPC 2014 INXPO Test  10/21/2013
+
+
+            
+General Overview
+
+Meteor's core components are written in Javascript and designed to be called from Javascript. 
+
+ 
+1. Meteor tracking Code.
+
+The code below is the Tag and Trace component which enables tracking of social sharing by generating an 11 digit unique ID for each user and appends this ID to the URL in the browser environment. 
+Ideally, this code should be placed at the header section of the every page where Meteor social tracking is desired.
+
+Preferred Hash configuration (appends Meteor ID behind the # in URL) 
+
+<!-- Meteor tracking code with Hash Implementation in header --> 
+<script type="text/javascript" src="//cdnt.meteorsolutions.com/metsol.js"></script>
+<script type="text/javascript" src="//cdnt.meteorsolutions.com/api/multi_track?application_id=a11a6ba2-4d8f-4f7e-a4ac-eaaf0d44685a&url_storage_source=hash&query_string_tag_key=mtag&query_string_tag_key=source&query_string_tag_key=src&query_string_tag_key=CR_CC&query_string_tag_key=cr_cc&query_string_tag_key=WT.mc_id">
+meteor.orion.init();
+</script>
+        
+ 
+Optional Query string configuration (appends Meteor ID behind the ? in URL but will cause browser to refresh the page). If using Query string configuration, it is important to insert the code below in the topmost of the header section to minimize user impact during browser refresh.
+<script type="text/javascript" src="//cdnt.meteorsolutions.com/metsol.js"></script>
+<script type="text/javascript" src="//cdnt.meteorsolutions.com/api/multi_track?application_id=a11a6ba2-4d8f-4f7e-a4ac-eaaf0d44685a&url_storage_source=query_string&query_string_tag_key=mtag&query_string_tag_key=source&query_string_tag_key=src&query_string_tag_key=CR_CC&query_string_tag_key=cr_cc&query_string_tag_key=WT.mc_id">
+meteor.orion.init();
+</script>
+ 
+    
+That's it. This will deploy Meteor and enable tracking of your site and must execute first on a page in order to utilize the rest of Meteor technologies listed below with sole exception of Pixel Conversion call detailed below. 
+   
+
+  
+Integrating Meteor social tracking into a non-Meteor share tool
+
+The most important integration is to include the Meteor's unique 11 alphanumeric id and appending it to any shared URL. 
+
+Most standard social share widget provided by the social site will automatically include the current page URL with Meteor's unique id so no additional work is necessary. However, there may be instances especially with 3rd party share tools which may not automatically include Meteor's id. In that case, it may be necessary to programatically append the Meteor's id to the share URL. 
+
+To obtain the 11 alphanumeric Meteor tracking id, commonly referred to as fbid, please call meteor.tracking.get_id() which will return the fbid value. This is safer than trying to get the data from the dom with a getElementById() call and is only available once the meteor.tracking.track call has been made.
+  
+Once fbid value is obtained, append it to the shared URL in this format: http://URL TO BE SHARED#fbid=REPLACE WITH Meteor tracking id
+
+  
+
+
+Conversion/End-Action Tracking
+
+We offer the ability to name tracking events so that they are easily distinguished, giving you a great deal of flexibility in how you measure your campaign or site's effectiveness.
+
+***In all cases - please rename the 'myconversion' to a conversion name appropriate for a specific end action i.e. 'whitepaper1_download', 'register_page1', 'watch_welcomeVideo'
+
+
+Option One -  Javascript  (The preferred method of tracking conversions) 
+
+This calls our track_conversion() method
+
+<input type="button" onClick="meteor.tracking.track_conversion('a11a6ba2-4d8f-4f7e-a4ac-eaaf0d44685a',{'name':'myconversion'});">
+_____
+
+
+HREF  Javascript Configuration
+(use for conversion that are links (<a href=...))
+
+<a href="http://example.com" onclick="meteor.tracking.track_conversion('a11a6ba2-4d8f-4f7e-a4ac-eaaf0d44685a',{'name':'myconversion'}, this);">
+***The "this" is needed to prevent the original link from firing, which can cause issues. If you are already blocking the original link, use the "non-this" format.
+
+
+Option Two -  Pixel
+
+For tracking on third-party sites, or places where incorporating Javascript is not possible, use the pixel conversion:
+
+<img src="http://cdnt.meteorsolutions.com/api/conversion_pixel?cookie_name=a11a6ba2-4d8f-4f7e-a4ac-eaaf0d44685a&name=myconversion" />
+
+
+
+

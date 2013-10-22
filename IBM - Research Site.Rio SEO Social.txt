@@ -1,0 +1,77 @@
+
+IBM - Research pages Campaign 7/31/2013
+	
+We're very excited to be working with you on this project! Please contact anna@rioseo.com with any questions.
+                         
+            
+General Overview
+
+RioSEO Social's core components are written in Javascript and designed to be called using Javascript.  
+
+ 
+STEP 1. RioSEO Social tracking Code.
+
+The code below is the Tag and Trace component which enables tracking of social sharing by generating an 11 digit unique ID for each user and appends this ID to the URL in the browser environment. 
+Ideally, this code should be placed in the header section of the every page on the site.
+
+Preferred Hash configuration (appends Meteor ID behind the # in URL) 
+
+<!-- Meteor tracking code with Hash Implementation in header --> 
+<script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script>
+<script type="text/javascript">
+meteor.tracking.track('27b7de4c-9c06-490f-9013-03f9c95adf12', {'url_storage_source': 'hash', 'query_string_tag_key': ['mtag', 'source', 'src', 'WT.mc_id', 'cr_cc', 'CR_CC']});
+meteor.orion.init();
+</script>
+        
+     
+That's it. This will enable tracking of your site and must execute first on the page in order to utilize the rest of technologies listed below.
+
+----------------------------------------------------------------------------------------------------------------------------------------------------
+
+STEP 2. Conversion/End-Action Tracking
+
+We offer the ability to name tracking events so that they are easily distinguished, giving you a great deal of flexibility in how you measure your campaign or site's effectiveness.
+
+***In all cases - please rename the 'myconversion' to a conversion name appropriate for a specific end action i.e. 'whitepaper1_download', 'register_page1', 'watch_welcomeVideo'
+
+
+Option One -  Javascript  (The preferred method of tracking conversions) 
+
+This calls our track_conversion() method
+
+<input type="button" onClick="meteor.tracking.track_conversion('27b7de4c-9c06-490f-9013-03f9c95adf12',{'name':'myconversion'});">
+_____
+
+
+HREF  Javascript Configuration
+(use for conversion that are links (<a href=...))
+
+<a href="http://example.com" onclick="meteor.tracking.track_conversion('27b7de4c-9c06-490f-9013-03f9c95adf12',{'name':'myconversion'}, this);">
+***The "this" is needed to prevent the original link from firing, which can cause issues. If you are already blocking the original link, use the "non-this" format.
+
+
+Option Two -  Pixel
+
+For tracking on third-party sites, or places where incorporating Javascript is not possible, use the pixel conversion:
+
+<img src="http://cdnt.meteorsolutions.com/api/conversion_pixel?cookie_name=27b7de4c-9c06-490f-9013-03f9c95adf12&name=myconversion" />
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+ 
+ 
+STEP 3. Integrating RioSEO Social tracking into your existing share tool
+
+The most important integration is to include the RioSEO Social's unique 11 alphanumeric id and appending it to any shared URL. 
+
+Most standard social share widget provided by the social site will automatically include the current page URL with Meteor's unique id so no additional work is necessary. However, there may be instances especially with 3rd party share tools which may not automatically include Meteor's id. In that case, it may be necessary to programatically append the Meteor's id to the share URL. 
+
+To obtain the 11 alphanumeric tracking id, commonly referred to as fbid, please call meteor.tracking.get_id() which will return the fbid value. This is safer than trying to get the data from the dom with a getElementById() call and is only available once the meteor.tracking.track call has been made.
+  
+Once fbid value is obtained, append it to the shared URL in this format: http://URL TO BE SHARED#fbid=REPLACE WITHtracking id
+
+In addition, we recommend adding a tag to ID the type of social sharing site for further insights about user bahavior. This should be in format of mtag=mbar-twitter, mtag=mbar-facebook, and so on for each social site.
+
+So the final shared URL format will look like this: http://URL TO BE SHARED#fbid=REPLACE WITH tracking id&mtag=mbar-name of social site
+
+

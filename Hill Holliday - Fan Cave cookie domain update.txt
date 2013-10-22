@@ -1,0 +1,20 @@
+MLB.com Fancave cookie_domain Code update 6/5/2013
+
+Please contact Rachel Ullstrom at rullstrom@rioseo.com with any questions.
+
+
+
+Please replace all instances of the following meteor.tracking.track Javascript call on mlb.com site
+
+meteor.tracking.track('b408ffc3-0ef5-4986-ab31-9973b4aa59f4', {'url_storage_source': 'hash','query_string_tag_key' : ['mtag','partnerId','affiliateId']});
+
+
+
+
+With this call which includes the addition of the 'cookie_domain': '.mlb.com' configuration.
+
+meteor.tracking.track('b408ffc3-0ef5-4986-ab31-9973b4aa59f4', {'cookie_domain': '.mlb.com', 'url_storage_source': 'hash','query_string_tag_key' : ['mtag','partnerId','affiliateId']});
+
+
+
+

@@ -1,0 +1,48 @@
+﻿CHANGES NEEDED TO MLB FAN CAVE SITE ON ALL PAGES: 
+
+Please reach out to Rachel@meteorsolutions with any questions/concerns and to confirm execution/release for testing and reporting purposes. 
+
+______________________________________________________________________________________________________________________________________________________
+
+______________________________________________________________________________________________________________________________________________________
+
+INSTALL METEOR ON ALL SHARE TOOLS (All share tools within the site - at the contgent/video level, page, concert information, etc...)
+
+Your share tool needs to be configured in all instances to pick up the meteor ID in the URL (dynamically pick up URL) meteor ID always looks like "#fbid=(dynamically generated ID)"
+
+IT IS VERY IMPORTANT that you include the configuration with the title and deescription to make your user expereice cohesive. 
+
+We are happy to jump on a call to discuss but we need more context in order to support. 
+
+
+______
+______
+
+SHARE TOOL INTEGRATION- SHARING the PAGE URL (URL in the URL bar)
+
+
+<a href="#" target="_blank" onclick="this.href=meteor.sharing.href('Twitter');">Share on Twitter</a>
+
+<a href="#" target="_blank" onclick="this.href=meteor.sharing.href('Facebook');">Share on Facebook</a>
+
+<a href="#" target="_blank" onclick="this.href=meteor.sharing.href('Email');">Share on Email</a>
+
+
+______
+______
+
+
+
+SHARE TOOL INTEGRATION- SHARING AN ALTERNATE URL (URL not in the URL bar)
+
+<script type="text/javascript" src="http://static.meteorsolutions.com/metsol.js"></script>
+        <script type="text/javascript"> 
+                meteor.sharing.configure('b408ffc3-0ef5-4986-ab31-9973b4aa59f4', {'id':'1', 'url': '<<set URL here>>'});
+        </script> 
+
+<a href="#" target="_blank" onclick="this.href=meteor.sharing.href('Twitter', {'id':'1'});">Share on Twitter</a>
+
+<a href="#" target="_blank" onclick="this.href=meteor.sharing.href('Facebook', {'id':'1'});">Share on Facebook</a>
+
+<a href="#" target="_blank" onclick="this.href=meteor.sharing.href('Email', {'id': '1', 'title': 'SET EMAIL SUBJECT 1', 'desc': 'SET EMAIL BODY 1'});">Share on Email</a>
+
